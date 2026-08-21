@@ -1,0 +1,285 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+}
+
+body {
+    background: #f5f7fb;
+}
+
+/* ================= HEADER ================= */
+
+.hotel-page-header {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    padding: 18px;
+    margin-bottom: 10px;
+}
+
+.hotel-back-btn {
+    justify-self: start;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    border: none;
+    background: none;
+    cursor: pointer;
+}
+
+.hotel-page-header h2 {
+    justify-self: center;
+    font-size: 28px;
+}
+
+.hotel-wishlist-btn {
+    justify-self: end;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    border: none;
+    background: none;
+    cursor: pointer;
+}
+
+/* Main Container */
+
+.hotel-page {
+    width: 100%;
+    padding: 15px 35px;
+}
+
+/* ================= HERO SECTION ================= */
+
+.hotel-hero-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: stretch;
+    background: #ffffff;
+    border-radius: 20px;
+    padding: 40px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+    margin-bottom: 60px;
+    overflow: hidden;
+}
+
+.hotel-hero-left {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.hotel-hero-left h1 {
+    font-size: 48px;
+    color: #222;
+    margin-bottom: 20px;
+}
+
+.hotel-hero-left p {
+    font-size: 17px;
+    color: #555;
+    line-height: 1.8;
+    margin-bottom: 30px;
+}
+
+.hotel-hero-left button {
+    padding: 14px 28px;
+    background: #6C63FF;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: .3s;
+    align-self: flex-start;
+}
+
+.hotel-hero-left button:hover {
+    background: #5147e5;
+}
+
+.hotel-hero-right {
+    flex: 1;
+    height: 280px;
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+.hotel-hero-right img {
+    width: 100%;
+    height: 100%;
+    object-fit: fill;
+    border-radius: 20px;
+    display: block;
+}
+
+/* ================= CAREER SECTION ================= */
+
+.hotel-career-section {
+    margin: 50px 0;
+}
+
+.hotel-career-section h2 {
+    font-size: 36px;
+    color: #222;
+}
+
+.hotel-career-section > p {
+    font-size: 18px;
+    margin-bottom: 30px;
+    color: #222;
+}
+
+.hotel-career-grid {
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    gap: 25px;
+}
+
+.hotel-career-card {
+    background: white;
+    border-radius: 18px;
+    padding: 25px;
+    text-align: center;
+    box-shadow: 0 8px 18px rgba(0,0,0,0.08);
+    transition: .3s;
+}
+
+.hotel-career-card:hover {
+    transform: translateY(-8px);
+}
+
+.hotel-career-icon {
+    width: 180px;
+    height: 180px;
+    margin: 0 auto 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.hotel-career-icon img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.hotel-career-card h3 {
+    margin-bottom: 10px;
+    color: #222;
+}
+
+.hotel-career-card p {
+    color: #666;
+    line-height: 1.6;
+    font-size: 15px;
+}
+
+.hotel-career-card button {
+    padding: 15px;
+    background: #6C63FF;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: .3s;
+}
+
+.hotel-career-card button:hover {
+    background: #5147e5;
+}
+
+/* ================= WHY CHOOSE ================= */
+
+.hotel-why-section {
+    margin-top: 70px;
+    min-height: 45vh;
+}
+
+.hotel-why-section h2 {
+    text-align: center;
+    margin-bottom: 35px;
+    font-size: 36px;
+}
+
+.hotel-why-grid {
+    display: grid;
+    grid-template-columns: repeat(5,1fr);
+    gap: 20px;
+}
+
+.hotel-why-card {
+    background: white;
+    padding: 25px;
+    border-radius: 15px;
+    text-align: center;
+    box-shadow: 0 6px 15px rgba(0,0,0,.08);
+}
+
+.hotel-why-card span {
+    font-size: 40px;
+}
+
+.hotel-why-card h3 {
+    margin: 18px 0;
+    color: #6C63FF;
+}
+
+.hotel-why-card p {
+    color: #666;
+    line-height: 1.6;
+}
+
+/* ================= RESPONSIVE ================= */
+
+@media(max-width:1200px) {
+
+    .hotel-career-grid {
+        grid-template-columns: repeat(2,1fr);
+    }
+
+    .hotel-why-grid {
+        grid-template-columns: repeat(2,1fr);
+    }
+
+    .hotel-hero-section {
+        flex-direction: column;
+        gap: 30px;
+    }
+
+    .hotel-hero-left,
+    .hotel-hero-right {
+        width: 100%;
+    }
+}
+
+@media(max-width:768px) {
+
+    .hotel-page {
+        padding: 20px;
+    }
+
+    .hotel-hero-left h1 {
+        font-size: 35px;
+    }
+
+    .hotel-hero-left p {
+        font-size: 15px;
+    }
+
+    .hotel-career-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .hotel-why-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .hotel-career-section h2,
+    .hotel-why-section h2 {
+        font-size: 28px;
+    }
+}

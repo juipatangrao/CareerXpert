@@ -1,0 +1,558 @@
+/* ===========================
+   CAREER RECOMMENDATION CSS
+===========================*/
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+
+body{
+    background:#f4f5f7;
+}
+
+.crf-page{
+    min-height:100vh;
+    width:100%;
+    background:linear-gradient(135deg,#800020,#a30029,#ffffff);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding:50px 20px;
+}
+
+.crf-overlay{
+    width:100%;
+    display:flex;
+    justify-content:center;
+}
+
+.crf-card{
+    width:100%;
+    max-width:1100px;
+    background:#fff;
+    border-radius:25px;
+    padding:45px;
+    box-shadow:0 20px 60px rgba(0,0,0,.18);
+    animation:fadeUp .7s ease;
+}
+
+@keyframes fadeUp{
+
+    from{
+        opacity:0;
+        transform:translateY(40px);
+    }
+
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+
+}
+
+.crf-header{
+    text-align:center;
+    margin-bottom:40px;
+}
+
+.crf-ai-icon{
+    width:90px;
+    height:90px;
+    border-radius:50%;
+    background:#800020;
+    color:white;
+    margin:auto;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-size:38px;
+    box-shadow:0 10px 30px rgba(128,0,32,.3);
+}
+
+.crf-header h1{
+    margin-top:20px;
+    color:#800020;
+    font-size:38px;
+    font-weight:700;
+}
+
+.crf-header p{
+    margin-top:15px;
+    color:#666;
+    font-size:17px;
+    line-height:28px;
+}
+
+.crf-progress-bar{
+    width:100%;
+    height:12px;
+    background:#ececec;
+    border-radius:30px;
+    overflow:hidden;
+    margin-bottom:45px;
+}
+
+.crf-progress-fill{
+    width:35%;
+    height:100%;
+    background:linear-gradient(90deg,#800020,#d4004d);
+    border-radius:30px;
+    animation:progress 2s linear infinite alternate;
+}
+
+@keyframes progress{
+
+    from{
+        width:20%;
+    }
+
+    to{
+        width:65%;
+    }
+
+}
+
+.crf-section{
+    margin-bottom:40px;
+    padding:28px;
+    border-radius:18px;
+    border:1px solid #eee;
+    transition:.3s;
+    background:#fff;
+}
+
+.crf-section:hover{
+    box-shadow:0 10px 25px rgba(0,0,0,.08);
+}
+
+.crf-section h2{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    color:#800020;
+    margin-bottom:25px;
+    font-size:24px;
+}
+.crf-form-group{
+    display:flex;
+    flex-direction:column;
+    margin-bottom:22px;
+}
+
+.crf-form-group label{
+    margin-bottom:8px;
+    color:#333;
+    font-weight:600;
+}
+
+.crf-form-group input,
+.crf-form-group select,
+.crf-form-group textarea{
+    width:100%;
+    padding:15px;
+    border:1px solid #ddd;
+    border-radius:12px;
+    font-size:16px;
+    transition:.3s;
+    outline:none;
+}
+
+.crf-form-group textarea{
+    resize:vertical;
+    min-height:130px;
+}
+
+.crf-form-group input:focus,
+.crf-form-group select:focus,
+.crf-form-group textarea:focus{
+    border-color:#800020;
+    box-shadow:0 0 0 4px rgba(128,0,32,.15);
+}
+
+.crf-two-column{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:22px;
+}
+
+.crf-checkbox-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:18px;
+}
+
+.crf-check-card{
+    background:#fafafa;
+    border:2px solid #ececec;
+    border-radius:15px;
+    padding:18px;
+    cursor:pointer;
+    transition:.35s;
+    display:flex;
+    align-items:center;
+    gap:12px;
+    font-weight:500;
+}
+
+.crf-check-card:hover{
+    border-color:#800020;
+    transform:translateY(-5px);
+    box-shadow:0 10px 25px rgba(128,0,32,.18);
+}
+
+.crf-check-card input{
+    width:20px;
+    height:20px;
+    accent-color:#800020;
+}
+
+.crf-check-card span{
+    color:#333;
+}
+
+.crf-next-btn{
+    width:100%;
+    padding:18px;
+    border:none;
+    border-radius:15px;
+    background:linear-gradient(90deg,#800020,#b3003c);
+    color:white;
+    font-size:19px;
+    font-weight:600;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:12px;
+    cursor:pointer;
+    transition:.35s;
+    margin-top:10px;
+}
+
+.crf-next-btn:hover{
+    transform:translateY(-4px);
+    box-shadow:0 15px 35px rgba(128,0,32,.35);
+}
+
+.crf-next-btn svg{
+    transition:.3s;
+}
+
+.crf-next-btn:hover svg{
+    transform:translateX(6px);
+}
+
+input::placeholder,
+textarea::placeholder{
+    color:#999;
+}
+
+select{
+    cursor:pointer;
+}
+
+::-webkit-scrollbar{
+    width:10px;
+}
+
+::-webkit-scrollbar-thumb{
+    background:#800020;
+    border-radius:20px;
+}
+
+::-webkit-scrollbar-track{
+    background:#eee;
+}
+
+@media(max-width:992px){
+
+.crf-checkbox-grid{
+grid-template-columns:repeat(2,1fr);
+}
+
+}
+
+@media(max-width:768px){
+
+.crf-card{
+padding:25px;
+}
+
+.crf-header h1{
+font-size:30px;
+}
+
+.crf-two-column{
+grid-template-columns:1fr;
+}
+
+.crf-checkbox-grid{
+grid-template-columns:1fr;
+}
+
+.crf-section{
+padding:20px;
+}
+
+.crf-ai-icon{
+width:70px;
+height:70px;
+font-size:30px;
+}
+
+.crf-next-btn{
+font-size:17px;
+}
+
+}
+
+@media(max-width:500px){
+
+.crf-page{
+padding:20px 10px;
+}
+
+.crf-card{
+border-radius:18px;
+padding:18px;
+}
+
+.crf-section h2{
+font-size:20px;
+}
+
+.crf-form-group input,
+.crf-form-group select,
+.crf-form-group textarea{
+font-size:15px;
+padding:13px;
+}
+
+/* ===============================
+   EXTRA PREMIUM UI EFFECTS
+=================================*/
+
+/* Selected Checkbox Card */
+
+.crf-check-card:has(input:checked){
+    background:linear-gradient(135deg,#800020,#a00030);
+    color:#fff;
+    border-color:#800020;
+    transform:translateY(-5px);
+    box-shadow:0 15px 35px rgba(128,0,32,.35);
+}
+
+.crf-check-card:has(input:checked) span{
+    color:#fff;
+}
+
+.crf-check-card:has(input:checked) input{
+    accent-color:#fff;
+}
+
+/* Input Hover */
+
+.crf-form-group input:hover,
+.crf-form-group select:hover,
+.crf-form-group textarea:hover{
+    border-color:#800020;
+}
+
+/* Floating Labels Effect */
+
+.crf-form-group{
+    position:relative;
+}
+
+/* Card Glow */
+
+.crf-card:hover{
+    box-shadow:0 30px 70px rgba(0,0,0,.20);
+}
+
+/* Section Animation */
+
+.crf-section{
+    animation:slideUp .7s ease;
+}
+
+@keyframes slideUp{
+
+0%{
+opacity:0;
+transform:translateY(40px);
+}
+
+100%{
+opacity:1;
+transform:translateY(0);
+}
+
+}
+
+/* Header Gradient */
+
+.crf-header h1{
+background:linear-gradient(90deg,#800020,#d4004d);
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
+}
+
+/* Beautiful Divider */
+
+.crf-section::after{
+content:"";
+display:block;
+margin-top:20px;
+height:1px;
+background:#ececec;
+}
+
+.crf-section:last-child::after{
+display:none;
+}
+
+/* Button Ripple */
+
+.crf-next-btn{
+position:relative;
+overflow:hidden;
+}
+
+.crf-next-btn::before{
+content:"";
+position:absolute;
+width:0;
+height:0;
+border-radius:50%;
+background:rgba(255,255,255,.25);
+top:50%;
+left:50%;
+transform:translate(-50%,-50%);
+transition:.6s;
+}
+
+.crf-next-btn:hover::before{
+width:500px;
+height:500px;
+}
+
+/* Nice Scroll Animation */
+
+html{
+scroll-behavior:smooth;
+}
+
+/* Soft Background Shapes */
+
+.crf-page::before{
+content:"";
+position:fixed;
+top:-150px;
+left:-150px;
+width:350px;
+height:350px;
+background:rgba(255,255,255,.10);
+border-radius:50%;
+z-index:0;
+}
+
+.crf-page::after{
+content:"";
+position:fixed;
+bottom:-180px;
+right:-180px;
+width:420px;
+height:420px;
+background:rgba(255,255,255,.10);
+border-radius:50%;
+z-index:0;
+}
+
+.crf-overlay{
+position:relative;
+z-index:1;
+}
+
+/* Glass Sections */
+
+.crf-section{
+backdrop-filter:blur(12px);
+}
+
+/* Title Icon */
+
+.crf-section h2 svg{
+font-size:26px;
+color:#800020;
+}
+
+/* Checkbox Hover */
+
+.crf-check-card:hover span{
+color:#800020;
+font-weight:600;
+}
+
+/* Input Shadow */
+
+.crf-form-group input:focus,
+.crf-form-group select:focus,
+.crf-form-group textarea:focus{
+transform:scale(1.01);
+}
+
+/* Better Placeholder */
+
+::placeholder{
+letter-spacing:.3px;
+}
+
+/* Button Active */
+
+.crf-next-btn:active{
+transform:scale(.98);
+}
+
+/* Progress Glow */
+
+.crf-progress-fill{
+box-shadow:0 0 18px #800020;
+}
+
+/* AI Icon Rotation */
+
+.crf-ai-icon{
+transition:.5s;
+}
+
+.crf-ai-icon:hover{
+transform:rotate(360deg);
+}
+
+/* Card Border Animation */
+
+.crf-card{
+border:3px solid transparent;
+background:
+linear-gradient(#fff,#fff) padding-box,
+linear-gradient(135deg,#800020,#d4004d) border-box;
+}
+
+/* Page Fade */
+
+.crf-page{
+animation:pageFade .6s ease;
+}
+
+@keyframes pageFade{
+from{
+opacity:0;
+}
+to{
+opacity:1;
+}
+}
+}

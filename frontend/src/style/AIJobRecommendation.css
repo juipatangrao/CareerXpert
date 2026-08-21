@@ -1,0 +1,475 @@
+/* =====================================================
+   JOB RECOMMENDATION PAGE
+   ===================================================== */
+
+.job-page {
+  min-height: 100vh;
+  width: 100%;
+  box-sizing: border-box;
+
+  background: #f8f5f2;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  padding: 80px 40px 40px;
+
+  position: relative;
+}
+
+
+/* =====================================================
+   MAIN CARD
+   ===================================================== */
+
+.job-page .job-card {
+  width: min(900px, 100%);
+
+  background: #ffffff;
+
+  border-radius: 18px;
+
+  padding: 45px;
+
+  box-sizing: border-box;
+
+  box-shadow: 0 15px 40px rgba(70, 35, 20, 0.10);
+
+  text-align: center;
+}
+
+
+.job-page .job-card h1 {
+  color: #7b1023;
+
+  font-size: 42px;
+
+  margin: 0 0 15px;
+
+  line-height: 1.2;
+}
+
+
+.job-page .job-card p {
+  color: #666666;
+
+  font-size: 18px;
+
+  margin: 0 0 35px;
+
+  line-height: 1.6;
+}
+
+
+/* =====================================================
+   GENERATE BUTTON
+   ===================================================== */
+
+.job-page .generate-btn {
+  display: inline-flex;
+
+  align-items: center;
+  justify-content: center;
+
+  background: #7b1023;
+
+  color: #ffffff;
+
+  padding: 16px 45px;
+
+  border: none;
+
+  border-radius: 10px;
+
+  font-size: 18px;
+
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition:
+    background 0.25s ease,
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+
+.job-page .generate-btn:hover {
+  background: #5f0c1c;
+
+  transform: translateY(-2px);
+
+  box-shadow: 0 8px 20px rgba(123, 16, 35, 0.20);
+}
+
+
+.job-page .generate-btn:active {
+  transform: translateY(0);
+}
+
+
+/* =====================================================
+   BACK BUTTON
+   ===================================================== */
+
+.job-page .back-btn {
+  position: absolute;
+
+  top: 20px;
+  left: 20px;
+
+  background: #7b1023;
+
+  color: #ffffff;
+
+  border: none;
+
+  padding: 10px 18px;
+
+  border-radius: 8px;
+
+  cursor: pointer;
+
+  font-weight: 600;
+
+  font-size: 15px;
+
+  transition:
+    background 0.25s ease,
+    transform 0.25s ease;
+}
+
+
+
+
+
+/* =====================================================
+   NORMAL LOADING TEXT
+   ===================================================== */
+
+.job-page .loading {
+  margin-top: 30px;
+
+  font-size: 20px;
+
+  color: #7b1023;
+
+  font-weight: 700;
+}
+
+
+/* =====================================================
+   RESULT
+   ===================================================== */
+
+.job-page .job-result {
+  width: min(900px, 100%);
+
+  margin-top: 40px;
+
+  background: #ffffff;
+
+  padding: 35px;
+
+  box-sizing: border-box;
+
+  border-radius: 18px;
+
+  box-shadow: 0 8px 25px rgba(70, 35, 20, 0.08);
+
+  line-height: 1.8;
+
+  text-align: left;
+}
+
+
+.job-page .job-result h1,
+.job-page .job-result h2,
+.job-page .job-result h3 {
+  color: #7b1023;
+
+  margin-top: 20px;
+
+  margin-bottom: 10px;
+}
+
+
+.job-page .job-result strong {
+  color: #7b1023;
+}
+
+
+/* =====================================================
+   TABLE
+   ===================================================== */
+
+.job-page .job-result table {
+  width: 100%;
+
+  border-collapse: collapse;
+
+  margin: 25px 0;
+}
+
+
+.job-page .job-result th {
+  background: #7b1023;
+
+  color: #ffffff;
+
+  padding: 14px;
+
+  text-align: left;
+}
+
+
+.job-page .job-result td {
+  border: 1px solid #dddddd;
+
+  padding: 14px;
+
+  vertical-align: top;
+}
+
+
+.job-page .job-result tr:nth-child(even) {
+  background: #f9f6f4;
+}
+
+
+.job-page .job-result ul {
+  padding-left: 22px;
+}
+
+
+.job-page .job-result li {
+  margin-bottom: 8px;
+}
+
+
+/* =====================================================
+   LOADING OVERLAY
+   IMPORTANT:
+   All loader styles are scoped to .job-page
+   to prevent conflicts with other project CSS.
+   ===================================================== */
+
+.job-page .loading-overlay {
+  position: fixed;
+
+  inset: 0;
+
+  width: 100%;
+  height: 100%;
+
+  background: rgba(17, 15, 20, 0.65);
+
+  display: flex;
+
+  flex-direction: column;
+
+  justify-content: center;
+
+  align-items: center;
+
+  z-index: 9999;
+
+  color: #ffffff;
+
+  box-sizing: border-box;
+}
+
+
+/* =====================================================
+   LOADER CIRCLE
+   ===================================================== */
+
+.job-page .loading-overlay .loader {
+  width: 70px !important;
+  height: 70px !important;
+
+  min-width: 70px;
+  min-height: 70px;
+
+  max-width: 70px;
+  max-height: 70px;
+
+  box-sizing: border-box;
+
+  border: 7px solid rgba(255, 255, 255, 0.25);
+
+  border-top: 7px solid #7b1023;
+
+  border-right: 7px solid #d81b60;
+
+  border-radius: 50% !important;
+
+  background: transparent !important;
+
+  animation: jobRecommendationSpin 1s linear infinite;
+
+  margin: 0 0 30px;
+
+  flex-shrink: 0;
+}
+
+
+/* =====================================================
+   LOADING TEXT
+   ===================================================== */
+
+.job-page .loading-overlay h2 {
+  margin: 0 0 12px;
+
+  color: #ffffff;
+
+  font-size: 30px;
+
+  text-align: center;
+}
+
+
+.job-page .loading-overlay p {
+  margin: 0;
+
+  color: #d6d6d6;
+
+  font-size: 20px;
+
+  text-align: center;
+}
+
+
+/* =====================================================
+   PROGRESS BAR
+   ===================================================== */
+
+.job-page .loading-overlay .progress {
+  width: 320px;
+
+  max-width: 80vw;
+
+  height: 8px;
+
+  background: rgba(255, 255, 255, 0.15);
+
+  border-radius: 50px;
+
+  overflow: hidden;
+
+  margin-top: 30px;
+}
+
+
+.job-page .loading-overlay .progress-fill {
+  width: 0%;
+
+  height: 100%;
+
+  background: linear-gradient(
+    90deg,
+    #7b1023,
+    #d81b60
+  );
+
+  animation: jobRecommendationLoadingBar 2.5s linear forwards;
+}
+
+
+/* =====================================================
+   ANIMATIONS
+   ===================================================== */
+
+@keyframes jobRecommendationSpin {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+
+@keyframes jobRecommendationLoadingBar {
+  0% {
+    width: 0%;
+  }
+
+  100% {
+    width: 100%;
+  }
+}
+
+
+/* =====================================================
+   RESPONSIVE
+   ===================================================== */
+
+@media (max-width: 768px) {
+
+  .job-page {
+    padding: 80px 20px 30px;
+  }
+
+  .job-page .job-card {
+    padding: 30px 22px;
+  }
+
+  .job-page .job-card h1 {
+    font-size: 32px;
+  }
+
+  .job-page .job-card p {
+    font-size: 16px;
+  }
+
+  .job-page .generate-btn {
+    width: 100%;
+
+    padding: 14px 20px;
+
+    font-size: 16px;
+  }
+
+  .job-page .job-result {
+    padding: 25px 20px;
+  }
+
+  .job-page .loading-overlay h2 {
+    font-size: 24px;
+  }
+
+  .job-page .loading-overlay p {
+    font-size: 16px;
+  }
+
+  .job-page .loading-overlay .progress {
+    width: 250px;
+  }
+}
+
+
+@media (max-width: 480px) {
+
+  .job-page .back-btn {
+    top: 15px;
+    left: 15px;
+
+    padding: 9px 14px;
+
+    font-size: 13px;
+  }
+
+  .job-page .job-card h1 {
+    font-size: 27px;
+  }
+
+  .job-page .loading-overlay .loader {
+    width: 60px !important;
+    height: 60px !important;
+
+    min-width: 60px;
+    min-height: 60px;
+
+    max-width: 60px;
+    max-height: 60px;
+  }
+}

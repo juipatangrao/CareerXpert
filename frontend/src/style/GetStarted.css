@@ -1,0 +1,138 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, Helvetica, sans-serif;
+}
+
+.getstarted-page{
+    width:100%;
+    height:100vh;
+    background:#701321;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    position:relative;
+    overflow:hidden;
+}
+
+.getstarted-card{
+    width:850px;
+    background:white;
+    border-radius: 10px;
+    padding:45px;
+    text-align:center;
+    box-shadow:0px 10px 30px rgba(0,0,0,0.25);
+    height: 710px;
+}
+
+.logo{
+    width:290px;
+    margin-top: -50px;
+    margin-left: 230px;
+}
+
+.getstarted-card h1{
+    font-size:60px;
+    color:#7B1123;
+    margin-top: -30px;
+    margin-bottom:30px;
+}
+
+.getstarted-card p{
+    color:#333;
+    font-size:24px;
+    line-height:38px;
+    margin-bottom:40px;
+}
+
+.icon-circle{
+    width:170px;
+    height:170px;
+    border-radius:50%;
+    background:#f8f5f5;
+    margin:auto;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    margin-bottom:40px;
+}
+
+.icon-circle svg{
+    font-size:85px;
+    color:#7B1123;
+}
+
+.start-btn{
+    background:#7B1123;
+    color:white;
+    border:none;
+    padding:18px 45px;
+    border-radius:50px;
+    font-size:24px;
+    cursor:pointer;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:15px;
+
+    margin:auto;
+
+    transition:.3s;
+}
+
+.start-btn:hover{
+    background:#5d0b19;
+    transform:scale(1.05);
+}
+
+.arrow{
+    font-size:20px;
+}
+
+.getstarted-card h3{
+    margin-top:20px;
+    color:#7B1123;
+    font-size:24px;
+    font-weight:600;
+}
+
+@media(max-width:768px){
+
+.getstarted-card{
+    width:90%;
+    padding:30px;
+}
+
+.logo{
+    width:150px;
+}
+
+.getstarted-card h1{
+    font-size:45px;
+}
+
+.getstarted-card p{
+    font-size:18px;
+    line-height:30px;
+}
+
+.icon-circle{
+    width:130px;
+    height:130px;
+}
+
+.icon-circle svg{
+    font-size:65px;
+}
+
+.start-btn{
+    font-size:20px;
+    padding:15px 35px;
+}
+
+.getstarted-card h3{
+    font-size:18px;
+}
+
+}

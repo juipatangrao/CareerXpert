@@ -1,0 +1,285 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+}
+
+body {
+    background: #f5f7fb;
+}
+
+/* ================= HEADER ================= */
+
+.it-page-header {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    padding: 18px;
+    margin-bottom: 10px;
+}
+
+.it-back-btn {
+    justify-self: start;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    border: none;
+    background: none;
+    cursor: pointer;
+}
+
+.it-page-header h2 {
+    justify-self: center;
+    font-size: 28px;
+}
+
+.it-wishlist-btn {
+    justify-self: end;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    border: none;
+    background: none;
+    cursor: pointer;
+}
+
+/* Main Container */
+
+.it-page {
+    width: 100%;
+    padding: 15px 35px;
+}
+
+/* ================= HERO SECTION ================= */
+
+.ithero-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: stretch;
+    background: #ffffff;
+    border-radius: 20px;
+    padding: 40px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+    margin-bottom: 60px;
+    overflow: hidden;
+}
+
+.ithero-left {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.ithero-left h1 {
+    font-size: 48px;
+    color: #222;
+    margin-bottom: 20px;
+}
+
+.ithero-left p {
+    font-size: 17px;
+    color: #555;
+    line-height: 1.8;
+    margin-bottom: 30px;
+}
+
+.ithero-left button {
+    padding: 14px 28px;
+    background: #6C63FF;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: .3s;
+    align-self: flex-start;
+}
+
+.ithero-left button:hover {
+    background: #5147e5;
+}
+
+.ithero-right {
+    flex: 1;
+    height: 280px;
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+.ithero-right img {
+    width: 100%;
+    height: 100%;
+    object-fit: fill;
+    border-radius: 20px;
+    display: block;
+}
+
+/* ================= CAREER SECTION ================= */
+
+.it-career-section {
+    margin: 50px 0;
+}
+
+.it-career-section h2 {
+    font-size: 36px;
+    color: #222;
+}
+
+.it-career-section > p {
+    font-size: 18px;
+    margin-bottom: 30px;
+    color: #222;
+}
+
+.it-career-grid {
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    gap: 25px;
+}
+
+.it-career-card {
+    background: white;
+    border-radius: 18px;
+    padding: 25px;
+    text-align: center;
+    box-shadow: 0 8px 18px rgba(0,0,0,0.08);
+    transition: .3s;
+}
+
+.it-career-card:hover {
+    transform: translateY(-8px);
+}
+
+.it-career-icon {
+    width: 180px;
+    height: 180px;
+    margin: 0 auto 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.it-career-icon img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.it-career-card h3 {
+    margin-bottom: 10px;
+    color: #222;
+}
+
+.it-career-card p {
+    color: #666;
+    line-height: 1.6;
+    font-size: 15px;
+}
+
+.it-career-card button {
+    padding: 15px;
+    background: #6C63FF;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: .3s;
+}
+
+.it-career-card button:hover {
+    background: #5147e5;
+}
+
+/* ================= WHY CHOOSE ================= */
+
+.it-why-section {
+    margin-top: 70px;
+    min-height: 45vh;
+}
+
+.it-why-section h2 {
+    text-align: center;
+    margin-bottom: 35px;
+    font-size: 36px;
+}
+
+.it-why-grid {
+    display: grid;
+    grid-template-columns: repeat(5,1fr);
+    gap: 20px;
+}
+
+.it-why-card {
+    background: white;
+    padding: 25px;
+    border-radius: 15px;
+    text-align: center;
+    box-shadow: 0 6px 15px rgba(0,0,0,.08);
+}
+
+.it-why-card span {
+    font-size: 40px;
+}
+
+.it-why-card h3 {
+    margin: 18px 0;
+    color: #6C63FF;
+}
+
+.it-why-card p {
+    color: #666;
+    line-height: 1.6;
+}
+
+/* ================= RESPONSIVE ================= */
+
+@media(max-width:1200px) {
+
+    .it-career-grid {
+        grid-template-columns: repeat(2,1fr);
+    }
+
+    .it-why-grid {
+        grid-template-columns: repeat(2,1fr);
+    }
+
+    .ithero-section {
+        flex-direction: column;
+        gap: 30px;
+    }
+
+    .ithero-left,
+    .ithero-right {
+        width: 100%;
+    }
+}
+
+@media(max-width:768px) {
+
+    .it-page {
+        padding: 20px;
+    }
+
+    .ithero-left h1 {
+        font-size: 35px;
+    }
+
+    .ithero-left p {
+        font-size: 15px;
+    }
+
+    .it-career-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .it-why-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .it-career-section h2,
+    .it-why-section h2 {
+        font-size: 28px;
+    }
+}

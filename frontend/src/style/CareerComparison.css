@@ -1,0 +1,520 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:"Poppins",sans-serif;
+}
+
+body{
+    background:#f5f7fb;
+}
+
+/* ===========================
+   Main Page
+=========================== */
+
+.comparison-page{
+    min-height:100vh;
+    padding:70px 20px;
+    display:flex;
+    justify-content:center;
+    align-items:flex-start;
+    background:
+    radial-gradient(circle at top left,#ffe8ee 0%,transparent 35%),
+    radial-gradient(circle at bottom right,#fde7ec 0%,transparent 35%),
+    linear-gradient(135deg,#f7f8fc,#eef2f8);
+}
+
+/* ===========================
+   Card
+=========================== */
+
+.comparison-card{
+
+    width:100%;
+    max-width:1150px;
+
+    background:rgba(255,255,255,.95);
+
+    backdrop-filter:blur(18px);
+
+    border-radius:25px;
+
+    padding:50px;
+
+    border:1px solid rgba(255,255,255,.6);
+
+    box-shadow:
+    0 15px 50px rgba(0,0,0,.08);
+
+    animation:fadeUp .6s ease;
+
+}
+
+@keyframes fadeUp{
+
+from{
+
+opacity:0;
+transform:translateY(30px);
+
+}
+
+to{
+
+opacity:1;
+transform:translateY(0);
+
+}
+
+}
+
+/* ===========================
+   Heading
+=========================== */
+
+.comparison-card h1{
+
+font-size:42px;
+
+font-weight:700;
+
+text-align:center;
+
+color:#7b1023;
+
+margin-bottom:18px;
+
+}
+
+.comparison-card p{
+
+text-align:center;
+
+font-size:17px;
+
+line-height:1.8;
+
+color:#666;
+
+max-width:850px;
+
+margin:auto;
+
+margin-bottom:45px;
+
+}
+
+/* ===========================
+   Dropdowns
+=========================== */
+
+.dropdown-group{
+
+display:flex;
+
+align-items:center;
+
+gap:30px;
+
+margin-bottom:40px;
+
+}
+
+.dropdown-box{
+
+flex:1;
+
+}
+
+.dropdown-box label{
+
+display:block;
+
+margin-bottom:12px;
+
+font-size:16px;
+
+font-weight:600;
+
+color:#7b1023;
+
+}
+
+.dropdown-box select{
+
+width:100%;
+
+padding:15px 18px;
+
+border-radius:14px;
+
+border:2px solid #e5e7eb;
+
+background:white;
+
+font-size:16px;
+
+transition:.3s;
+
+cursor:pointer;
+
+outline:none;
+
+}
+
+.dropdown-box select:hover{
+
+border-color:#b83b5e;
+
+}
+
+.dropdown-box select:focus{
+
+border-color:#7b1023;
+
+box-shadow:0 0 0 5px rgba(123,16,35,.12);
+
+}
+
+/* ===========================
+   VS
+=========================== */
+
+.vs-text{
+
+width:70px;
+
+height:70px;
+
+border-radius:50%;
+
+background:linear-gradient(135deg,#7b1023,#b3173d);
+
+color:white;
+
+display:flex;
+
+justify-content:center;
+
+align-items:center;
+
+font-size:22px;
+
+font-weight:700;
+
+box-shadow:0 10px 25px rgba(123,16,35,.25);
+
+}
+
+/* ===========================
+   Button
+=========================== */
+
+.compare-btn{
+
+display:block;
+
+margin:auto;
+
+padding:16px 50px;
+
+border:none;
+
+border-radius:14px;
+
+background:linear-gradient(135deg,#7b1023,#a11634);
+
+color:white;
+
+font-size:17px;
+
+font-weight:600;
+
+cursor:pointer;
+
+transition:.35s;
+
+box-shadow:0 10px 25px rgba(123,16,35,.22);
+
+}
+
+.compare-btn:hover{
+
+transform:translateY(-4px);
+
+box-shadow:0 18px 35px rgba(123,16,35,.28);
+
+}
+
+.compare-btn:active{
+
+transform:scale(.98);
+
+}
+
+/* ===========================
+   Loading
+=========================== */
+
+.loading{
+
+margin-top:30px;
+
+text-align:center;
+
+font-size:18px;
+
+font-weight:600;
+
+color:#7b1023;
+
+}
+
+/* ===========================
+   Back Button
+=========================== */
+
+.back-btn{
+
+position:fixed;
+
+top:25px;
+
+left:25px;
+
+padding:12px 22px;
+
+border:none;
+
+border-radius:12px;
+
+background:#7b1023;
+
+color:white;
+
+font-weight:600;
+
+cursor:pointer;
+
+transition:.3s;
+
+box-shadow:0 8px 20px rgba(0,0,0,.15);
+
+z-index:999;
+
+}
+
+.back-btn:hover{
+
+background:#5f0c1d;
+
+transform:translateY(-3px);
+
+}
+
+/* ===========================
+   Result Card
+=========================== */
+
+.comparison-result{
+
+margin-top:45px;
+
+background:white;
+
+padding:40px;
+
+border-radius:20px;
+
+border:1px solid #ececec;
+
+box-shadow:0 10px 30px rgba(0,0,0,.08);
+
+animation:fadeUp .6s ease;
+
+}
+
+/* ===========================
+   Titles
+=========================== */
+
+.comparison-result h1,
+.comparison-result h2,
+.comparison-result h3{
+
+color:#7b1023;
+
+margin-top:30px;
+
+margin-bottom:15px;
+
+}
+
+.comparison-result h2{
+
+padding-left:14px;
+
+border-left:6px solid #7b1023;
+
+font-size:26px;
+
+}
+
+.comparison-result h3{
+
+font-size:20px;
+
+}
+
+/* ===========================
+   Paragraphs
+=========================== */
+
+.comparison-result p{
+
+font-size:16px;
+
+line-height:1.9;
+
+color:#555;
+
+margin-bottom:15px;
+
+}
+
+/* ===========================
+   List
+=========================== */
+
+.comparison-result ul{
+
+padding-left:22px;
+
+margin:15px 0;
+
+}
+
+.comparison-result li{
+
+margin-bottom:10px;
+
+line-height:1.8;
+
+}
+
+/* ===========================
+   Table
+=========================== */
+
+.comparison-result table{
+
+width:100%;
+
+border-collapse:collapse;
+
+margin:30px 0;
+
+overflow:hidden;
+
+border-radius:16px;
+
+box-shadow:0 8px 20px rgba(0,0,0,.05);
+
+}
+
+.comparison-result th{
+
+background:linear-gradient(135deg,#7b1023,#a11634);
+
+color:white;
+
+padding:18px;
+
+font-size:16px;
+
+}
+
+.comparison-result td{
+
+padding:18px;
+
+border:1px solid #ececec;
+
+vertical-align:top;
+
+font-size:15px;
+
+}
+
+.comparison-result tr:nth-child(even){
+
+background:#fafafa;
+
+}
+
+.comparison-result tr:hover{
+
+background:#fff3f6;
+
+transition:.25s;
+
+}
+
+/* ===========================
+   Strong
+=========================== */
+
+.comparison-result strong{
+
+color:#7b1023;
+
+}
+
+/* ===========================
+   Responsive
+=========================== */
+
+@media(max-width:900px){
+
+.comparison-card{
+
+padding:30px;
+
+}
+
+.comparison-card h1{
+
+font-size:32px;
+
+}
+
+.dropdown-group{
+
+flex-direction:column;
+
+}
+
+.vs-text{
+
+width:60px;
+
+height:60px;
+
+font-size:18px;
+
+}
+
+.comparison-result{
+
+overflow-x:auto;
+
+}
+
+.comparison-result table{
+
+min-width:750px;
+
+}
+
+}

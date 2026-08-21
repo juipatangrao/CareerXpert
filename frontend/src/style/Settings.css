@@ -1,0 +1,259 @@
+.settings-page{
+
+min-height:100vh;
+padding:40px;
+background:linear-gradient(
+135deg,
+#fef6f8,
+#f8edf1,
+#ffffff
+);
+
+}
+
+
+.back-btn {
+
+    position: absolute;
+    left: 30px;
+    top: 40px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    font-size: 25px;
+    
+}
+.back-btn a{
+    text-decoration: none;
+    color: #f3f3f3;
+}
+.settings-header{
+
+text-align:center;
+margin-bottom:30px;
+
+}
+
+
+.settings-header h1{
+
+font-size:35px;
+color:#7b1e3a;
+
+}
+
+
+.settings-header p{
+
+color:#777;
+
+}
+
+
+
+
+
+.settings-card,
+.danger-card{
+
+background:white;
+padding:25px;
+margin-bottom:25px;
+border-radius:18px;
+box-shadow:0 8px 25px rgba(0,0,0,0.08);
+
+}
+
+
+
+.settings-card h2,
+.danger-card h2{
+
+display:flex;
+align-items:center;
+gap:12px;
+color:#7b1e3a;
+font-size:22px;
+
+}
+
+
+
+.info-row,
+.setting-option,
+.toggle-row{
+
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:15px 0;
+border-bottom:1px solid #eee;
+
+}
+
+
+.info-row span{
+
+font-weight:600;
+
+}
+
+
+
+.profile-btn{
+
+margin-top:20px;
+padding:12px 25px;
+border:none;
+border-radius:25px;
+background:#7b1e3a;
+color:white;
+cursor:pointer;
+
+}
+
+
+
+
+
+/* Toggle */
+
+.switch{
+
+position:relative;
+width:45px;
+height:22px;
+
+}
+
+
+.switch input{
+
+display:none;
+
+}
+
+
+.slider{
+
+position:absolute;
+inset:0;
+background:#ccc;
+border-radius:20px;
+cursor:pointer;
+
+}
+
+
+
+.slider:before{
+
+content:"";
+position:absolute;
+height:18px;
+width:18px;
+left:2px;
+top:2px;
+background:white;
+border-radius:50%;
+transition:.3s;
+
+}
+
+
+input:checked + .slider{
+
+background:#8b2145;
+
+}
+
+
+input:checked + .slider:before{
+
+transform:translateX(23px);
+
+}
+
+
+
+
+
+select{
+
+padding:8px 15px;
+border-radius:8px;
+border:1px solid #ccc;
+
+}
+
+
+
+.disabled{
+
+background:#ddd;
+border:none;
+padding:8px 15px;
+border-radius:20px;
+
+}
+
+
+
+
+.click-option{
+
+padding:15px 0;
+cursor:pointer;
+
+}
+
+
+.click-option small{
+
+display:block;
+color:#999;
+margin-top:5px;
+
+}
+
+
+
+
+
+/* Danger */
+
+
+.danger-card{
+
+border:2px solid #ffcccc;
+
+}
+
+
+.danger-card h2{
+
+color:#d62828;
+
+}
+
+
+
+.delete-btn{
+
+background:#d62828;
+color:white;
+border:none;
+padding:13px 25px;
+border-radius:25px;
+cursor:pointer;
+font-size:15px;
+
+}
+
+
+.delete-btn:hover{
+
+background:#b91c1c;
+
+}

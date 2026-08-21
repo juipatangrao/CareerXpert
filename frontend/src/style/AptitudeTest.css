@@ -1,0 +1,324 @@
+
+/* ==========================================
+   APTITUDE TEST CSS
+   CareerXpert
+========================================== */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+
+body{
+    background:#f4f5f7;
+}
+
+/* ================= PAGE ================= */
+
+.at-page{
+    min-height:100vh;
+    width:100%;
+    background:linear-gradient(135deg,#800020,#a00030,#ffffff);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding:40px 20px;
+}
+
+/* ================= CARD ================= */
+
+.at-card{
+    width:100%;
+    max-width:850px;
+    background:#fff;
+    border-radius:25px;
+    padding:45px;
+    box-shadow:0 20px 60px rgba(0,0,0,.18);
+    animation:fadeUp .6s ease;
+}
+
+@keyframes fadeUp{
+
+0%{
+opacity:0;
+transform:translateY(35px);
+}
+
+100%{
+opacity:1;
+transform:translateY(0);
+}
+
+}
+
+/* ================= HEADER ================= */
+
+.at-header{
+    text-align:center;
+    margin-bottom:35px;
+}
+
+.at-brain-icon{
+    font-size:65px;
+    color:#800020;
+    margin-bottom:15px;
+}
+
+.at-header h1{
+    font-size:38px;
+    color:#800020;
+    margin-bottom:12px;
+}
+
+.at-header p{
+    color:#666;
+    line-height:28px;
+    font-size:16px;
+}
+
+/* ================= PROGRESS ================= */
+
+.at-progress-bar{
+    width:100%;
+    height:12px;
+    background:#ececec;
+    border-radius:30px;
+    overflow:hidden;
+    margin-bottom:30px;
+}
+
+.at-progress-fill{
+    height:100%;
+    background:linear-gradient(90deg,#800020,#d00045);
+    border-radius:30px;
+    transition:.5s;
+}
+
+.at-question-number{
+    text-align:center;
+    color:#800020;
+    font-weight:600;
+    margin-bottom:30px;
+    font-size:18px;
+}
+
+/* ================= QUESTION CARD ================= */
+
+.at-question-card{
+    background:#fafafa;
+    border-radius:20px;
+    padding:35px;
+    border:1px solid #ececec;
+    transition:.3s;
+}
+
+.at-question-card:hover{
+    box-shadow:0 15px 35px rgba(0,0,0,.08);
+}
+
+.at-question-card h2{
+    color:#333;
+    margin-bottom:30px;
+    font-size:25px;
+    line-height:36px;
+}
+
+/* ================= OPTIONS ================= */
+
+.at-option-list{
+    display:flex;
+    flex-direction:column;
+    gap:18px;
+}
+
+.at-option{
+    display:flex;
+    align-items:center;
+    gap:15px;
+    padding:18px 22px;
+    border:2px solid #e8e8e8;
+    border-radius:15px;
+    cursor:pointer;
+    transition:.35s;
+    background:#fff;
+}
+
+.at-option:hover{
+    border-color:#800020;
+    transform:translateX(8px);
+    box-shadow:0 10px 25px rgba(128,0,32,.15);
+}
+
+.at-option input{
+    width:20px;
+    height:20px;
+    accent-color:#800020;
+}
+
+.at-option span{
+    font-size:17px;
+    color:#333;
+    font-weight:500;
+}
+
+.at-option.active{
+    background:linear-gradient(135deg,#800020,#b00035);
+    border-color:#800020;
+}
+
+.at-option.active span{
+    color:#fff;
+}
+
+.at-option.active input{
+    accent-color:#fff;
+}
+
+/* ================= BUTTONS ================= */
+
+.at-button-group{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-top:35px;
+}
+
+.at-back-btn,
+.at-next-btn,
+.at-submit-btn{
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:10px;
+
+    padding:15px 28px;
+
+    border:none;
+
+    border-radius:12px;
+
+    cursor:pointer;
+
+    font-size:17px;
+
+    font-weight:600;
+
+    transition:.35s;
+
+}
+
+.at-back-btn{
+    background:#f2f2f2;
+    color:#444;
+}
+
+.at-back-btn:hover{
+    background:#ddd;
+}
+
+.at-next-btn{
+    background:#800020;
+    color:white;
+}
+
+.at-next-btn:hover{
+    background:#5d0018;
+    transform:translateY(-3px);
+}
+
+.at-submit-btn{
+    background:linear-gradient(90deg,#008c45,#00b35a);
+    color:white;
+}
+
+.at-submit-btn:hover{
+    transform:translateY(-3px);
+    box-shadow:0 12px 30px rgba(0,140,69,.3);
+}
+
+/* ================= HOVER EFFECTS ================= */
+
+.at-back-btn svg,
+.at-next-btn svg,
+.at-submit-btn svg{
+    transition:.3s;
+}
+
+.at-next-btn:hover svg{
+    transform:translateX(5px);
+}
+
+.at-back-btn:hover svg{
+    transform:translateX(-5px);
+}
+
+.at-submit-btn:hover svg{
+    transform:scale(1.15);
+}
+
+/* ================= RESPONSIVE ================= */
+
+@media(max-width:768px){
+
+    .at-card{
+        padding:25px;
+    }
+
+    .at-header h1{
+        font-size:30px;
+    }
+
+    .at-brain-icon{
+        font-size:55px;
+    }
+
+    .at-question-card{
+        padding:22px;
+    }
+
+    .at-question-card h2{
+        font-size:21px;
+        line-height:30px;
+    }
+
+    .at-button-group{
+        flex-direction:column;
+        gap:15px;
+    }
+
+    .at-back-btn,
+    .at-next-btn,
+    .at-submit-btn{
+        width:100%;
+    }
+
+}
+
+@media(max-width:500px){
+
+    .at-page{
+        padding:20px 10px;
+    }
+
+    .at-card{
+        padding:18px;
+        border-radius:18px;
+    }
+
+    .at-question-card h2{
+        font-size:19px;
+    }
+
+    .at-option{
+        padding:15px;
+    }
+
+    .at-option span{
+        font-size:15px;
+    }
+
+}
+

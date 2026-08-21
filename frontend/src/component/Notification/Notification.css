@@ -1,0 +1,109 @@
+.notification-popup {
+  position: fixed;
+  top: 80px;
+  right: 80px;
+  width: 380px;
+  max-height: 500px;
+  background: #fff;
+  border-radius: 15px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+  z-index: 99999;
+  animation: popup 0.3s ease;
+}
+
+.notification-header {
+  background: #7b1023;
+  color: white;
+  padding: 15px;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.notification-body {
+  max-height: 430px;
+  overflow-y: auto;
+}
+
+.notification-body::-webkit-scrollbar {
+  width: 6px;
+}
+
+.notification-body::-webkit-scrollbar-thumb {
+  background: #bdbdbd;
+  border-radius: 10px;
+}
+
+.loading-news {
+  text-align: center;
+  padding: 25px;
+  font-size: 16px;
+  color: #7b1023;
+}
+
+.notification-item {
+  display: flex;
+  gap: 12px;
+  padding: 15px;
+  border-bottom: 1px solid #ececec;
+  transition: 0.3s;
+}
+
+.notification-item:hover {
+  background: #f8f8f8;
+}
+
+.news-image {
+  width: 90px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 8px;
+  flex-shrink: 0;
+}
+
+.news-content {
+  flex: 1;
+}
+
+.news-content h4 {
+  font-size: 15px;
+  margin-bottom: 6px;
+  color: #7b1023;
+  line-height: 1.4;
+}
+
+.news-content p {
+  font-size: 13px;
+  color: #555;
+  margin-bottom: 8px;
+  line-height: 1.5;
+}
+
+.news-content span {
+  font-size: 12px;
+  color: gray;
+}
+
+.news-content a {
+  display: inline-block;
+  margin-top: 8px;
+  text-decoration: none;
+  color: #7b1023;
+  font-weight: 600;
+}
+
+.news-content a:hover {
+  text-decoration: underline;
+}
+
+@keyframes popup {
+  from {
+    opacity: 0;
+    transform: translateY(-15px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
