@@ -1,8 +1,19 @@
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import {
+  BrowserRouter,
+  Routes,
+  Route,
+  Navigate,
+  useLocation,
+} from "react-router-dom";
+
+import { useEffect } from "react";
 
 import Signup from "./component/Signup";
 import Login from "./component/Login";
 import Home from "./component/Home";
+import EditProfile from "./pages/EditProfile";
+import CareerComparison from "./pages/CareerComparison";
+import CollegeRecommendation from "./pages/CollegeRecommendation";
 
 import Government from "./component/Government";
 import IT from "./component/IT";
@@ -13,62 +24,121 @@ import HotelManagement from "./component/HotelManagement";
 import MerchantNavy from "./component/MerchantNavy";
 import Engineering from "./component/Engineering";
 import Doctor from "./component/Doctor";
+
 import ScienceResearch from "./component/ScienceResearch";
 import SpaceAstronomy from "./component/SpaceAstronomy";
 import Environmental from "./component/Environmental";
 import MediaJournalism from "./component/MediaJournalism";
 import Design from "./component/Design";
 
-import GetStarted from "./component/GetStarted";
-import ProtectedRoute from "./component/ProtectedRoute";
+import AIJobRecommendation from "./pages/AIJobRecommendation";
 
-import CareerDetails from "./pages/CareerDetails";
+import "./App.css";
+
+import GetStarted from "./component/GetStarted";
 import CareerRecommendation from "./pages/CareerRecommendation";
 import AptitudeTest from "./pages/AptitudeTest";
 import CareerResult from "./pages/CareerResult";
-import EditProfile from "./pages/EditProfile";
-import CareerComparison from "./pages/CareerComparison";
-import CollegeRecommendation from "./pages/CollegeRecommendation";
-import AIJobRecommendation from "./pages/AIJobRecommendation";
+
 import Settings from "./pages/Settings";
 import PortfolioGenerator from "./pages/PortfolioGenerator";
+import ProtectedRoute from "./component/ProtectedRoute";
 
-import "./App.css";
+import CareerDetails from "./pages/CareerDetails";
+
+
+/* =========================================================
+   SCROLL TO TOP
+   ========================================================= */
+
+const ScrollToTop = () => {
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+
+  return null;
+};
+
+
+/* =========================================================
+   APP
+   ========================================================= */
 
 function App() {
   return (
     <BrowserRouter>
+
+      {/* Automatically move every new page to TOP */}
+      <ScrollToTop />
+
+      {/* <ChatBot /> */}
+
       <Routes>
 
-        {/* =========================
-            MAIN / AUTH
-        ========================= */}
+        {/* =================================================
+            AUTH / START
+            ================================================= */}
 
-        <Route path="/" element={<GetStarted />} />
-        <Route path="/signup" element={<Signup />} />
-        <Route path="/login" element={<Login />} />
+        <Route
+          path="/"
+          element={<GetStarted />}
+        />
+
+        <Route
+          path="/signup"
+          element={<Signup />}
+        />
+
+        <Route
+          path="/login"
+          element={<Login />}
+        />
+
+
+        {/* =================================================
+            PROTECTED HOME
+            ================================================= */}
 
         <Route element={<ProtectedRoute />}>
-          <Route path="/home" element={<Home />} />
+
+          <Route
+            path="/home"
+            element={<Home />}
+          />
+
         </Route>
 
 
-        {/* =========================
-            MAIN CAREER CATEGORIES
-        ========================= */}
+        {/* =================================================
+            MAIN CAREER CATEGORY PAGES
+            ================================================= */}
 
-        <Route path="/government" element={<Government />} />
+        <Route
+          path="/government"
+          element={<Government />}
+        />
 
-        <Route path="/it" element={<IT />} />
+        <Route
+          path="/it"
+          element={<IT />}
+        />
 
         <Route
           path="/banking-and-finance"
           element={<BankingANDFinance />}
         />
 
-        <Route path="/law" element={<Law />} />
+        <Route
+          path="/law"
+          element={<Law />}
+        />
 
-        <Route path="/aviation" element={<Aviation />} />
+        <Route
+          path="/aviation"
+          element={<Aviation />}
+        />
 
         <Route
           path="/hotel-management"
@@ -80,9 +150,15 @@ function App() {
           element={<MerchantNavy />}
         />
 
-        <Route path="/engineering" element={<Engineering />} />
+        <Route
+          path="/engineering"
+          element={<Engineering />}
+        />
 
-        <Route path="/doctor" element={<Doctor />} />
+        <Route
+          path="/doctor"
+          element={<Doctor />}
+        />
 
         <Route
           path="/science-research"
@@ -104,12 +180,17 @@ function App() {
           element={<Environmental />}
         />
 
-        <Route path="/design" element={<Design />} />
+        <Route
+          path="/design"
+          element={<Design />}
+        />
 
 
-        {/* =========================
-            ENGINEERING SUB-CAREERS
-        ========================= */}
+        {/* =================================================
+            CAREER DETAILS
+            ================================================= */}
+
+        {/* Engineering */}
 
         <Route
           path="/engineering/:careerId"
@@ -117,9 +198,7 @@ function App() {
         />
 
 
-        {/* =========================
-            IT SUB-CAREERS
-        ========================= */}
+        {/* IT */}
 
         <Route
           path="/it/:careerId"
@@ -127,21 +206,20 @@ function App() {
         />
 
 
-        {/* =========================
-            BANKING & FINANCE
-            Actual JSON route:
-            /banking-finance/...
-        ========================= */}
+        {/* Banking & Finance */}
 
         <Route
           path="/banking-finance/:careerId"
           element={<CareerDetails />}
         />
 
+        <Route
+          path="/banking-and-finance/:careerId"
+          element={<CareerDetails />}
+        />
 
-        {/* =========================
-            LAW SUB-CAREERS
-        ========================= */}
+
+        {/* Law */}
 
         <Route
           path="/law/:careerId"
@@ -149,9 +227,7 @@ function App() {
         />
 
 
-        {/* =========================
-            AVIATION SUB-CAREERS
-        ========================= */}
+        {/* Aviation */}
 
         <Route
           path="/aviation/:careerId"
@@ -159,9 +235,7 @@ function App() {
         />
 
 
-        {/* =========================
-            HOTEL MANAGEMENT
-        ========================= */}
+        {/* Hotel Management */}
 
         <Route
           path="/hotel-management/:careerId"
@@ -169,9 +243,7 @@ function App() {
         />
 
 
-        {/* =========================
-            MERCHANT NAVY
-        ========================= */}
+        {/* Merchant Navy */}
 
         <Route
           path="/merchant-navy/:careerId"
@@ -179,9 +251,7 @@ function App() {
         />
 
 
-        {/* =========================
-            SCIENCE & RESEARCH
-        ========================= */}
+        {/* Science & Research */}
 
         <Route
           path="/science-research/:careerId"
@@ -189,29 +259,7 @@ function App() {
         />
 
 
-        {/* =========================
-            SPACE & ASTRONOMY
-        ========================= */}
-
-        <Route
-          path="/space-astronomy/:careerId"
-          element={<CareerDetails />}
-        />
-
-
-        {/* =========================
-            ENVIRONMENTAL
-        ========================= */}
-
-        <Route
-          path="/environmental/:careerId"
-          element={<CareerDetails />}
-        />
-
-
-        {/* =========================
-            MEDIA & JOURNALISM
-        ========================= */}
+        {/* Media & Journalism */}
 
         <Route
           path="/media-and-journalism/:careerId"
@@ -219,55 +267,64 @@ function App() {
         />
 
 
-        {/* =========================
-            DESIGN
-            Your JSON uses /Design/...
-        ========================= */}
+        {/* Space & Astronomy */}
+
+        <Route
+          path="/space-astronomy/:careerId"
+          element={<CareerDetails />}
+        />
+
+
+        {/* Environmental */}
+
+        <Route
+          path="/environmental/:careerId"
+          element={<CareerDetails />}
+        />
+
+
+        {/* Design */}
+
+        <Route
+          path="/design/:careerId"
+          element={<CareerDetails />}
+        />
+
+        {/* Compatibility for old /Design/... URLs */}
 
         <Route
           path="/Design/:careerId"
           element={<CareerDetails />}
         />
 
-        {/* Also support lowercase URLs */}
-        <Route
-          path="/design/:careerId"
-          element={<CareerDetails />}
-        />
 
-
-        {/* =========================
-            DOCTOR / MEDICAL
-            Your JSON contains both:
-            /Doctor/...
-            /doctor/...
-        ========================= */}
-
-        <Route
-          path="/Doctor/:careerId"
-          element={<CareerDetails />}
-        />
+        {/* Doctor / Medical */}
 
         <Route
           path="/doctor/:careerId"
           element={<CareerDetails />}
         />
 
+        {/* Compatibility for old /Doctor/... URLs */}
 
-        {/* =========================
-            GOVERNMENT CAREER LEGACY ROUTES
-            Government.jsx currently
-            generates:
-            /ias
-            /ips
-            /police
-            /army
-            /railway
-            /forest
-            /talathi
-            /food
-            /income-tax
-        ========================= */}
+        <Route
+          path="/Doctor/:careerId"
+          element={<CareerDetails />}
+        />
+
+
+        {/* Government */}
+
+        <Route
+          path="/government/:careerId"
+          element={<CareerDetails />}
+        />
+
+
+        {/* =================================================
+            OLD GOVERNMENT ROUTES
+            Keep these so existing links don't break
+            ================================================= */}
 
         <Route
           path="/ias"
@@ -290,6 +347,11 @@ function App() {
         />
 
         <Route
+          path="/income-tax"
+          element={<CareerDetails />}
+        />
+
+        <Route
           path="/railway"
           element={<CareerDetails />}
         />
@@ -300,49 +362,79 @@ function App() {
         />
 
         <Route
-          path="/talathi"
-          element={<CareerDetails />}
-        />
-
-        <Route
           path="/food"
           element={<CareerDetails />}
         />
 
         <Route
-          path="/income-tax"
+          path="/talathi"
           element={<CareerDetails />}
         />
 
 
-        {/* =========================
-            CAREER FEATURES
-        ========================= */}
+        {/* =================================================
+            CAREER RECOMMENDATION
+            ================================================= */}
 
         <Route
           path="/career-recommendation"
           element={<CareerRecommendation />}
         />
 
+
+        {/* =================================================
+            APTITUDE TEST
+            ================================================= */}
+
         <Route
           path="/aptitude-test"
           element={<AptitudeTest />}
         />
+
+
+        {/* =================================================
+            CAREER RESULT
+            ================================================= */}
 
         <Route
           path="/career-result"
           element={<CareerResult />}
         />
 
+
+        {/* =================================================
+            EDIT PROFILE
+            ================================================= */}
+
+        <Route
+          path="/edit-profile"
+          element={<EditProfile />}
+        />
+
+
+        {/* =================================================
+            CAREER COMPARISON
+            ================================================= */}
+
         <Route
           path="/career-comparison"
           element={<CareerComparison />}
         />
 
+
+        {/* =================================================
+            COLLEGE RECOMMENDATION
+            ================================================= */}
+
         <Route
           path="/college-recommendation"
           element={<CollegeRecommendation />}
         />
+
+
+        {/* =================================================
+            JOB RECOMMENDATION
+            ================================================= */}
 
         <Route
           path="/job-recommendation"
@@ -350,19 +442,19 @@ function App() {
         />
 
 
-        {/* =========================
-            USER / PROFILE
-        ========================= */}
-
-        <Route
-          path="/edit-profile"
-          element={<EditProfile />}
-        />
+        {/* =================================================
+            SETTINGS
+            ================================================= */}
 
         <Route
           path="/settings"
           element={<Settings />}
         />
+
+
+        {/* =================================================
+            PORTFOLIO GENERATOR
+            ================================================= */}
 
         <Route
           path="/portfolio-generator"
@@ -370,9 +462,9 @@ function App() {
         />
 
 
-        {/* =========================
+        {/* =================================================
             FALLBACK
-        ========================= */}
+            ================================================= */}
 
         <Route
           path="*"
@@ -380,8 +472,10 @@ function App() {
         />
 
       </Routes>
+
     </BrowserRouter>
   );
 }
+
 
 export default App;
