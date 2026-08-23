@@ -1,114 +1,97 @@
-// const User = require("../models/User");
-// const comparisonService = require("../services/comparisonService");
-
-// exports.compareCareers = async (req, res) => {
-//   try {
-//     const { career1, career2, userId } = req.body;
-
-//     if (!career1 || !career2) {
-//       return res.status(400).json({
-//         success: false,
-//         message: "Please select both careers.",
-//       });
-//     }
-
-//     const user = await User.findById(userId);
-
-// // const prompt = `
-// // Compare these careers:
-
-// // Career 1: ${career1}
-
-// // Career 2: ${career2}
-
-// // Generate a professional comparison.
-
-// // Use HTML only.
-
-// // Include:
-
-// // <h2>Overview</h2>
-
-// // <p>...</p>
-
-// // <h2>Education</h2>
-
-// // <table>
-// // ...
-// // </table>
-
-// // <h2>Skills</h2>
-
-// // <ul>
-// // ...
-// // </ul>
-
-// // <h2>Salary</h2>
-
-// // <h2>Future Scope</h2>
-
-// // <h2>Final Recommendation</h2>
-
-// // Rules:
-
-// // Return ONLY HTML.
-
-// // Do NOT return JSON.
-
-// // Do NOT use markdown.
-
-// // Do NOT use \`\`\`.
-
-// // Start directly with <h2>.
-// // `;
-// const reply = comparisonService(career1, career2);
-// const reply = await generateComparison(prompt);
-//     res.json({
-//       success: true,
-//       comparison: reply,
-//     });
-
-//   } catch (err) {
-//     console.log(err);
-
-//     res.status(500).json({
-//       success: false,
-//       message: err.message,
-//     });
-//   }
-// };
-
 const comparisonService = require("../services/comparisonService");
 
-exports.compareCareers = async (req, res) => {
+
+exports.compareCareers = async (
+  req,
+  res
+) => {
 
   try {
 
-    const { career1, career2 } = req.body;
+    const {
+      career1,
+      career2,
+    } = req.body;
 
-    if (!career1 || !career2) {
+
+    if (
+      !career1 ||
+      !career2
+    ) {
 
       return res.status(400).json({
+
         success: false,
-        message: "Please select both careers."
+
+        message:
+          "Please select both careers.",
+
       });
 
     }
 
-    const comparison = comparisonService(career1, career2);
 
-    res.json({
+    if (
+      career1.trim().toLowerCase() ===
+      career2.trim().toLowerCase()
+    ) {
+
+      return res.status(400).json({
+
+        success: false,
+
+        message:
+          "Please select two different careers.",
+
+      });
+
+    }
+
+
+    const comparison =
+      await comparisonService(
+        career1,
+        career2
+      );
+
+
+    if (!comparison.found) {
+
+      return res.status(404).json({
+
+        success: false,
+
+        message:
+          comparison.message,
+
+      });
+
+    }
+
+
+    return res.json({
+
       success: true,
-      comparison
+
+      comparison,
+
     });
 
-  } catch (err) {
+  } catch (error) {
 
-    console.log(err);
+    console.error(
+      "Career comparison controller error:",
+      error
+    );
 
-    res.status(500).json({
+
+    return res.status(500).json({
+
       success: false,
-      message: err.message
+
+      message:
+        "Failed to compare careers.",
+
     });
 
   }

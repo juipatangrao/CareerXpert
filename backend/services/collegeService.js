@@ -1,80 +1,216 @@
-const { GoogleGenerativeAI } = require("@google/generative-ai");
+const College = require("../models/College");
 
-const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
+const escapeRegex = (value) => {
+  return value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+};
 
-async function generateCollegeRecommendation(
+const calculateRecommendationScore = (
+  college,
+  selectedProgram,
+  collegeType
+) => {
+  let score = 0;
+
+  // --------------------------------
+  // 1. Career / Program Match
+  // --------------------------------
+  const program = college.programs.find(
+    (item) =>
+      item.careerCategory?.toLowerCase() ===
+      selectedProgram.toLowerCase()
+  );
+
+  if (!program) {
+    return 0;
+  }
+
+  score += 30;
+
+  // --------------------------------
+  // 2. College Type
+  // --------------------------------
+  if (
+    collegeType === "Any" ||
+    college.type === collegeType
+  ) {
+    score += 10;
+  }
+
+  // --------------------------------
+  // 3. College Rating
+  // --------------------------------
+  if (college.rating >= 4.5) {
+    score += 10;
+  } else if (college.rating >= 4.0) {
+    score += 8;
+  } else if (college.rating >= 3.5) {
+    score += 5;
+  }
+
+  // --------------------------------
+  // 4. Placement
+  // --------------------------------
+  const averagePackage =
+    college.placement?.averagePackage;
+
+  if (averagePackage) {
+    if (averagePackage >= 1200000) {
+      score += 10;
+    } else if (averagePackage >= 800000) {
+      score += 8;
+    } else if (averagePackage >= 500000) {
+      score += 5;
+    }
+  }
+
+  // --------------------------------
+  // 5. NAAC Accreditation
+  // --------------------------------
+  const naacGrade =
+    college.accreditation?.naacGrade
+      ?.toUpperCase();
+
+  if (naacGrade === "A++") {
+    score += 5;
+  } else if (naacGrade === "A+") {
+    score += 4;
+  } else if (naacGrade === "A") {
+    score += 3;
+  }
+
+  // --------------------------------
+  // 6. Hostel
+  // --------------------------------
+  if (college.hostel) {
+    score += 5;
+  }
+
+  // --------------------------------
+  // 7. Scholarship
+  // --------------------------------
+  if (college.scholarshipAvailable) {
+    score += 5;
+  }
+
+  // --------------------------------
+  // 8. Verified Information
+  // --------------------------------
+  if (college.verified) {
+    score += 5;
+  }
+
+  // --------------------------------
+  // 9. NIRF Ranking
+  // --------------------------------
+  const nirfRank =
+    college.accreditation?.nirf?.rank;
+
+  if (nirfRank) {
+    if (nirfRank <= 10) {
+      score += 5;
+    } else if (nirfRank <= 25) {
+      score += 4;
+    } else if (nirfRank <= 50) {
+      score += 3;
+    } else if (nirfRank <= 100) {
+      score += 2;
+    }
+  }
+
+  return Math.min(score, 100);
+};
+
+
+const generateCollegeRecommendation = async (
   career,
   state,
   collegeType
-) {
+) => {
+  try {
+    const escapedCareer = escapeRegex(career);
 
-  const model = genAI.getGenerativeModel({
-    model: "gemini-2.5-flash",
-  });
+    // --------------------------------
+    // MongoDB Search
+    // --------------------------------
+    const query = {
+      "location.state": state,
 
-  const prompt = `
-You are an expert Indian career counselor.
+      careerCategories: {
+        $regex: `^${escapedCareer}$`,
+        $options: "i",
+      },
+    };
 
-Generate ONLY valid HTML.
+    // Government / Private / Any
+    if (
+      collegeType &&
+      collegeType !== "Any"
+    ) {
+      query.type = collegeType;
+    }
 
-Do NOT use Markdown.
-Do NOT use backticks.
-Do NOT use JSON.
-Do NOT include CSS.
+    const colleges = await College.find(query)
+      .lean();
 
-Student Career:
-${career}
+    // --------------------------------
+    // Calculate recommendation score
+    // --------------------------------
+    const recommendations = colleges
+      .map((college) => {
+        const selectedProgram =
+          college.programs.find(
+            (program) =>
+              program.careerCategory
+                ?.toLowerCase() ===
+              career.toLowerCase()
+          );
 
-Preferred State:
-${state}
+        if (!selectedProgram) {
+          return null;
+        }
 
-Preferred College Type:
-${collegeType}
+        const recommendationScore =
+          calculateRecommendationScore(
+            college,
+            career,
+            collegeType
+          );
 
-Generate a professional report with the following sections:
+        return {
+          ...college,
+          selectedProgram,
+          recommendationScore,
+        };
+      })
+      .filter(Boolean)
+      .filter(
+        (college) =>
+          college.recommendationScore > 0
+      )
+      .sort(
+        (a, b) =>
+          b.recommendationScore -
+          a.recommendationScore
+      );
 
-<h1>AI College Recommendation</h1>
+    return {
+      career,
+      state,
+      collegeType: collegeType || "Any",
+      totalResults:
+        recommendations.length,
+      colleges: recommendations,
+    };
 
-<h2>Overview</h2>
+  } catch (error) {
+    console.error(
+      "College Recommendation Service Error:",
+      error
+    );
 
-<h2>Top Government Colleges</h2>
-
-Create a table with:
-College Name
-Location
-Approx Fees
-NIRF Ranking
-NAAC Grade
-Average Package
-Highest Package
-
-<h2>Top Private Colleges</h2>
-
-(Create same table)
-
-<h2>Entrance Exams</h2>
-
-<h2>Eligibility</h2>
-
-<h2>Popular Courses</h2>
-
-<h2>Placement Opportunities</h2>
-
-<h2>Top Recruiters</h2>
-
-<h2>Future Scope</h2>
-
-<h2>AI Recommendation</h2>
-
-Make the report detailed, professional, and suitable for Indian students.
-
-Return ONLY HTML.
-`;
-
-  const result = await model.generateContent(prompt);
-
-  return result.response.text();
-}
+    throw error;
+  }
+};
 
 module.exports = {
   generateCollegeRecommendation,

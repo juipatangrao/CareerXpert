@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Signup from "./component/Signup";
 import Login from "./component/Login";
 import Home from "./component/Home";
@@ -23,7 +23,6 @@ import AIJobRecommendation from "./pages/AIJobRecommendation";
 import Design from "./component/Design";
 //Government
 //IT
-
 
 //Banking and Finance pages
 
@@ -68,7 +67,6 @@ function App() {
         <Route element={<ProtectedRoute />}>
           <Route path="/home" element={<Home />} />
         </Route>
-        
 
         <Route path="/government" element={<Government />} />
         <Route path="/it" element={<IT />} />
@@ -80,103 +78,34 @@ function App() {
         <Route path="/engineering" element={<Engineering />} />
         <Route path="/doctor" element={<Doctor />} />
         <Route path="/science-research" element={<ScienceResearch />} />
-        
-        
-        
-        
-        
-        
-        
-        
-        
+
         <Route path="/media-and-journalism" element={<MediaJournalism />} />
         <Route path="/space-astronomy" element={<SpaceAstronomy />} />
         <Route path="/environmental" element={<Environmental />} />
         <Route path="/design" element={<Design />} />
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
+
         {/* Banking and Finance routes */}
-        
-        
-        
-        
-        
-        
+
         {/* Law */}
-        
-        
-        
-        
-        
-        
+
         {/* Aviation */}
-        
-        
-        
-        
-        
-        
+
         {/* Science and Research */}
-        
-        
-        
-        
-        
-        
+
         {/* Engineering */}
-        
-        
-        
-        
-        
-        
-        
-        
+
         {/* Hotel Management */}
-        
-        
-        
-        
+
         {/*Environment*/}
-        
-        
-        
+
         {/* Merchant Navy */}
-        
-        
-        
-        
-        
 
         {/*Design */}
-        
-        
-        
-        
 
         {/*Space*/}
-        
-        
-        
-        
+
         {/*Doctor*/}
-        
-        
-        
-        
-        
-        
-        
-        
-        
+
         <Route
           path="/career-recommendation"
           element={<CareerRecommendation />}
@@ -194,7 +123,7 @@ function App() {
         <Route path="/job-recommendation" element={<AIJobRecommendation />} />
         <Route path="/settings" element={<Settings />} />
         <Route path="/portfolio-generator" element={<PortfolioGenerator />} />
-        <Route path="*" element={<CareerDetails />} />
+        <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </BrowserRouter>
   );
