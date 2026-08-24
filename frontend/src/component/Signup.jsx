@@ -80,22 +80,22 @@ const Signup = () => {
 
 
 
-      localStorage.setItem( "userId", res.data.user._id );
-      localStorage.setItem("loggedInUser", res.data.user.name );
-      localStorage.setItem( "userEmail", email);
+      localStorage.setItem("userId", res.data.user._id);
+localStorage.setItem("loggedInUser", res.data.user.name);
+localStorage.setItem("userEmail", email);
 
-      alert("Signup Successful!");
+// New user flag
+localStorage.setItem("isNewUser", "true");
 
+alert("Signup Successful!");
 
+setFullName("");
+setEmail("");
+setPassword("");
+setConfirmPassword("");
 
-      setFullName("");
-      setEmail("");
-      setPassword("");
-      setConfirmPassword("");
-
-
-
-      navigate("/home");
+// Signup नंतर Login page वर
+navigate("/login");
 
 
 

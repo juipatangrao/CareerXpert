@@ -25,6 +25,7 @@ function EditProfile() {
 });
 const userId = localStorage.getItem("userId");
 const navigate = useNavigate();
+const isNewUser = localStorage.getItem("isNewUser") === "true";
 const [profileImage, setProfileImage] = useState(null);
 const [preview, setPreview] = useState(defaultProfile);
 const [editPersonal, setEditPersonal] = useState(false);
@@ -165,13 +166,18 @@ const fetchProfile = async () => {
       }
     );
 
-    alert(res.data.message);
+ if (isNewUser) {
+  alert("Profile created successfully!");
+  localStorage.setItem("isNewUser", "false");
+} else {
+  alert("Profile updated successfully!");
+}
 
-    navigate("/home", {
-      state: {
-        refresh: Date.now(),
-      },
-    });
+navigate("/home", {
+  state: {
+    refresh: Date.now(),
+  },
+});
 
   } catch (error) {
     console.log(error);
@@ -190,9 +196,11 @@ const progress = Math.round(
 
 return (
   <div className="edit-profile-page">
-    <Link to="/home" className="back-btn">
-      ← Back
-    </Link>
+    {!isNewUser && (
+  <Link to="/home" className="back-btn">
+    ← Back
+  </Link>
+)}
 
     <div className="edit-profile-card">
 
@@ -253,13 +261,15 @@ return (
 
           <h3>👤 Personal Information</h3>
 
-          <button
-            type="button"
-            className="change-btn"
-            onClick={() => setEditPersonal(!editPersonal)}
-          >
-            {editPersonal ? "Cancel" : "Change"}
-          </button>
+          {!isNewUser && (
+  <button
+    type="button"
+    className="change-btn"
+    onClick={() => setEditPersonal(!editPersonal)}
+  >
+    {editPersonal ? "Cancel" : "Change"}
+  </button>
+)}
 
         </div>
 
@@ -274,7 +284,7 @@ return (
               name="phone"
               value={formData.phone}
               onChange={handleChange}
-              disabled={!editPersonal}
+disabled={!isNewUser && !editPersonal}
               placeholder="Enter Phone Number"
             />
 
@@ -288,7 +298,7 @@ return (
               name="gender"
               value={formData.gender}
               onChange={handleChange}
-              disabled={!editPersonal}
+              disabled={!isNewUser && !editPersonal}
             >
               <option value="">Select Gender</option>
               <option>Male</option>
@@ -307,7 +317,7 @@ return (
               name="dob"
               value={formData.dob}
               onChange={handleChange}
-              disabled={!editPersonal}
+disabled={!isNewUser && !editPersonal}
             />
 
           </div>
@@ -335,13 +345,15 @@ return (
 
     <h3>🎓 Education</h3>
 
-    <button
-      type="button"
-      className="change-btn"
-      onClick={() => setEditEducation(!editEducation)}
-    >
-      {editEducation ? "Cancel" : "Change"}
-    </button>
+    {!isNewUser && (
+  <button
+    type="button"
+    className="change-btn"
+    onClick={() => setEditEducation(!editEducation)}
+  >
+    {editEducation ? "Cancel" : "Change"}
+  </button>
+)}
 
   </div>
 
@@ -355,8 +367,7 @@ return (
         name="college"
         value={formData.college}
         onChange={handleChange}
-        disabled={!editEducation}
-      />
+disabled={!isNewUser && !editEducation}      />
 
     </div>
 
@@ -368,8 +379,7 @@ return (
         name="course"
         value={formData.course}
         onChange={handleChange}
-        disabled={!editEducation}
-      />
+disabled={!isNewUser && !editEducation}      />
 
     </div>
 
@@ -381,8 +391,7 @@ return (
         name="year"
         value={formData.year}
         onChange={handleChange}
-        disabled={!editEducation}
-      />
+disabled={!isNewUser && !editEducation}      />
 
     </div>
 
@@ -394,8 +403,7 @@ return (
         name="semester"
         value={formData.semester}
         onChange={handleChange}
-        disabled={!editEducation}
-      />
+disabled={!isNewUser && !editEducation}      />
 
     </div>
 
@@ -411,13 +419,15 @@ return (
 
     <h3>💻 Career Information</h3>
 
-    <button
-      type="button"
-      className="change-btn"
-      onClick={() => setEditCareer(!editCareer)}
-    >
-      {editCareer ? "Cancel" : "Change"}
-    </button>
+  {!isNewUser && (
+  <button
+    type="button"
+    className="change-btn"
+    onClick={() => setEditCareer(!editCareer)}
+  >
+    {editCareer ? "Cancel" : "Change"}
+  </button>
+)}
 
   </div>
 
@@ -433,8 +443,7 @@ return (
         placeholder="React, Java, Python..."
         value={formData.skills}
         onChange={handleChange}
-        disabled={!editCareer}
-      />
+disabled={!isNewUser && !editCareer}      />
 
     </div>
 
@@ -448,8 +457,7 @@ return (
         placeholder="AI, Web Development..."
         value={formData.interests}
         onChange={handleChange}
-        disabled={!editCareer}
-      />
+disabled={!isNewUser && !editCareer}      />
 
     </div>
 
@@ -464,8 +472,7 @@ return (
       value={formData.careerGoal}
       onChange={handleChange}
       placeholder="Describe your dream career..."
-      disabled={!editCareer}
-    />
+disabled={!isNewUser && !editCareer}    />
 
   </div>
 
@@ -478,13 +485,15 @@ return (
 
     <h3>📍 Address</h3>
 
-    <button
-      type="button"
-      className="change-btn"
-      onClick={() => setEditAddress(!editAddress)}
-    >
-      {editAddress ? "Cancel" : "Change"}
-    </button>
+    {!isNewUser && (
+  <button
+    type="button"
+    className="change-btn"
+    onClick={() => setEditAddress(!editAddress)}
+  >
+    {editAddress ? "Cancel" : "Change"}
+  </button>
+)}
 
   </div>
 
@@ -497,8 +506,7 @@ return (
       value={formData.address}
       onChange={handleChange}
       placeholder="Enter your address"
-      disabled={!editAddress}
-    />
+disabled={!isNewUser && !editAddress}    />
 
   </div>
 
@@ -512,8 +520,7 @@ return (
         name="city"
         value={formData.city}
         onChange={handleChange}
-        disabled={!editAddress}
-      />
+disabled={!isNewUser && !editAddress}      />
 
     </div>
 
@@ -525,8 +532,7 @@ return (
         name="state"
         value={formData.state}
         onChange={handleChange}
-        disabled={!editAddress}
-      />
+disabled={!isNewUser && !editAddress}      />
 
     </div>
 
@@ -538,8 +544,7 @@ return (
         name="country"
         value={formData.country}
         onChange={handleChange}
-        disabled={!editAddress}
-      />
+disabled={!isNewUser && !editAddress}      />
 
     </div>
 
@@ -549,32 +554,44 @@ return (
 
 {/* ---------------- Buttons ---------------- */}
 
-<div className="button-group">
+{isNewUser ? (
+  <div className="new-user-save">
+    <button
+      type="button"
+      className="save-btn"
+      onClick={handleSave}
+    >
+      Save
+    </button>
+  </div>
+) : (
+  <div className="button-group">
 
-  <button
-    type="button"
-    className="cancel-btn"
-    onClick={() => navigate("/home")}
-  >
-    Cancel
-  </button>
+    <button
+      type="button"
+      className="cancel-btn"
+      onClick={() => navigate("/home")}
+    >
+      Cancel
+    </button>
 
-  <button
-    type="button"
-    className="save-btn"
-    onClick={async () => {
-      await handleSave();
+    <button
+      type="button"
+      className="save-btn"
+      onClick={async () => {
+        await handleSave();
 
-      setEditPersonal(false);
-      setEditEducation(false);
-      setEditCareer(false);
-      setEditAddress(false);
-    }}
-  >
-    💾 Save Changes
-  </button>
+        setEditPersonal(false);
+        setEditEducation(false);
+        setEditCareer(false);
+        setEditAddress(false);
+      }}
+    >
+      💾 Save Changes
+    </button>
 
-</div>
+  </div>
+)}
 
 </div>
 </div>
