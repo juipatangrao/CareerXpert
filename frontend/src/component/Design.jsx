@@ -97,7 +97,7 @@ function Design() {
 
               <p>{career.description}</p>
 
- <Link to={`/Design/${career.id}`}>
+<Link to={`/design/${career.id}`}>
   <button>Explore Career →</button>
 </Link>
             </div>

@@ -1167,3 +1167,271 @@ body {
     width: 230px;
   }
 }
+
+/* =========================================================
+   MERGED FRIEND FEATURES
+   Added to the MAIN Home.css without replacing main styles
+   ========================================================= */
+
+/* ================= SKILL GAP FLOATING BUTTON ================= */
+
+.skill-gap-btn {
+  position: fixed;
+  right: 28px;
+  bottom: 200px;
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #800020, #b30045);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  box-shadow: 0 10px 30px rgba(128, 0, 32, 0.35);
+  transition: 0.3s;
+  z-index: 9999;
+  animation: careerFloat 2.5s infinite;
+}
+
+.skill-gap-btn:hover {
+  transform: scale(1.1);
+}
+
+.skill-gap-icon {
+  color: white;
+  font-size: 30px;
+}
+
+.skill-gap-tooltip {
+  position: absolute;
+  right: 85px;
+  background: #800020;
+  color: white;
+  padding: 10px 16px;
+  border-radius: 8px;
+  font-size: 15px;
+  white-space: nowrap;
+  opacity: 0;
+  visibility: hidden;
+  transition: 0.3s;
+}
+
+.skill-gap-btn:hover .skill-gap-tooltip {
+  opacity: 1;
+  visibility: visible;
+}
+
+
+/* ================= STUDY PLANNER FLOATING BUTTON ================= */
+
+.study-planner-btn {
+  position: fixed;
+  right: 28px;
+  bottom: 360px;
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #800020, #b30045);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  box-shadow: 0 10px 30px rgba(128, 0, 32, 0.35);
+  transition: 0.3s;
+  z-index: 9999;
+  animation: careerFloat 2.5s infinite;
+}
+
+.study-planner-btn:hover {
+  transform: scale(1.1);
+}
+
+.study-planner-icon {
+  color: white;
+  font-size: 30px;
+}
+
+.study-planner-tooltip {
+  position: absolute;
+  right: 85px;
+  background: #800020;
+  color: white;
+  padding: 10px 16px;
+  border-radius: 8px;
+  font-size: 15px;
+  white-space: nowrap;
+  opacity: 0;
+  visibility: hidden;
+  transition: 0.3s;
+}
+
+.study-planner-btn:hover .study-planner-tooltip {
+  opacity: 1;
+  visibility: visible;
+}
+
+
+/* ================= CAREER ROADMAP FLOATING BUTTON ================= */
+
+.roadmap-btn {
+  position: fixed;
+  right: 28px;
+  bottom: 440px;
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #800020, #b30045);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 9999;
+  box-shadow: 0 10px 30px rgba(128, 0, 32, 0.35);
+  transition: transform 0.2s ease;
+  animation: careerFloat 2.5s infinite;
+}
+
+.roadmap-btn:hover {
+  transform: scale(1.1);
+}
+
+.roadmap-icon {
+  font-size: 30px;
+  color: white;
+}
+
+.roadmap-tooltip {
+  position: absolute;
+  right: 85px;
+  background: #800020;
+  color: white;
+  padding: 10px 16px;
+  border-radius: 8px;
+  font-size: 15px;
+  white-space: nowrap;
+  opacity: 0;
+  visibility: hidden;
+  transition: 0.3s;
+}
+
+.roadmap-btn:hover .roadmap-tooltip {
+  opacity: 1;
+  visibility: visible;
+}
+
+
+/* =========================================================
+   FLOATING BUTTON ORDER
+   Prevent overlap with YOUR existing buttons
+   ========================================================= */
+
+/*
+   Top
+   ┌ Roadmap
+   ├ Job Recommendation
+   ├ Study Planner
+   ├ College Recommendation
+   ├ Skill Gap
+   ├ Career Comparison
+   └ Career Recommendation
+   Bottom
+*/
+
+.roadmap-btn {
+  bottom: 520px;
+}
+
+.job-ai-btn {
+  bottom: 440px;
+}
+
+.study-planner-btn {
+  bottom: 360px;
+}
+
+.college-floating-btn {
+  bottom: 280px;
+}
+
+.skill-gap-btn {
+  bottom: 200px;
+}
+
+.comparison-ai-btn {
+  bottom: 120px;
+}
+
+.career-ai-btn {
+  bottom: 40px;
+}
+
+
+/* ================= RESPONSIVE FLOATING BUTTONS ================= */
+
+@media (max-width: 700px) {
+
+  .roadmap-btn,
+  .job-ai-btn,
+  .study-planner-btn,
+  .college-floating-btn,
+  .skill-gap-btn,
+  .comparison-ai-btn,
+  .career-ai-btn {
+    right: 15px;
+  }
+
+  .roadmap-btn,
+  .job-ai-btn,
+  .study-planner-btn,
+  .college-floating-btn,
+  .skill-gap-btn,
+  .comparison-ai-btn,
+  .career-ai-btn {
+    width: 58px;
+    height: 58px;
+  }
+
+  .roadmap-icon,
+  .job-ai-icon,
+  .study-planner-icon,
+  .skill-gap-icon,
+  .college-floating-icon,
+  .comparison-ai-icon,
+  .career-ai-icon {
+    font-size: 25px;
+  }
+
+}
+
+@media (max-width: 500px) {
+
+  .roadmap-btn {
+    bottom: 470px;
+  }
+
+  .job-ai-btn {
+    bottom: 400px;
+  }
+
+  .study-planner-btn {
+    bottom: 330px;
+  }
+
+  .college-floating-btn {
+    bottom: 260px;
+  }
+
+  .skill-gap-btn {
+    bottom: 190px;
+  }
+
+  .comparison-ai-btn {
+    bottom: 120px;
+  }
+
+  .career-ai-btn {
+    bottom: 50px;
+  }
+
+}

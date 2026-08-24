@@ -55,7 +55,7 @@ const handleGenerate = async () => {
     setRecommendation(res.data.recommendation);
   } catch (err) {
     console.log(err);
-    alert("Failed to generate recommendations.");
+    alert("Complete your Profile First.");
   } finally {
     setLoading(false);
   }

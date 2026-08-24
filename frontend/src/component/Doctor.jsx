@@ -13,70 +13,70 @@ import RadiologistIcon from "../assets/Radiologist.jpeg";
 import doctorHero from "../assets/doctor-hero.jpeg";
 function Doctor() {
   const careers = [
-    {
-      id: "Cardiologist",
-      title: "Cardiologist",
-      icon: CardiologistIcon,
-      description:
-        "Cardiologists diagnose and treat heart diseases and help patients maintain a healthy cardiovascular system.",
-    },
-    {
-      id: "Neurologist",
-      title: "Neurologist",
-      icon: NeurologistIcon,
-      description:
-        "Neurologists diagnose and treat disorders of the brain, spinal cord and nervous system.",
-    },
-    {
-      id: "MBBS",
-      title: "MBBS Doctor",
-      icon: MBBSDoctorIcon,
-      description:
-        "MBBS Doctors provide general medical care, diagnose illnesses and prescribe treatments for patients.",
-    },
-    {
-      id: "Gynecologist",
-      title: "Gynecologist",
-      icon: GynecologistIcon,
-      description:
-        "Gynecologists specialize in women's reproductive health, pregnancy and childbirth care.",
-    },
-    {
-      id: "Dermatologist",
-      title: "Dermatologist",
-      icon: DermatologistIcon,
-      description:
-        "Dermatologists diagnose and treat diseases related to the skin, hair and nails.",
-    },
-    {
-      id: "Psychiatrist",
-      title: "Psychiatrist",
-      icon: PsychiatristIcon,
-      description:
-        "Psychiatrists diagnose and treat mental health conditions through therapy and medication.",
-    },
-    {
-      id: "Dentist",
-      title: "Dentist (BDS)",
-      icon: DentistIcon,
-      description:
-        "Dentists diagnose and treat dental problems while helping patients maintain healthy teeth and gums.",
-    },
-    {
-      id: "Urologist",
-      title: "Urologist",
-      icon: UrologistIcon,
-      description:
-        "Urologists diagnose and treat disorders of the urinary tract and male reproductive system.",
-    },
-    {
-      id: "Radiologist",
-      title: "Radiologist",
-      icon: RadiologistIcon,
-      description:
-        "Radiologists use X-rays, CT scans and MRI to diagnose and monitor diseases.",
-    },
-  ];
+  {
+    id: "Cardiologist",
+    title: "Cardiologist",
+    icon: CardiologistIcon,
+    description:
+      "Cardiologists diagnose and treat heart diseases and help patients maintain a healthy cardiovascular system.",
+  },
+  {
+    id: "neurologist",
+    title: "Neurologist",
+    icon: NeurologistIcon,
+    description:
+      "Neurologists diagnose and treat disorders of the brain, spinal cord and nervous system.",
+  },
+  {
+    id: "Mbbs",
+    title: "MBBS Doctor",
+    icon: MBBSDoctorIcon,
+    description:
+      "MBBS Doctors provide general medical care, diagnose illnesses and prescribe treatments for patients.",
+  },
+  {
+    id: "Gynecologist",
+    title: "Gynecologist",
+    icon: GynecologistIcon,
+    description:
+      "Gynecologists specialize in women's reproductive health, pregnancy and childbirth care.",
+  },
+  {
+    id: "Dermatologist",
+    title: "Dermatologist",
+    icon: DermatologistIcon,
+    description:
+      "Dermatologists diagnose and treat diseases related to the skin, hair and nails.",
+  },
+  {
+    id: "Psychiatrist",
+    title: "Psychiatrist",
+    icon: PsychiatristIcon,
+    description:
+      "Psychiatrists diagnose and treat mental health conditions through therapy and medication.",
+  },
+  {
+    id: "Dentist",
+    title: "Dentist (BDS)",
+    icon: DentistIcon,
+    description:
+      "Dentists diagnose and treat dental problems while helping patients maintain healthy teeth and gums.",
+  },
+  {
+    id: "Urologist",
+    title: "Urologist",
+    icon: UrologistIcon,
+    description:
+      "Urologists diagnose and treat disorders of the urinary tract and male reproductive system.",
+  },
+  {
+    id: "Radiologist",
+    title: "Radiologist",
+    icon: RadiologistIcon,
+    description:
+      "Radiologists use X-rays, CT scans and MRI to diagnose and monitor diseases.",
+  },
+];
 
   return (
     <div className="doctor-page">
@@ -122,7 +122,7 @@ function Doctor() {
 
               <p>{career.description}</p>
 
-              <Link to={`/${career.id}`}>
+<Link to={`/doctor/${career.id}`}>
                 <button>Explore Career →</button>
               </Link>
             </div>

@@ -1,0 +1,559 @@
+/* =====================================
+   CAREER ROADMAP RESULT PAGE
+===================================== */
+
+.roadmap-result-page {
+  min-height: 100vh;
+  background: #7b1023;
+  padding: 45px 20px;
+  box-sizing: border-box;
+}
+
+
+/* =====================================
+   MAIN CONTAINER
+===================================== */
+
+.roadmap-result-container {
+  width: 100%;
+  max-width: 950px;
+  margin: 0 auto;
+
+  background: #ffffff;
+
+  border-radius: 24px;
+
+  padding: 35px 50px 50px;
+
+  box-sizing: border-box;
+
+  box-shadow: 0 18px 45px rgba(0, 0, 0, 0.18);
+}
+
+
+/* =====================================
+   TOP BAR
+===================================== */
+
+.result-top-bar {
+  margin-bottom: 10px;
+}
+
+.result-back-btn {
+  border: none;
+  background: transparent;
+
+  color: #7b1023;
+
+  font-size: 15px;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  padding: 5px 0;
+}
+
+
+/* =====================================
+   HEADER
+===================================== */
+
+.result-header {
+  text-align: center;
+
+  padding: 15px 0 35px;
+}
+
+.result-icon {
+  width: 70px;
+  height: 70px;
+
+  margin: 0 auto 15px;
+
+  border-radius: 50%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: #8b1538;
+
+  color: white;
+
+  font-size: 30px;
+
+  box-shadow:
+    0 8px 20px rgba(123, 16, 35, 0.25);
+}
+
+.result-small-title {
+  margin: 0 0 8px;
+
+  color: #8b1538;
+
+  font-size: 12px;
+
+  font-weight: 700;
+
+  letter-spacing: 1.5px;
+}
+
+.result-header h1 {
+  margin: 0;
+
+  color: #5c3a21;
+
+  font-size: 34px;
+
+  font-weight: 700;
+}
+
+.result-subtitle {
+  max-width: 600px;
+
+  margin: 10px auto 0;
+
+  color: #777;
+
+  font-size: 15px;
+
+  line-height: 1.6;
+}
+
+
+/* =====================================
+   CAREER SUMMARY
+===================================== */
+
+.career-summary {
+  display: flex;
+  align-items: center;
+
+  background: #faf7f4;
+
+  border: 1px solid #eadfd8;
+
+  border-radius: 14px;
+
+  padding: 20px 25px;
+
+  margin-bottom: 45px;
+}
+
+.summary-box {
+  flex: 1;
+}
+
+.summary-box span {
+  display: block;
+
+  margin-bottom: 7px;
+
+  color: #888;
+
+  font-size: 12px;
+
+  font-weight: 600;
+
+  text-transform: uppercase;
+
+  letter-spacing: 0.7px;
+}
+
+.summary-box strong {
+  color: #3a2e27;
+
+  font-size: 17px;
+}
+
+.summary-line {
+  width: 1px;
+
+  height: 42px;
+
+  background: #d8cfc9;
+
+  margin: 0 25px;
+}
+
+
+/* =====================================
+   SECTION HEADING
+===================================== */
+
+.roadmap-section-heading {
+  margin-bottom: 30px;
+}
+
+.roadmap-section-heading h2 {
+  margin: 0;
+
+  color: #3a2e27;
+
+  font-size: 25px;
+}
+
+.roadmap-section-heading p {
+  margin: 7px 0 0;
+
+  color: #888;
+
+  font-size: 14px;
+}
+
+
+/* =====================================
+   TIMELINE
+===================================== */
+
+.career-timeline {
+  position: relative;
+}
+
+.timeline-item {
+  display: flex;
+
+  gap: 22px;
+
+  position: relative;
+}
+
+
+/* =====================================
+   TIMELINE LEFT
+===================================== */
+
+.timeline-left {
+  width: 55px;
+
+  flex-shrink: 0;
+
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+}
+
+.timeline-number {
+  width: 48px;
+  height: 48px;
+
+  border-radius: 50%;
+
+  background: #8b1538;
+
+  color: white;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  font-size: 14px;
+
+  font-weight: 700;
+
+  box-shadow:
+    0 5px 14px rgba(123, 16, 35, 0.2);
+
+  position: relative;
+
+  z-index: 2;
+}
+
+.timeline-line {
+  width: 2px;
+
+  flex: 1;
+
+  min-height: 30px;
+
+  background: #d9c7b8;
+
+  margin: 5px 0;
+}
+
+
+/* =====================================
+   TIMELINE CARD
+===================================== */
+
+.timeline-card {
+  flex: 1;
+
+  background: #ffffff;
+
+  border: 1px solid #e4dad3;
+
+  border-radius: 15px;
+
+  padding: 22px 24px;
+
+  margin-bottom: 25px;
+
+  box-sizing: border-box;
+
+  transition: 0.2s ease;
+}
+
+.timeline-card:hover {
+  box-shadow:
+    0 8px 22px rgba(92, 58, 33, 0.08);
+
+  border-color: #cdb9aa;
+}
+
+
+/* =====================================
+   CARD TOP
+===================================== */
+
+.timeline-card-top {
+  display: flex;
+
+  align-items: flex-start;
+
+  justify-content: space-between;
+
+  gap: 15px;
+}
+
+.stage-label {
+  color: #8b1538;
+
+  font-size: 11px;
+
+  font-weight: 700;
+
+  letter-spacing: 1px;
+}
+
+.timeline-card h3 {
+  margin: 5px 0 0;
+
+  color: #3a2e27;
+
+  font-size: 19px;
+}
+
+
+/* =====================================
+   DURATION
+===================================== */
+
+.duration {
+  background: #f5eeee;
+
+  color: #8b1538;
+
+  padding: 7px 12px;
+
+  border-radius: 20px;
+
+  font-size: 12px;
+
+  font-weight: 600;
+
+  white-space: nowrap;
+}
+
+
+/* =====================================
+   DESCRIPTION
+===================================== */
+
+.step-description {
+  margin: 14px 0;
+
+  color: #777;
+
+  font-size: 14px;
+
+  line-height: 1.6;
+}
+
+
+/* =====================================
+   SKILLS
+===================================== */
+
+.skill-list {
+  display: flex;
+
+  flex-wrap: wrap;
+
+  gap: 8px;
+
+  margin-bottom: 18px;
+}
+
+.skill-tag {
+  padding: 7px 11px;
+
+  background: #faf7f4;
+
+  border: 1px solid #e4dad3;
+
+  border-radius: 7px;
+
+  color: #5c3a21;
+
+  font-size: 12px;
+
+  font-weight: 500;
+}
+
+
+/* =====================================
+   START BUTTON
+===================================== */
+
+.start-step-btn {
+  border: none;
+
+  background: transparent;
+
+  color: #8b1538;
+
+  font-size: 13px;
+
+  font-weight: 600;
+
+  cursor: pointer;
+
+  padding: 0;
+}
+
+
+/* =====================================
+   BOTTOM CTA
+===================================== */
+
+.roadmap-bottom {
+  text-align: center;
+
+  margin-top: 25px;
+
+  padding: 35px 25px;
+
+  background: #faf7f4;
+
+  border-radius: 16px;
+
+  border: 1px solid #eadfd8;
+}
+
+.roadmap-bottom h2 {
+  margin: 0;
+
+  color: #5c3a21;
+
+  font-size: 22px;
+}
+
+.roadmap-bottom p {
+  max-width: 550px;
+
+  margin: 9px auto 20px;
+
+  color: #777;
+
+  font-size: 14px;
+
+  line-height: 1.6;
+}
+
+.study-plan-btn {
+  height: 48px;
+
+  padding: 0 25px;
+
+  border: none;
+
+  border-radius: 9px;
+
+  background: #8b1538;
+
+  color: white;
+
+  font-size: 14px;
+
+  font-weight: 600;
+
+  cursor: pointer;
+}
+
+
+/* =====================================
+   EMPTY RESULT
+===================================== */
+
+.empty-result {
+  text-align: center;
+  padding: 70px 30px;
+}
+
+.empty-result h2 {
+  color: #5c3a21;
+}
+
+.empty-result p {
+  color: #777;
+}
+
+
+/* =====================================
+   RESPONSIVE
+===================================== */
+
+@media (max-width: 700px) {
+
+  .roadmap-result-container {
+    padding: 30px 22px 40px;
+  }
+
+  .result-header h1 {
+    font-size: 27px;
+  }
+
+  .career-summary {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 15px;
+  }
+
+  .summary-line {
+    width: 100%;
+    height: 1px;
+
+    margin: 0;
+  }
+
+  .timeline-item {
+    gap: 12px;
+  }
+
+  .timeline-left {
+    width: 40px;
+  }
+
+  .timeline-number {
+    width: 40px;
+    height: 40px;
+
+    font-size: 12px;
+  }
+
+  .timeline-card {
+    padding: 18px;
+  }
+
+  .timeline-card-top {
+    flex-direction: column;
+  }
+
+  .duration {
+    align-self: flex-start;
+  }
+}

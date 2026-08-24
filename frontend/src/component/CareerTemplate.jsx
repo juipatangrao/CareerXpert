@@ -29,20 +29,21 @@ const CareerTemplate = ({
   salary,
   dayToDayWork,
   careerTest,
- roadmap,
- realityCheck,
+  roadmap,
+  realityCheck,
+  parentCareerPath,
 }) => {
 
-  const location = useLocation();
+//   const location = useLocation();
 
-const pathParts = location.pathname
-  .split("/")
-  .filter(Boolean);
+// const pathParts = location.pathname
+//   .split("/")
+//   .filter(Boolean);
 
-const parentCareerPath =
-  pathParts.length > 1
-    ? `/${pathParts[0]}`
-    : "/home";
+// const parentCareerPath =
+//   pathParts.length > 1
+//     ? `/${pathParts[0]}`
+//     : "/home";
 
   // Sidebar Pages
   const [activePage, setActivePage] = useState("Overview");
@@ -161,9 +162,9 @@ const roadmapIcons = [
 
             {/* Home */}
 
-            <li>
+<li>
   <Link
-    to={parentCareerPath}
+    to={parentCareerPath || "/home"}
     className="career-sidebar-link"
   >
     🏠 Home

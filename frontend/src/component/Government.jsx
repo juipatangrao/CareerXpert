@@ -128,7 +128,7 @@ function Government() {
               <p>{career.description}</p>
 
               
-                <Link to={`/${career.id}`}>
+<Link to={`/government/${career.id}`}>
   <button>Explore Career →</button>
 </Link>
               

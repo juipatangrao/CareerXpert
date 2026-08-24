@@ -1,0 +1,500 @@
+/* =========================================================
+   STUDY PLANNER - PROFESSIONAL UI
+   ========================================================= */
+
+* {
+  box-sizing: border-box;
+}
+
+.study-page {
+  min-height: 100vh;
+  background: #7b1023;
+  color: #2f2925;
+  padding: 40px 48px 70px;
+  font-family: "Inter", "Segoe UI", Arial, sans-serif;
+}
+
+/* =========================================================
+   FORM
+   ========================================================= */
+
+.planner-form {
+  width: min(920px, 100%);
+  margin: 20px auto;
+  background: #ffffff;
+  padding: 42px 46px;
+  border: 1px solid #e7dfd6;
+  border-radius: 20px;
+  box-shadow: 0 12px 35px rgba(72, 48, 32, 0.08);
+}
+
+.planner-form h1 {
+  margin: 0 0 34px;
+  text-align: center;
+  color: #5c3a21;
+  font-size: 32px;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+}
+
+.form-group {
+  margin-bottom: 22px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 9px;
+  color: #3d3028;
+  font-size: 14px;
+  font-weight: 650;
+}
+
+.form-group input,
+.form-group select {
+  width: 100%;
+  height: 50px;
+  padding: 0 15px;
+  border: 1px solid #d9d0c7;
+  border-radius: 11px;
+  background: #fff;
+  color: #332c27;
+  font-size: 15px;
+  outline: none;
+  transition: all 0.2s ease;
+}
+
+.form-group input::placeholder {
+  color: #a49b93;
+}
+
+.form-group input:hover,
+.form-group select:hover {
+  border-color: #bba99b;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+  border-color: #7a5032;
+  box-shadow: 0 0 0 3px rgba(122, 80, 50, 0.10);
+}
+
+.row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 22px;
+}
+
+/* =========================================================
+   SUBJECTS
+   ========================================================= */
+
+.subject-input-row {
+  display: flex;
+  align-items: stretch;
+  gap: 10px;
+}
+
+.subject-input-row input {
+  flex: 1;
+  min-width: 0;
+}
+
+.add-subject-btn {
+  height: 50px;
+  padding: 0 20px;
+  border: 1px solid #7b1023;
+  border-radius: 11px;
+  background: #7b1023;
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 650;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.2s ease;
+}
+
+.add-subject-btn:hover {
+    background: #650d1c;
+  border-color: #650d1c;
+  transform: translateY(-1px);
+  box-shadow: 0 5px 12px rgba(92, 58, 33, 0.18);
+}
+
+.add-subject-btn:active {
+  transform: translateY(0);
+}
+
+/* Subject chips container */
+
+.subjects {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 14px;
+  min-height: 10px;
+}
+
+/* Individual subject chip */
+
+.subjects .subject {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+
+  min-height: 38px;
+  padding: 6px 8px 6px 15px;
+
+  border: 1px solid #7b1023;
+  border-radius: 999px;
+
+  background: #7b1023;
+  color: #ffffff;
+
+  font-size: 14px;
+  font-weight: 600;
+
+  transition: all 0.2s ease;
+}
+
+.subjects .subject:hover {
+  background: #650d1c;
+  border-color: #650d1c;
+}
+
+
+
+/* Subject cross */
+
+.subjects .subject button {
+  width: 25px;
+  height: 25px;
+  min-width: 25px;
+  padding: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+  border-radius: 50%;
+  background: #e5d5c8;
+  color: #68432a;
+  font-size: 17px;
+  line-height: 1;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.18s ease;
+}
+
+.subjects .subject button:hover {
+  transform: scale(1.05);
+}
+
+/* =========================================================
+   CREATE PLAN BUTTON
+   ========================================================= */
+
+.generate-btn {
+  width: 100%;
+  height: 52px;
+  margin-top: 12px;
+  border: 0;
+  border-radius: 12px;
+  background: #7b1023;
+  color: #fff;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 6px 16px rgba(107, 66, 38, 0.18);
+  transition: all 0.2s ease;
+}
+
+.generate-btn:hover {
+  background: #650d1c;
+  transform: translateY(-1px);
+  box-shadow: 0 9px 20px rgba(107, 66, 38, 0.23);
+}
+
+.generate-btn:active {
+  transform: translateY(0);
+}
+
+.generate-btn:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+}
+
+/* =========================================================
+   DASHBOARD
+   ========================================================= */
+
+.dashboard {
+  width: min(1450px, 100%);
+  margin: 0 auto;
+}
+
+.dashboard h1 {
+  margin: 8px 0 8px;
+  text-align: center;
+  color: #ffffff;
+  font-size: 34px;
+  font-weight: 750;
+  letter-spacing: -0.6px;
+}
+
+.planner-subtitle {
+  margin: 0 auto 34px;
+  text-align: center;
+  color: #ffffff;
+  font-size: 15px;
+}
+
+/* =========================================================
+   DASHBOARD CARDS
+   ========================================================= */
+
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 20px;
+}
+
+.card {
+  min-width: 0;
+  padding: 24px;
+  background: #ffffff;
+  border: 1px solid #e8dfd7;
+  border-radius: 17px;
+  box-shadow: 0 7px 22px rgba(73, 53, 39, 0.07);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 11px 28px rgba(73, 53, 39, 0.10);
+}
+
+.card h3 {
+  margin: 0 0 18px;
+  color: #5c3a21;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 1.35;
+}
+
+.card h2 {
+  margin: 8px 0 12px;
+  color: #5c3a21;
+}
+
+.card p {
+  color: #4c443e;
+  line-height: 1.65;
+}
+
+.card ul {
+  margin: 0;
+  padding-left: 20px;
+}
+
+.card li {
+  margin-bottom: 11px;
+  color: #493d35;
+  font-size: 14px;
+  line-height: 1.55;
+}
+
+/* Today's tasks */
+
+.card input[type="checkbox"] {
+  width: 17px;
+  height: 17px;
+  accent-color: #7b1023;
+  cursor: pointer;
+  vertical-align: middle;
+}
+
+/* =========================================================
+   PROGRESS
+   ========================================================= */
+
+.progress {
+  width: 100%;
+  height: 9px;
+  margin: 12px 0;
+  overflow: hidden;
+  border-radius: 999px;
+  background: #e8e2dc;
+}
+
+.progress-fill {
+  height: 100%;
+  border-radius: inherit;
+  background: #7b1023;
+  transition: width 0.3s ease;
+}
+
+/* =========================================================
+   POMODORO
+   ========================================================= */
+
+.timer-btn {
+  min-width: 105px;
+  height: 42px;
+  padding: 0 18px;
+  border: 0;
+  border-radius: 9px;
+  background: #7b1023;
+  color: #ffffff;
+  font-weight: 650;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.timer-btn:hover {
+  background: #7b1023;
+}
+
+/* =========================================================
+   DAILY TIP
+   ========================================================= */
+
+.daily-tip {
+  margin: 0;
+  padding: 15px 16px;
+  border-left: 4px solid #6b4226;
+  border-radius: 8px;
+  background: #f7f1ec;
+  color: #4a3c32;
+}
+
+/* =========================================================
+   CALENDAR
+   ========================================================= */
+
+.card .react-calendar {
+  width: 100%;
+  max-width: 100%;
+  border: 1px solid #e4dbd3;
+  border-radius: 10px;
+  padding: 8px;
+  font-family: inherit;
+}
+
+.card .react-calendar button {
+  color: #7b1023;
+}
+
+.card .react-calendar__tile--active {
+  background: #7b1023;
+  color: #ffffff;
+}
+
+.card .react-calendar__tile--now {
+  background: #eee2d8;
+  color: #7b1023;
+}
+
+/* =========================================================
+   DOWNLOAD PDF
+   ========================================================= */
+
+/* =========================================================
+   DOWNLOAD PDF
+   ========================================================= */
+
+.download-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+
+  width: 210px;
+  height: 50px;
+
+  margin: 38px auto 0;
+  padding: 0 22px;
+
+  border-radius: 11px;
+
+  background: #fcfcfc;
+  border: 1px solid #7b1023;
+  color: #360404;
+
+  font-size: 15px;
+  font-weight: 700;
+
+  cursor: pointer;
+
+  box-shadow: 0 7px 16px rgba(107, 66, 38, 0.18);
+
+  transition: all 0.2s ease;
+}
+
+.download-btn::before {
+  content: "↓";
+  font-size: 19px;
+  font-weight: 700;
+}
+
+/* फक्त Download PDF चा hover */
+.download-btn:hover {
+
+  color: #ffffff;
+  transform: none;
+  box-shadow: 0 7px 16px rgba(107, 66, 38, 0.18);
+}
+
+.download-btn:active {
+  transform: none;
+}
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 1100px) {
+  .dashboard-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .study-page {
+    padding: 30px;
+  }
+}
+
+@media (max-width: 700px) {
+  .study-page {
+    padding: 20px 14px 50px;
+  }
+
+  .planner-form {
+    padding: 28px 20px;
+    border-radius: 16px;
+  }
+
+  .planner-form h1,
+  .dashboard h1 {
+    font-size: 27px;
+  }
+
+  .row {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+
+  .subject-input-row {
+    flex-direction: column;
+  }
+
+  .add-subject-btn {
+    width: 100%;
+  }
+
+  .dashboard-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .download-btn {
+    width: 100%;
+    max-width: 320px;
+  }
+}

@@ -4,31 +4,42 @@ const {
 
 const getCollegeRecommendation = async (req, res) => {
   try {
-    const { career, state, collegeType } = req.body;
+    const {
+      career,
+      state,
+      collegeType,
+    } = req.body;
 
     if (!career || !state) {
       return res.status(400).json({
-        message: "Career and State are required.",
+        success: false,
+        message:
+          "Career and State are required.",
       });
     }
 
-    const result = await generateCollegeRecommendation(
-      career,
-      state,
-      collegeType
-    );
+    const result =
+      await generateCollegeRecommendation(
+        career,
+        state,
+        collegeType || "Any"
+      );
 
-    res.json({
+    return res.status(200).json({
       success: true,
       result,
     });
 
   } catch (error) {
-    console.error("College Recommendation Error:", error);
+    console.error(
+      "College Recommendation Error:",
+      error
+    );
 
-    res.status(500).json({
+    return res.status(500).json({
       success: false,
-      message: "Failed to generate recommendation.",
+      message:
+        "Unable to generate college recommendations.",
     });
   }
 };

@@ -6,10 +6,18 @@ const careerData = require("../data/career.json");
 // MongoDB remains available for create operations and legacy integrations.
 exports.getAllCareers = async (req, res) => {
   try {
-    res.status(200).json(careerData);
+    const careers = await Career.find({})
+      .select("title category route")
+      .sort({ title: 1 })
+      .lean();
+
+    res.status(200).json(careers);
   } catch (error) {
+    console.error("Get careers error:", error);
+
     res.status(500).json({
-      message: error.message,
+      success: false,
+      message: "Failed to load careers.",
     });
   }
 };
