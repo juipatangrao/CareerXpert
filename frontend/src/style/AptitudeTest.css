@@ -1,4 +1,3 @@
-
 /* ==========================================
    APTITUDE TEST CSS
    CareerXpert
@@ -17,7 +16,7 @@ body{
 
 /* ================= PAGE ================= */
 
-.at-page{
+.aptitude-page{
     min-height:100vh;
     width:100%;
     background:linear-gradient(135deg,#800020,#a00030,#ffffff);
@@ -29,7 +28,7 @@ body{
 
 /* ================= CARD ================= */
 
-.at-card{
+.aptitude-card{
     width:100%;
     max-width:850px;
     background:#fff;
@@ -55,24 +54,24 @@ transform:translateY(0);
 
 /* ================= HEADER ================= */
 
-.at-header{
+.aptitude-header{
     text-align:center;
     margin-bottom:35px;
 }
 
-.at-brain-icon{
+.brain-icon{
     font-size:65px;
     color:#800020;
     margin-bottom:15px;
 }
 
-.at-header h1{
+.aptitude-header h1{
     font-size:38px;
     color:#800020;
     margin-bottom:12px;
 }
 
-.at-header p{
+.aptitude-header p{
     color:#666;
     line-height:28px;
     font-size:16px;
@@ -80,7 +79,7 @@ transform:translateY(0);
 
 /* ================= PROGRESS ================= */
 
-.at-progress-bar{
+.progress-bar{
     width:100%;
     height:12px;
     background:#ececec;
@@ -89,14 +88,14 @@ transform:translateY(0);
     margin-bottom:30px;
 }
 
-.at-progress-fill{
+.progress-fill{
     height:100%;
     background:linear-gradient(90deg,#800020,#d00045);
     border-radius:30px;
     transition:.5s;
 }
 
-.at-question-number{
+.question-number{
     text-align:center;
     color:#800020;
     font-weight:600;
@@ -106,7 +105,7 @@ transform:translateY(0);
 
 /* ================= QUESTION CARD ================= */
 
-.at-question-card{
+.question-card{
     background:#fafafa;
     border-radius:20px;
     padding:35px;
@@ -114,11 +113,11 @@ transform:translateY(0);
     transition:.3s;
 }
 
-.at-question-card:hover{
+.question-card:hover{
     box-shadow:0 15px 35px rgba(0,0,0,.08);
 }
 
-.at-question-card h2{
+.question-card h2{
     color:#333;
     margin-bottom:30px;
     font-size:25px;
@@ -127,13 +126,13 @@ transform:translateY(0);
 
 /* ================= OPTIONS ================= */
 
-.at-option-list{
+.option-list{
     display:flex;
     flex-direction:column;
     gap:18px;
 }
 
-.at-option{
+.option{
     display:flex;
     align-items:center;
     gap:15px;
@@ -145,49 +144,49 @@ transform:translateY(0);
     background:#fff;
 }
 
-.at-option:hover{
+.option:hover{
     border-color:#800020;
     transform:translateX(8px);
     box-shadow:0 10px 25px rgba(128,0,32,.15);
 }
 
-.at-option input{
+.option input{
     width:20px;
     height:20px;
     accent-color:#800020;
 }
 
-.at-option span{
+.option span{
     font-size:17px;
     color:#333;
     font-weight:500;
 }
 
-.at-option.active{
+.option.active{
     background:linear-gradient(135deg,#800020,#b00035);
     border-color:#800020;
 }
 
-.at-option.active span{
+.option.active span{
     color:#fff;
 }
 
-.at-option.active input{
+.option.active input{
     accent-color:#fff;
 }
 
 /* ================= BUTTONS ================= */
 
-.at-button-group{
+.button-group{
     display:flex;
     justify-content:space-between;
     align-items:center;
     margin-top:35px;
 }
 
-.at-back-btn,
-.at-next-btn,
-.at-submit-btn{
+.back-btn,
+.next-btn,
+.submit-btn{
 
     display:flex;
     align-items:center;
@@ -210,52 +209,52 @@ transform:translateY(0);
 
 }
 
-.at-back-btn{
+.back-btn{
     background:#f2f2f2;
     color:#444;
 }
 
-.at-back-btn:hover{
+.back-btn:hover{
     background:#ddd;
 }
 
-.at-next-btn{
+.next-btn{
     background:#800020;
     color:white;
 }
 
-.at-next-btn:hover{
+.next-btn:hover{
     background:#5d0018;
     transform:translateY(-3px);
 }
 
-.at-submit-btn{
+.submit-btn{
     background:linear-gradient(90deg,#008c45,#00b35a);
     color:white;
 }
 
-.at-submit-btn:hover{
+.submit-btn:hover{
     transform:translateY(-3px);
     box-shadow:0 12px 30px rgba(0,140,69,.3);
 }
 
 /* ================= HOVER EFFECTS ================= */
 
-.at-back-btn svg,
-.at-next-btn svg,
-.at-submit-btn svg{
+.back-btn svg,
+.next-btn svg,
+.submit-btn svg{
     transition:.3s;
 }
 
-.at-next-btn:hover svg{
+.next-btn:hover svg{
     transform:translateX(5px);
 }
 
-.at-back-btn:hover svg{
+.back-btn:hover svg{
     transform:translateX(-5px);
 }
 
-.at-submit-btn:hover svg{
+.submit-btn:hover svg{
     transform:scale(1.15);
 }
 
@@ -263,62 +262,61 @@ transform:translateY(0);
 
 @media(max-width:768px){
 
-    .at-card{
-        padding:25px;
-    }
+.aptitude-card{
+padding:25px;
+}
 
-    .at-header h1{
-        font-size:30px;
-    }
+.aptitude-header h1{
+font-size:30px;
+}
 
-    .at-brain-icon{
-        font-size:55px;
-    }
+.brain-icon{
+font-size:55px;
+}
 
-    .at-question-card{
-        padding:22px;
-    }
+.question-card{
+padding:22px;
+}
 
-    .at-question-card h2{
-        font-size:21px;
-        line-height:30px;
-    }
+.question-card h2{
+font-size:21px;
+line-height:30px;
+}
 
-    .at-button-group{
-        flex-direction:column;
-        gap:15px;
-    }
+.button-group{
+flex-direction:column;
+gap:15px;
+}
 
-    .at-back-btn,
-    .at-next-btn,
-    .at-submit-btn{
-        width:100%;
-    }
+.back-btn,
+.next-btn,
+.submit-btn{
+width:100%;
+}
 
 }
 
 @media(max-width:500px){
 
-    .at-page{
-        padding:20px 10px;
-    }
-
-    .at-card{
-        padding:18px;
-        border-radius:18px;
-    }
-
-    .at-question-card h2{
-        font-size:19px;
-    }
-
-    .at-option{
-        padding:15px;
-    }
-
-    .at-option span{
-        font-size:15px;
-    }
-
+.aptitude-page{
+padding:20px 10px;
 }
 
+.aptitude-card{
+padding:18px;
+border-radius:18px;
+}
+
+.question-card h2{
+font-size:19px;
+}
+
+.option{
+padding:15px;
+}
+
+.option span{
+font-size:15px;
+}
+
+}

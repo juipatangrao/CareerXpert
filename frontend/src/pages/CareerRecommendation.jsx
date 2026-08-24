@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+
 import {
   FaUserGraduate,
   FaBrain,
@@ -11,10 +12,15 @@ import {
   FaBullseye,
   FaUserTie,
 } from "react-icons/fa";
+
 import "../style/CareerRecommendation.css";
 
 const CareerRecommendation = () => {
   const navigate = useNavigate();
+
+  /* =====================================================
+     FORM DATA
+     ===================================================== */
 
   const [formData, setFormData] = useState({
     fullName: "",
@@ -32,30 +38,39 @@ const CareerRecommendation = () => {
     locationPreference: "",
   });
 
+  /* =====================================================
+     HANDLE INPUT CHANGE
+     ===================================================== */
+
   const handleChange = (e) => {
     const { name, value } = e.target;
 
-    setFormData({
-      ...formData,
+    setFormData((prev) => ({
+      ...prev,
       [name]: value,
-    });
+    }));
   };
+
+  /* =====================================================
+     HANDLE CHECKBOX
+     ===================================================== */
 
   const handleCheckbox = (e) => {
     const { name, value, checked } = e.target;
 
-    if (checked) {
-      setFormData({
-        ...formData,
-        [name]: [...formData[name], value],
-      });
-    } else {
-      setFormData({
-        ...formData,
-        [name]: formData[name].filter((item) => item !== value),
-      });
-    }
+    setFormData((prev) => ({
+      ...prev,
+      [name]: checked
+        ? [...prev[name], value]
+        : prev[name].filter(
+            (item) => item !== value
+          ),
+    }));
   };
+
+  /* =====================================================
+     SUBMIT FORM
+     ===================================================== */
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -68,6 +83,10 @@ const CareerRecommendation = () => {
     navigate("/aptitude-test");
   };
 
+  /* =====================================================
+     RETURN
+     ===================================================== */
+
   return (
     <div className="crf-page">
 
@@ -75,47 +94,54 @@ const CareerRecommendation = () => {
 
         <div className="crf-card">
 
+          {/* =================================================
+              HEADER
+              ================================================= */}
+
           <div className="crf-header">
 
             <div className="crf-ai-icon">
-
               <FaBrain />
-
             </div>
 
-            <h1>AI Career Recommendation</h1>
+            <h1>
+              AI Career Recommendation
+            </h1>
 
             <p>
-              Fill the information below and let our AI analyze
-              your interests, skills, aptitude and personality
-              to recommend the best career for you.
+              Fill the information below and let our AI
+              analyze your interests, skills, aptitude
+              and personality to recommend the best
+              career for you.
             </p>
 
           </div>
 
-          {/* <div className="progress-bar">
 
-            <div className="progress-fill"></div>
-
-          </div> */}
+          {/* =================================================
+              FORM
+              ================================================= */}
 
           <form onSubmit={handleSubmit}>
 
-            {/* PERSONAL INFORMATION */}
+            {/* =================================================
+                PERSONAL INFORMATION
+                ================================================= */}
 
             <div className="crf-section">
 
               <h2>
-
                 <FaUserGraduate />
-
                 Personal Information
-
               </h2>
+
+              {/* Full Name */}
 
               <div className="crf-form-group">
 
-                <label>Full Name</label>
+                <label>
+                  Full Name
+                </label>
 
                 <input
                   type="text"
@@ -128,11 +154,16 @@ const CareerRecommendation = () => {
 
               </div>
 
+
+              {/* Age + Class */}
+
               <div className="crf-two-column">
 
                 <div className="crf-form-group">
 
-                  <label>Age</label>
+                  <label>
+                    Age
+                  </label>
 
                   <input
                     type="number"
@@ -140,14 +171,19 @@ const CareerRecommendation = () => {
                     placeholder="Enter age"
                     value={formData.age}
                     onChange={handleChange}
+                    min="10"
+                    max="100"
                     required
                   />
 
                 </div>
 
+
                 <div className="crf-form-group">
 
-                  <label>Class</label>
+                  <label>
+                    Class
+                  </label>
 
                   <select
                     name="studentClass"
@@ -156,15 +192,25 @@ const CareerRecommendation = () => {
                     required
                   >
 
-                    <option value="">Select Class</option>
+                    <option value="">
+                      Select Class
+                    </option>
 
-                    <option value="10th">10th</option>
+                    <option value="10th">
+                      10th
+                    </option>
 
-                    <option value="12th">12th</option>
+                    <option value="12th">
+                      12th
+                    </option>
 
-                    <option value="Diploma">Diploma</option>
+                    <option value="Diploma">
+                      Diploma
+                    </option>
 
-                    <option value="Graduate">Graduate</option>
+                    <option value="Graduate">
+                      Graduate
+                    </option>
 
                   </select>
 
@@ -172,11 +218,16 @@ const CareerRecommendation = () => {
 
               </div>
 
+
+              {/* Stream + Marks */}
+
               <div className="crf-two-column">
 
                 <div className="crf-form-group">
 
-                  <label>Stream</label>
+                  <label>
+                    Stream
+                  </label>
 
                   <select
                     name="stream"
@@ -185,25 +236,40 @@ const CareerRecommendation = () => {
                     required
                   >
 
-                    <option value="">Select Stream</option>
+                    <option value="">
+                      Select Stream
+                    </option>
 
-                    <option value="Science">Science</option>
+                    <option value="Science">
+                      Science
+                    </option>
 
-                    <option value="Commerce">Commerce</option>
+                    <option value="Commerce">
+                      Commerce
+                    </option>
 
-                    <option value="Arts">Arts</option>
+                    <option value="Arts">
+                      Arts
+                    </option>
 
-                    <option value="Engineering">Engineering</option>
+                    <option value="Engineering">
+                      Engineering
+                    </option>
 
-                    <option value="Diploma">Diploma</option>
+                    <option value="Diploma">
+                      Diploma
+                    </option>
 
                   </select>
 
                 </div>
 
+
                 <div className="crf-form-group">
 
-                  <label>Marks (%)</label>
+                  <label>
+                    Marks (%)
+                  </label>
 
                   <input
                     type="number"
@@ -211,6 +277,8 @@ const CareerRecommendation = () => {
                     placeholder="Enter Percentage"
                     value={formData.marks}
                     onChange={handleChange}
+                    min="0"
+                    max="100"
                     required
                   />
 
@@ -220,16 +288,16 @@ const CareerRecommendation = () => {
 
             </div>
 
-            {/* FAVORITE SUBJECTS */}
+
+            {/* =================================================
+                FAVOURITE SUBJECTS
+                ================================================= */}
 
             <div className="crf-section">
 
               <h2>
-
                 <FaBook />
-
                 Favourite Subjects
-
               </h2>
 
               <div className="crf-checkbox-grid">
@@ -243,16 +311,24 @@ const CareerRecommendation = () => {
                   "English",
                 ].map((subject) => (
 
-                  <label key={subject} className="crf-check-card">
+                  <label
+                    key={subject}
+                    className="crf-check-card"
+                  >
 
                     <input
                       type="checkbox"
                       name="favoriteSubjects"
                       value={subject}
+                      checked={formData.favoriteSubjects.includes(
+                        subject
+                      )}
                       onChange={handleCheckbox}
                     />
 
-                    <span>{subject}</span>
+                    <span>
+                      {subject}
+                    </span>
 
                   </label>
 
@@ -262,16 +338,16 @@ const CareerRecommendation = () => {
 
             </div>
 
-            {/* SKILLS */}
+
+            {/* =================================================
+                SKILLS
+                ================================================= */}
 
             <div className="crf-section">
 
               <h2>
-
                 <FaLaptopCode />
-
                 Skills
-
               </h2>
 
               <div className="crf-checkbox-grid">
@@ -287,34 +363,43 @@ const CareerRecommendation = () => {
                   "Public Speaking",
                 ].map((skill) => (
 
-                  <label key={skill} className="crf-check-card">
+                  <label
+                    key={skill}
+                    className="crf-check-card"
+                  >
 
                     <input
                       type="checkbox"
                       name="skills"
                       value={skill}
+                      checked={formData.skills.includes(
+                        skill
+                      )}
                       onChange={handleCheckbox}
                     />
 
-                    <span>{skill}</span>
+                    <span>
+                      {skill}
+                    </span>
 
                   </label>
 
                 ))}
+
               </div>
 
             </div>
 
-            {/* INTERESTS */}
+
+            {/* =================================================
+                INTERESTS
+                ================================================= */}
 
             <div className="crf-section">
 
               <h2>
-
                 <FaBrain />
-
                 Interests
-
               </h2>
 
               <div className="crf-checkbox-grid">
@@ -346,10 +431,15 @@ const CareerRecommendation = () => {
                       type="checkbox"
                       name="interests"
                       value={interest}
+                      checked={formData.interests.includes(
+                        interest
+                      )}
                       onChange={handleCheckbox}
                     />
 
-                    <span>{interest}</span>
+                    <span>
+                      {interest}
+                    </span>
 
                   </label>
 
@@ -359,16 +449,16 @@ const CareerRecommendation = () => {
 
             </div>
 
-            {/* PERSONALITY */}
+
+            {/* =================================================
+                PERSONALITY
+                ================================================= */}
 
             <div className="crf-section">
 
               <h2>
-
                 <FaUserTie />
-
                 Personality Type
-
               </h2>
 
               <div className="crf-form-group">
@@ -402,16 +492,16 @@ const CareerRecommendation = () => {
 
             </div>
 
-            {/* CAREER GOAL */}
+
+            {/* =================================================
+                CAREER GOAL
+                ================================================= */}
 
             <div className="crf-section">
 
               <h2>
-
                 <FaBullseye />
-
                 Career Goal
-
               </h2>
 
               <div className="crf-form-group">
@@ -419,23 +509,24 @@ const CareerRecommendation = () => {
                 <textarea
                   rows="5"
                   name="careerGoal"
-                  placeholder="Example : I want to become an AI Engineer..."
+                  placeholder="Example: I want to become an AI Engineer..."
                   value={formData.careerGoal}
                   onChange={handleChange}
-                ></textarea>
+                />
 
               </div>
 
             </div>
 
-            {/* WORK STYLE */}
+
+            {/* =================================================
+                WORK STYLE
+                ================================================= */}
 
             <div className="crf-section">
 
               <h2>
-
                 Preferred Work Style
-
               </h2>
 
               <div className="crf-form-group">
@@ -472,16 +563,16 @@ const CareerRecommendation = () => {
 
             </div>
 
-            {/* SALARY */}
+
+            {/* =================================================
+                EXPECTED SALARY
+                ================================================= */}
 
             <div className="crf-section">
 
               <h2>
-
                 <FaMoneyBillWave />
-
                 Expected Salary
-
               </h2>
 
               <div className="crf-form-group">
@@ -518,16 +609,16 @@ const CareerRecommendation = () => {
 
             </div>
 
-            {/* LOCATION */}
+
+            {/* =================================================
+                LOCATION
+                ================================================= */}
 
             <div className="crf-section">
 
               <h2>
-
                 <FaMapMarkerAlt />
-
                 Preferred Work Location
-
               </h2>
 
               <div className="crf-form-group">
@@ -560,14 +651,19 @@ const CareerRecommendation = () => {
 
             </div>
 
-            {/* SUBMIT BUTTON */}
+
+            {/* =================================================
+                SUBMIT BUTTON
+                ================================================= */}
 
             <button
               type="submit"
               className="crf-next-btn"
             >
 
-              Continue to Aptitude Test
+              <span>
+                Continue to Aptitude Test
+              </span>
 
               <FaArrowRight />
 

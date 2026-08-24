@@ -1,259 +1,1155 @@
-.settings-page{
+/* =========================================================
+   SETTINGS PAGE
+========================================================= */
 
-min-height:100vh;
-padding:40px;
-background:linear-gradient(
-135deg,
-#fef6f8,
-#f8edf1,
-#ffffff
-);
+.settings-page {
+  min-height: 100vh;
+  padding: 40px;
+  background: linear-gradient(
+    135deg,
+    #fef6f8,
+    #f8edf1,
+    #ffffff
+  );
 
+  color: #111;
+  transition: background 0.3s ease, color 0.3s ease;
 }
 
 
-.back-btn {
+/* =========================================================
+   BACK BUTTON
+========================================================= */
 
-    position: absolute;
-    left: 30px;
-    top: 40px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    cursor: pointer;
-    font-size: 25px;
-    
-}
-.back-btn a{
-    text-decoration: none;
-    color: #f3f3f3;
-}
-.settings-header{
+/* ================================
+   BACK BUTTON
+================================ */
 
-text-align:center;
-margin-bottom:30px;
+/* =========================================
+   SETTINGS BACK BUTTON
+========================================= */
 
-}
+.settings-back-wrapper {
+  position: absolute;
+  top: 50px;
+  left: 38px;
 
+  padding: 0;
+  margin: 0;
 
-.settings-header h1{
+  width: 64px;
+  height: 64px;
 
-font-size:35px;
-color:#7b1e3a;
+  background: transparent;
+  border: none;
+  box-shadow: none;
 
-}
-
-
-.settings-header p{
-
-color:#777;
-
+  z-index: 100;
 }
 
+.settings-back-link {
+  width: 64px;
+  height: 64px;
+
+  padding: 0;
+  margin: 0;
+
+  box-sizing: border-box;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: #970b32;
+  color: white;
+
+  border: none;
+  border-radius: 12px;
+
+  text-decoration: none;
+
+  font-size: 25px;
+
+  box-shadow: 0 7px 18px rgba(151, 11, 50, 0.25);
+
+  transition: all 0.25s ease;
+}
+
+.settings-back-link:hover {
+  background: #7b0829;
+  color: white;
+
+  transform: translateY(-2px);
+
+  box-shadow: 0 10px 22px rgba(151, 11, 50, 0.3);
+}
 
 
+/* =========================================================
+   HEADER
+========================================================= */
 
+.settings-header {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.settings-header h1 {
+  margin: 0;
+
+  font-size: 35px;
+  color: #7b1e3a;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.settings-title-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.settings-header p {
+  margin-top: 7px;
+  color: #777;
+  font-size: 17px;
+}
+
+
+/* =========================================================
+   SETTINGS CARDS
+========================================================= */
 
 .settings-card,
-.danger-card{
+.danger-card {
+  background: #ffffff;
 
-background:white;
-padding:25px;
-margin-bottom:25px;
-border-radius:18px;
-box-shadow:0 8px 25px rgba(0,0,0,0.08);
+  padding: 25px;
 
+  margin-bottom: 25px;
+
+  border-radius: 18px;
+
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+
+  transition:
+    background 0.3s ease,
+    color 0.3s ease,
+    box-shadow 0.3s ease;
 }
 
 
+/* =========================================================
+   CARD HEADINGS
+========================================================= */
 
 .settings-card h2,
-.danger-card h2{
+.danger-card h2 {
+  display: flex;
+  align-items: center;
 
-display:flex;
-align-items:center;
-gap:12px;
-color:#7b1e3a;
-font-size:22px;
+  gap: 12px;
 
+  margin-top: 0;
+  margin-bottom: 15px;
+
+  color: #7b1e3a;
+
+  font-size: 22px;
+}
+
+.settings-card h2 svg {
+  font-size: 20px;
 }
 
 
+/* =========================================================
+   INFORMATION ROW
+========================================================= */
 
 .info-row,
 .setting-option,
-.toggle-row{
+.toggle-row {
+  display: flex;
 
-display:flex;
-justify-content:space-between;
-align-items:center;
-padding:15px 0;
-border-bottom:1px solid #eee;
+  justify-content: space-between;
+  align-items: center;
 
+  padding: 15px 0;
+
+  border-bottom: 1px solid #eee;
+}
+
+.info-row:last-child,
+.setting-option:last-child,
+.toggle-row:last-child {
+  border-bottom: none;
+}
+
+.info-row span {
+  font-weight: 600;
+}
+
+.info-row p {
+  margin: 0;
+}
+
+.status-dot {
+  display: inline-block;
+
+  width: 11px;
+  height: 11px;
+
+  margin-right: 8px;
+
+  border-radius: 50%;
+
+  background: #35d77b;
+
+  box-shadow: 0 0 8px rgba(53, 215, 123, 0.5);
+}
+
+.active-status {
+  color: #249c58;
+  font-weight: 600;
 }
 
 
-.info-row span{
+/* =========================================================
+   PROFILE BUTTON
+========================================================= */
 
-font-weight:600;
+.profile-btn {
+  margin-top: 20px;
 
+  padding: 12px 25px;
+
+  border: none;
+  border-radius: 25px;
+
+  background: #7b1e3a;
+  color: white;
+
+  cursor: pointer;
+
+  font-size: 15px;
+  font-weight: 600;
+
+  transition: all 0.25s ease;
+}
+
+.profile-btn:hover {
+  background: #65152f;
+  transform: translateY(-2px);
+
+  box-shadow: 0 5px 15px rgba(123, 30, 58, 0.25);
 }
 
 
+/* =========================================================
+   TOGGLE
+========================================================= */
 
-.profile-btn{
+.switch {
+  position: relative;
 
-margin-top:20px;
-padding:12px 25px;
-border:none;
-border-radius:25px;
-background:#7b1e3a;
-color:white;
-cursor:pointer;
+  width: 45px;
+  height: 22px;
 
+  flex-shrink: 0;
+}
+
+.switch input {
+  opacity: 0;
+
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+
+  inset: 0;
+
+  background: #ccc;
+
+  border-radius: 20px;
+
+  cursor: pointer;
+
+  transition: 0.3s;
+}
+
+.slider:before {
+  content: "";
+
+  position: absolute;
+
+  height: 18px;
+  width: 18px;
+
+  left: 2px;
+  top: 2px;
+
+  background: white;
+
+  border-radius: 50%;
+
+  transition: 0.3s;
+
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+.switch input:checked + .slider {
+  background: #8b2145;
+}
+
+.switch input:checked + .slider:before {
+  transform: translateX(23px);
 }
 
 
+/* =========================================================
+   PREFERENCES
+========================================================= */
 
+.setting-option {
+  min-height: 55px;
 
+  font-size: 17px;
+}
 
-/* Toggle */
-
-.switch{
-
-position:relative;
-width:45px;
-height:22px;
-
+.setting-option span {
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 
 
-.switch input{
+/* =========================================================
+   LANGUAGE SELECT
+========================================================= */
 
-display:none;
+.setting-option select,
+.settings-card select {
+  padding: 8px 15px;
 
+  border-radius: 8px;
+
+  border: 1px solid #ccc;
+
+  background: #ffffff;
+
+  color: #111;
+
+  font-size: 14px;
+
+  cursor: pointer;
+
+  outline: none;
+
+  transition: 0.2s ease;
+}
+
+.setting-option select:hover,
+.settings-card select:hover {
+  border-color: #8b2145;
+}
+
+.setting-option select:focus,
+.settings-card select:focus {
+  border-color: #8b2145;
+
+  box-shadow: 0 0 0 3px rgba(139, 33, 69, 0.1);
 }
 
 
-.slider{
+/* =========================================================
+   COMING SOON
+========================================================= */
 
-position:absolute;
-inset:0;
-background:#ccc;
-border-radius:20px;
-cursor:pointer;
+.disabled {
+  background: #ddd;
 
+  border: none;
+
+  padding: 8px 15px;
+
+  border-radius: 20px;
+
+  color: #666;
+
+  font-size: 13px;
 }
 
 
+/* =========================================================
+   SECURITY / PRIVACY OPTIONS
+========================================================= */
 
-.slider:before{
+.click-option {
+  width: 100%;
 
-content:"";
-position:absolute;
-height:18px;
-width:18px;
-left:2px;
-top:2px;
-background:white;
-border-radius:50%;
-transition:.3s;
+  min-height: 55px;
 
+  padding: 15px 0;
+
+  cursor: pointer;
+
+  background: transparent;
+
+  border: none;
+
+  border-bottom: 1px solid #eee;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  text-align: left;
+
+  font-size: 17px;
+
+  color: #111;
+
+  transition: all 0.2s ease;
+}
+
+.click-option:last-child {
+  border-bottom: none;
+}
+
+.click-option:hover {
+  color: #8b2145;
+
+  padding-left: 5px;
+}
+
+.click-option span:first-child {
+  display: flex;
+
+  align-items: center;
+
+  gap: 10px;
+}
+
+.click-option small {
+  display: block;
+
+  color: #999;
+
+  margin-top: 5px;
+
+  font-size: 13px;
+}
+
+.arrow {
+  font-size: 20px;
+
+  color: #999;
+
+  transition: 0.2s ease;
+}
+
+.click-option:hover .arrow {
+  color: #8b2145;
+
+  transform: translateX(3px);
+}
+
+.disabled-option {
+  cursor: pointer;
 }
 
 
-input:checked + .slider{
+/* =========================================================
+   DANGER ZONE
+========================================================= */
 
-background:#8b2145;
+.danger-card {
+  border: 2px solid #ffcccc;
 
+  box-shadow: none;
+}
+
+.danger-card h2 {
+  color: #d62828;
+}
+
+.danger-card p {
+  margin-top: 0;
+  margin-bottom: 15px;
+
+  font-size: 16px;
 }
 
 
-input:checked + .slider:before{
+/* =========================================================
+   DELETE BUTTON
+========================================================= */
 
-transform:translateX(23px);
+.delete-btn {
+  display: flex;
 
+  align-items: center;
+
+  gap: 8px;
+
+  background: #d62828;
+
+  color: white;
+
+  border: none;
+
+  padding: 13px 25px;
+
+  border-radius: 25px;
+
+  cursor: pointer;
+
+  font-size: 15px;
+  font-weight: 600;
+
+  transition: all 0.25s ease;
+}
+
+.delete-btn:hover {
+  background: #b91c1c;
+
+  transform: translateY(-2px);
+
+  box-shadow: 0 5px 15px rgba(214, 40, 40, 0.25);
 }
 
 
+/* =========================================================
+   MODAL OVERLAY
+========================================================= */
 
+.modal-overlay {
+  position: fixed;
 
+  inset: 0;
 
-select{
+  z-index: 9999;
 
-padding:8px 15px;
-border-radius:8px;
-border:1px solid #ccc;
+  background: rgba(0, 0, 0, 0.55);
 
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  padding: 20px;
+
+  animation: fadeIn 0.2s ease;
 }
 
 
+/* =========================================================
+   MODAL
+========================================================= */
 
-.disabled{
+.settings-modal {
+  width: 100%;
 
-background:#ddd;
-border:none;
-padding:8px 15px;
-border-radius:20px;
+  max-width: 550px;
 
+  max-height: 85vh;
+
+  overflow-y: auto;
+
+  background: #ffffff;
+
+  border-radius: 20px;
+
+  box-shadow: 0 25px 80px rgba(0, 0, 0, 0.25);
+
+  animation: modalIn 0.25s ease;
 }
 
 
+/* =========================================================
+   MODAL HEADER
+========================================================= */
 
+.modal-header {
+  display: flex;
 
-.click-option{
+  align-items: center;
 
-padding:15px 0;
-cursor:pointer;
+  justify-content: space-between;
 
+  padding: 20px 25px;
+
+  border-bottom: 1px solid #eee;
+}
+
+.modal-header h2 {
+  margin: 0;
+
+  color: #7b1e3a;
+
+  font-size: 23px;
 }
 
 
-.click-option small{
+/* =========================================================
+   MODAL CLOSE BUTTON
+========================================================= */
 
-display:block;
-color:#999;
-margin-top:5px;
+.modal-close {
+  width: 35px;
+  height: 35px;
 
+  border: none;
+
+  border-radius: 50%;
+
+  background: #f3f3f3;
+
+  color: #555;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  cursor: pointer;
+
+  transition: 0.2s ease;
+}
+
+.modal-close:hover {
+  background: #e5e5e5;
+
+  color: #7b1e3a;
+
+  transform: rotate(90deg);
 }
 
 
+/* =========================================================
+   MODAL BODY
+========================================================= */
 
-
-
-/* Danger */
-
-
-.danger-card{
-
-border:2px solid #ffcccc;
-
+.modal-body {
+  padding: 25px;
 }
 
 
-.danger-card h2{
+/* =========================================================
+   PROFILE MODAL
+========================================================= */
 
-color:#d62828;
+.profile-modal {
+  text-align: center;
+}
 
+.profile-avatar {
+  width: 85px;
+  height: 85px;
+
+  margin: 0 auto 15px;
+
+  border-radius: 50%;
+
+  background: #7b1e3a;
+
+  color: white;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  font-size: 34px;
+
+  font-weight: 700;
+
+  box-shadow: 0 8px 20px rgba(123, 30, 58, 0.25);
+}
+
+.profile-modal h3 {
+  margin: 0;
+
+  font-size: 24px;
+
+  color: #222;
+}
+
+.profile-modal > p {
+  margin-top: 5px;
+
+  color: #777;
 }
 
 
+/* =========================================================
+   PROFILE STATUS
+========================================================= */
 
-.delete-btn{
+.profile-status {
+  width: fit-content;
 
-background:#d62828;
-color:white;
-border:none;
-padding:13px 25px;
-border-radius:25px;
-cursor:pointer;
-font-size:15px;
+  margin: 15px auto 25px;
 
+  padding: 8px 15px;
+
+  border-radius: 20px;
+
+  background: #e9fff2;
+
+  color: #219653;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 7px;
+
+  font-size: 14px;
+
+  font-weight: 600;
 }
 
 
-.delete-btn:hover{
+/* =========================================================
+   PROFILE DETAILS
+========================================================= */
 
-background:#b91c1c;
+.profile-details {
+  text-align: left;
+}
 
+.profile-details div {
+  padding: 13px 0;
+
+  border-bottom: 1px solid #eee;
+
+  display: flex;
+
+  justify-content: space-between;
+
+  gap: 20px;
+}
+
+.profile-details div:last-child {
+  border-bottom: none;
+}
+
+.profile-details span {
+  color: #777;
+}
+
+.profile-details strong {
+  color: #222;
+}
+
+
+/* =========================================================
+   PASSWORD FORM
+========================================================= */
+
+.password-form {
+  display: flex;
+
+  flex-direction: column;
+}
+
+.password-form label {
+  margin-bottom: 7px;
+
+  font-size: 14px;
+
+  font-weight: 600;
+
+  color: #333;
+}
+
+.password-input {
+  position: relative;
+
+  margin-bottom: 18px;
+}
+
+.password-input input {
+  width: 100%;
+
+  box-sizing: border-box;
+
+  padding: 12px 45px 12px 13px;
+
+  border: 1px solid #ddd;
+
+  border-radius: 9px;
+
+  outline: none;
+
+  font-size: 15px;
+
+  transition: 0.2s ease;
+}
+
+.password-input input:focus {
+  border-color: #941b40;
+
+  box-shadow:
+    0 0 0 3px rgba(148, 27, 64, 0.1);
+}
+
+.password-input button {
+  position: absolute;
+
+  right: 12px;
+
+  top: 50%;
+
+  transform: translateY(-50%);
+
+  border: none;
+
+  background: transparent;
+
+  color: #777;
+
+  cursor: pointer;
+
+  font-size: 16px;
+}
+
+.password-input button:hover {
+  color: #7b1e3a;
+}
+
+
+/* =========================================================
+   PRIMARY MODAL BUTTON
+========================================================= */
+
+.modal-primary-btn {
+  margin-top: 8px;
+
+  padding: 13px;
+
+  border: none;
+
+  border-radius: 9px;
+
+  background: #7b1e3a;
+
+  color: white;
+
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition: 0.2s ease;
+}
+
+.modal-primary-btn:hover {
+  background: #65152f;
+
+  transform: translateY(-1px);
+}
+
+
+/* =========================================================
+   PASSWORD MESSAGES
+========================================================= */
+
+.error-message {
+  margin-bottom: 12px;
+
+  padding: 10px;
+
+  border-radius: 7px;
+
+  background: #fff0f0;
+
+  color: #c62828;
+
+  font-size: 14px;
+}
+
+.success-message {
+  margin-bottom: 12px;
+
+  padding: 10px;
+
+  border-radius: 7px;
+
+  background: #edfff4;
+
+  color: #1d8b4d;
+
+  font-size: 14px;
+}
+
+
+/* =========================================================
+   PRIVACY / TERMS
+========================================================= */
+
+.policy-content {
+  line-height: 1.7;
+
+  color: #444;
+}
+
+.policy-content h3 {
+  margin-top: 0;
+
+  color: #7b1e3a;
+}
+
+.policy-content h4 {
+  margin-bottom: 5px;
+
+  color: #333;
+}
+
+.policy-content p {
+  margin-top: 5px;
+}
+
+
+/* =========================================================
+   DARK MODE
+========================================================= */
+
+body.dark-mode {
+  background: #151515;
+}
+
+body.dark-mode .settings-page {
+  background: linear-gradient(
+    135deg,
+    #151515,
+    #1d1d1d,
+    #222
+  );
+
+  color: #f4f4f4;
+}
+
+body.dark-mode .settings-card {
+  background: #202020;
+
+  color: #f4f4f4;
+
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+}
+
+body.dark-mode .settings-header h1,
+body.dark-mode .settings-card h2 {
+  color: #d65a80;
+}
+
+body.dark-mode .settings-header p {
+  color: #aaa;
+}
+
+body.dark-mode .info-row,
+body.dark-mode .setting-option,
+body.dark-mode .toggle-row,
+body.dark-mode .click-option,
+body.dark-mode .profile-details div {
+  border-color: #3a3a3a;
+}
+
+body.dark-mode .click-option {
+  color: #f4f4f4;
+}
+
+body.dark-mode .click-option:hover {
+  color: #e36a91;
+}
+
+body.dark-mode .info-row p {
+  color: #eee;
+}
+
+body.dark-mode .setting-option select,
+body.dark-mode .settings-card select {
+  background: #292929;
+
+  color: #ffffff;
+
+  border-color: #444;
+}
+
+body.dark-mode .settings-modal {
+  background: #202020;
+
+  color: #f4f4f4;
+}
+
+body.dark-mode .modal-header {
+  border-color: #3a3a3a;
+}
+
+body.dark-mode .modal-header h2 {
+  color: #d65a80;
+}
+
+body.dark-mode .modal-close {
+  background: #333;
+
+  color: #fff;
+}
+
+body.dark-mode .profile-modal h3 {
+  color: #fff;
+}
+
+body.dark-mode .profile-modal > p {
+  color: #aaa;
+}
+
+body.dark-mode .profile-details span {
+  color: #aaa;
+}
+
+body.dark-mode .profile-details strong {
+  color: #fff;
+}
+
+body.dark-mode .password-form label {
+  color: #ddd;
+}
+
+body.dark-mode .password-input input {
+  background: #292929;
+
+  color: white;
+
+  border-color: #444;
+}
+
+body.dark-mode .password-input input::placeholder {
+  color: #999;
+}
+
+body.dark-mode .password-input button {
+  color: #aaa;
+}
+
+body.dark-mode .policy-content {
+  color: #ccc;
+}
+
+body.dark-mode .policy-content h4 {
+  color: #eee;
+}
+
+body.dark-mode .danger-card {
+  background: #241919;
+
+  border-color: #7b3030;
+
+  color: #eee;
+}
+
+
+/* =========================================================
+   ANIMATIONS
+========================================================= */
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes modalIn {
+  from {
+    opacity: 0;
+
+    transform:
+      translateY(-15px)
+      scale(0.98);
+  }
+
+  to {
+    opacity: 1;
+
+    transform:
+      translateY(0)
+      scale(1);
+  }
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 768px) {
+
+  .settings-page {
+    padding: 30px 18px;
+  }
+
+  .back-btn {
+    position: static;
+
+    margin-bottom: 25px;
+  }
+
+  .back-btn a {
+    width: 50px;
+    height: 45px;
+  }
+
+  .settings-header h1 {
+    font-size: 30px;
+  }
+
+  .settings-header p {
+    font-size: 15px;
+  }
+
+  .settings-card,
+  .danger-card {
+    padding: 20px;
+
+    border-radius: 15px;
+  }
+
+  .settings-card h2,
+  .danger-card h2 {
+    font-size: 20px;
+  }
+
+  .info-row,
+  .toggle-row,
+  .setting-option,
+  .click-option {
+    font-size: 15px;
+  }
+
+  .settings-modal {
+    max-height: 90vh;
+  }
+
+  .modal-body {
+    padding: 20px;
+  }
+
+  .profile-details div {
+    flex-direction: column;
+
+    gap: 4px;
+  }
 }

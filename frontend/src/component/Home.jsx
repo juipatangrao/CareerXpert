@@ -9,7 +9,7 @@ import {
   FaUniversity,
   FaSearch,
   FaBell,
-  FaCogs,
+  FaFileAlt,
 } from "react-icons/fa";
 
 import { GiArtificialIntelligence } from "react-icons/gi";
@@ -61,12 +61,9 @@ import navy from "../assets/Merchant-navy.png";
 import ChatBot from "../component/ChatBot/ChatBot";
 import Notification from "../component/Notification/Notification";
 
-
 function Home() {
-
   const location = useLocation();
   const navigate = useNavigate();
-
 
   /* =====================================================
      PROFILE
@@ -80,14 +77,12 @@ function Home() {
   const [username, setUsername] =
     useState("");
 
-
   /* =====================================================
      CAREER SECTION
      ===================================================== */
 
   const [showMore, setShowMore] =
     useState(false);
-
 
   /* =====================================================
      NOTIFICATION
@@ -99,7 +94,6 @@ function Home() {
   const [unreadCount, setUnreadCount] =
     useState(1);
 
-
   /* =====================================================
      USER ID
      ===================================================== */
@@ -107,13 +101,11 @@ function Home() {
   const userId =
     localStorage.getItem("userId");
 
-
   /* =====================================================
      GET USER PROFILE
      ===================================================== */
 
   useEffect(() => {
-
     const user =
       localStorage.getItem("loggedInUser");
 
@@ -123,19 +115,19 @@ function Home() {
 
     getProfile();
 
-    // Prevent unnecessary dependency warning
     // eslint-disable-next-line react-hooks/exhaustive-deps
-
   }, [location.state]);
-
 
   /* =====================================================
      GET PROFILE IMAGE
      ===================================================== */
 
   const getProfile = async () => {
-
     try {
+      if (!userId) {
+        setProfileImage(defaultProfile);
+        return;
+      }
 
       await axios.get(
         `http://localhost:5000/api/profile/${userId}`
@@ -144,29 +136,22 @@ function Home() {
       setProfileImage(
         `http://localhost:5000/api/profile/image/${userId}?t=${Date.now()}`
       );
-
     } catch (error) {
-
       console.log(error);
 
       setProfileImage(defaultProfile);
-
     }
-
   };
-
 
   /* =====================================================
      PROFILE IMAGE UPLOAD
      ===================================================== */
 
   const handleImageUpload = async (e) => {
-
     const file =
       e.target.files[0];
 
     if (!file) return;
-
 
     const formData =
       new FormData();
@@ -181,9 +166,7 @@ function Home() {
       userId
     );
 
-
     try {
-
       await axios.post(
         "http://localhost:5000/api/profile/upload",
         formData,
@@ -195,36 +178,27 @@ function Home() {
         }
       );
 
-
       setProfileImage(
         `http://localhost:5000/api/profile/image/${userId}?t=${Date.now()}`
       );
 
-
       alert(
         "Profile image uploaded successfully!"
       );
-
-
     } catch (err) {
-
       console.log(err);
 
       alert(
         "Image upload failed"
       );
-
     }
-
   };
-
 
   /* =====================================================
      CAREER DATA
      ===================================================== */
 
   const careers = [
-
     {
       name: "Engineering",
       image: engineering,
@@ -308,24 +282,19 @@ function Home() {
       image: navy,
       path: "/merchant-navy",
     },
-
   ];
-
 
   const visibleCareers =
     showMore
       ? careers
       : careers.slice(0, 9);
 
-
   /* =====================================================
      RETURN
      ===================================================== */
 
   return (
-
     <div className="home">
-
 
       {/* =================================================
           NAVBAR
@@ -342,13 +311,11 @@ function Home() {
 
         </div>
 
-
         <div className="list">
 
           <nav className="navbar">
 
             <div className="nav-icons">
-
 
               {/* NAVIGATION LINKS */}
 
@@ -361,14 +328,12 @@ function Home() {
                   Home
                 </a>
 
-
                 <a
                   href="#career"
                   className="list"
                 >
                   Career
                 </a>
-
 
                 <a
                   href="#about"
@@ -378,7 +343,6 @@ function Home() {
                 </a>
 
               </div>
-
 
               {/* SEARCH */}
 
@@ -395,56 +359,44 @@ function Home() {
 
               </div>
 
-
               {/* NOTIFICATION */}
 
               <div className="notification-wrapper">
 
                 <FaBell
                   className="nav-icon"
-
                   onClick={() => {
-
                     setShowNotification(
                       !showNotification
                     );
 
                     setUnreadCount(0);
-
                   }}
-
                 />
 
-
                 {unreadCount > 0 && (
-
                   <span className="notification-badge">
-
                     {unreadCount}
-
                   </span>
-
                 )}
 
               </div>
 
-
               {showNotification && (
-
                 <Notification
                   setUnreadCount={
                     setUnreadCount
                   }
                 />
-
               )}
-
 
               {/* PROFILE */}
 
               <div
                 className="profile-icon"
-                onClick={() => setOpen(true)}
+                onClick={() =>
+                  setOpen(true)
+                }
               >
 
                 <img
@@ -452,25 +404,16 @@ function Home() {
                     profileImage ||
                     defaultProfile
                   }
-
                   alt="Profile"
-
                   className="navbar-profile-image"
-
                   onError={(e) => {
-
-                    e.target.onerror =
-                      null;
-
+                    e.target.onerror = null;
                     e.target.src =
                       defaultProfile;
-
                   }}
-
                 />
 
               </div>
-
 
             </div>
 
@@ -479,7 +422,6 @@ function Home() {
         </div>
 
       </header>
-
 
       {/* =================================================
           HERO
@@ -496,26 +438,20 @@ function Home() {
           <br />
 
           <h1>
-
             Explore Today,
             <br />
 
             <span>
               Succeed Tommorow.
             </span>
-
           </h1>
 
-
           <p>
-
             Explore careers, compare
             professions and make better
             career decisions with AI
             guidance.
-
           </p>
-
 
           <div className="features">
 
@@ -539,7 +475,6 @@ function Home() {
 
         </div>
 
-
         <div className="home-hero">
 
           <img
@@ -550,7 +485,6 @@ function Home() {
         </div>
 
       </section>
-
 
       {/* =================================================
           CAREER SECTION
@@ -567,9 +501,7 @@ function Home() {
             Explore Top Career Categories
           </h2>
 
-
           {showMore && (
-
             <button
               className="view-btn"
               onClick={() =>
@@ -578,30 +510,23 @@ function Home() {
             >
               Show Less
             </button>
-
           )}
 
         </div>
 
-
         <div className="career-grid">
-
 
           {visibleCareers.map(
             (career, index) => (
 
               <div
-
                 className="career-card"
-
                 key={index}
-
                 onClick={() =>
                   navigate(
                     career.path
                   )
                 }
-
               >
 
                 <div className="career-image">
@@ -613,7 +538,6 @@ function Home() {
 
                 </div>
 
-
                 <p>
                   {career.name}
                 </p>
@@ -623,19 +547,15 @@ function Home() {
             )
           )}
 
-
           {/* MORE */}
 
           {!showMore && (
 
             <div
-
               className="career-card more-card"
-
               onClick={() =>
                 setShowMore(true)
               }
-
             >
 
               <div
@@ -648,7 +568,6 @@ function Home() {
 
               </div>
 
-
               <p>
                 More
               </p>
@@ -660,7 +579,6 @@ function Home() {
         </div>
 
       </section>
-
 
       {/* =================================================
           ABOUT
@@ -679,23 +597,19 @@ function Home() {
             </b>
           </h2>
 
-
           <p>
-
             Career Expert helps students
             discover the perfect career path
             based on their interests, skills
             and goals. Our platform provides
             AI guidance, career simulations,
             learning roadmaps and complete
-            information about <br />
+            information about
             every career. Choose your future
             with confidence.
-
           </p>
 
         </div>
-
 
         <div className="about-right">
 
@@ -707,7 +621,6 @@ function Home() {
         </div>
 
       </section>
-
 
       {/* =================================================
           FOOTER
@@ -721,50 +634,38 @@ function Home() {
             Career Expert
           </h3>
 
-
           <p>
-
             Empowering students to
             choose the right career with
             AI-powered guidance, career
             roadmaps, simulations, and
             expert insights.
-
           </p>
-
 
           <hr />
 
-
           <p className="copyright">
-
             © 2026 Career Xpert.
             All Rights Reserved.
-
           </p>
 
         </div>
 
       </footer>
 
-
       {/* =================================================
-          FLOATING AI BUTTONS
+          FLOATING FEATURES
           ================================================= */}
-
 
       {/* JOB RECOMMENDATION */}
 
       <div
-
         className="job-ai-btn"
-
         onClick={() =>
           navigate(
             "/job-recommendation"
           )
         }
-
       >
 
         <GiArtificialIntelligence
@@ -772,26 +673,20 @@ function Home() {
         />
 
         <span className="job-tooltip">
-
           Job Recommendation
-
         </span>
 
       </div>
 
-
       {/* COLLEGE RECOMMENDATION */}
 
       <div
-
         className="college-floating-btn"
-
         onClick={() =>
           navigate(
             "/college-recommendation"
           )
         }
-
       >
 
         <FaUniversity
@@ -799,26 +694,20 @@ function Home() {
         />
 
         <span className="college-tooltip">
-
           College Recommendation
-
         </span>
 
       </div>
 
-
       {/* CAREER COMPARISON */}
 
       <div
-
         className="comparison-ai-btn"
-
         onClick={() =>
           navigate(
             "/career-comparison"
           )
         }
-
       >
 
         <FaBalanceScale
@@ -826,26 +715,20 @@ function Home() {
         />
 
         <span className="comparison-tooltip">
-
           Career Comparison
-
         </span>
 
       </div>
 
-
       {/* CAREER RECOMMENDATION */}
 
       <div
-
         className="career-ai-btn"
-
         onClick={() =>
           navigate(
             "/career-recommendation"
           )
         }
-
       >
 
         <FaBrain
@@ -853,31 +736,22 @@ function Home() {
         />
 
         <span className="career-tooltip">
-
           Career Recommendation
-
         </span>
 
       </div>
 
-
       {/* =================================================
-          FRIEND'S FEATURES
+          SKILL GAP ANALYSIS
           ================================================= */}
 
-
-      {/* SKILL GAP ANALYSIS */}
-
       <div
-
         className="skill-gap-btn"
-
         onClick={() =>
           navigate(
             "/skill-gap"
           )
         }
-
       >
 
         <FaChartLine
@@ -885,26 +759,22 @@ function Home() {
         />
 
         <span className="skill-gap-tooltip">
-
           Skill Gap Analysis
-
         </span>
 
       </div>
 
-
-      {/* STUDY PLANNER */}
+      {/* =================================================
+          STUDY PLANNER
+          ================================================= */}
 
       <div
-
         className="study-planner-btn"
-
         onClick={() =>
           navigate(
             "/study-planner"
           )
         }
-
       >
 
         <FaBookOpen
@@ -912,26 +782,22 @@ function Home() {
         />
 
         <span className="study-planner-tooltip">
-
           Study Planner
-
         </span>
 
       </div>
 
-
-      {/* CAREER ROADMAP */}
+      {/* =================================================
+          CAREER ROADMAP
+          ================================================= */}
 
       <div
-
         className="roadmap-btn"
-
         onClick={() =>
           navigate(
             "/career-roadmap"
           )
         }
-
       >
 
         <FaMapSigns
@@ -939,13 +805,32 @@ function Home() {
         />
 
         <span className="roadmap-tooltip">
-
           Career Roadmap
-
         </span>
 
       </div>
 
+      {/* =================================================
+          COVER LETTER - NEW
+          ================================================= */}
+
+      <div
+        className="cover-letter-btn"
+        onClick={() =>
+          navigate("/cover-letter")
+        }
+        title="Cover Letter"
+      >
+
+        <FaFileAlt
+          className="cover-letter-icon"
+        />
+
+        <span className="cover-letter-tooltip">
+          Cover Letter
+        </span>
+
+      </div>
 
       {/* =================================================
           CHATBOT
@@ -953,38 +838,27 @@ function Home() {
 
       <ChatBot />
 
-
       {/* =================================================
           PROFILE SIDEBAR
           ================================================= */}
 
       <ProfileSidebar
-
         open={open}
-
         setOpen={setOpen}
-
         profileImage={profileImage}
-
         handleImageUpload={
           handleImageUpload
         }
-
         username={username}
-
         email={
           localStorage.getItem(
             "userEmail"
           )
         }
-
       />
 
     </div>
-
   );
-
 }
-
 
 export default Home;

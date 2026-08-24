@@ -1,558 +1,1196 @@
-/* ===========================
-   CAREER RECOMMENDATION CSS
-===========================*/
+/* =========================================================
+   CAREER RECOMMENDATION
+   FINAL MERGED & CLEAN CSS
+========================================================= */
 
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:'Poppins',sans-serif;
+
+/* =========================================================
+   GLOBAL
+========================================================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
 }
 
-body{
-    background:#f4f5f7;
+html {
+    scroll-behavior: smooth;
 }
 
-.crf-page{
-    min-height:100vh;
-    width:100%;
-    background:linear-gradient(135deg,#800020,#a30029,#ffffff);
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    padding:50px 20px;
+body {
+    background: #f4f5f7;
 }
 
-.crf-overlay{
-    width:100%;
-    display:flex;
-    justify-content:center;
+
+/* =========================================================
+   MAIN PAGE
+========================================================= */
+
+.crf-page {
+    min-height: 100vh;
+    width: 100%;
+
+    background:
+        linear-gradient(
+            135deg,
+            #800020,
+            #a30029,
+            #ffffff
+        );
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    padding: 50px 20px;
+
+    position: relative;
+
+    animation: pageFade 0.6s ease;
 }
 
-.crf-card{
-    width:100%;
-    max-width:1100px;
-    background:#fff;
-    border-radius:25px;
-    padding:45px;
-    box-shadow:0 20px 60px rgba(0,0,0,.18);
-    animation:fadeUp .7s ease;
+
+/* Background decorative circle */
+
+.crf-page::before {
+    content: "";
+
+    position: fixed;
+
+    top: -150px;
+    left: -150px;
+
+    width: 350px;
+    height: 350px;
+
+    background: rgba(255, 255, 255, 0.10);
+
+    border-radius: 50%;
+
+    z-index: 0;
 }
 
-@keyframes fadeUp{
 
-    from{
-        opacity:0;
-        transform:translateY(40px);
+/* Background decorative circle */
+
+.crf-page::after {
+    content: "";
+
+    position: fixed;
+
+    bottom: -180px;
+    right: -180px;
+
+    width: 420px;
+    height: 420px;
+
+    background: rgba(255, 255, 255, 0.10);
+
+    border-radius: 50%;
+
+    z-index: 0;
+}
+
+
+/* =========================================================
+   OVERLAY
+========================================================= */
+
+.crf-overlay {
+    width: 100%;
+
+    display: flex;
+    justify-content: center;
+
+    position: relative;
+
+    z-index: 1;
+}
+
+
+/* =========================================================
+   MAIN CARD
+========================================================= */
+
+.crf-card {
+    width: 100%;
+    max-width: 1100px;
+
+    padding: 45px;
+
+    border-radius: 25px;
+
+    border: 3px solid transparent;
+
+    background:
+        linear-gradient(#ffffff, #ffffff) padding-box,
+        linear-gradient(
+            135deg,
+            #800020,
+            #d4004d
+        ) border-box;
+
+    box-shadow:
+        0 20px 60px rgba(0, 0, 0, 0.18);
+
+    animation: fadeUp 0.7s ease;
+
+    transition: 0.3s;
+}
+
+.crf-card:hover {
+    box-shadow:
+        0 30px 70px rgba(0, 0, 0, 0.20);
+}
+
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.crf-header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+
+/* AI Circle */
+
+.crf-ai-icon {
+    width: 90px;
+    height: 90px;
+
+    border-radius: 50%;
+
+    background: #800020;
+
+    color: white;
+
+    margin: auto;
+
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+
+    font-size: 38px;
+
+    box-shadow:
+        0 10px 30px rgba(128, 0, 32, 0.30);
+
+    transition: 0.5s;
+}
+
+.crf-ai-icon:hover {
+    transform: rotate(360deg);
+}
+
+
+/* Main heading */
+
+.crf-header h1 {
+    margin-top: 20px;
+
+    font-size: 38px;
+
+    font-weight: 700;
+
+    background:
+        linear-gradient(
+            90deg,
+            #800020,
+            #d4004d
+        );
+
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+
+/* Description */
+
+.crf-header p {
+    margin-top: 15px;
+
+    color: #666;
+
+    font-size: 17px;
+
+    line-height: 28px;
+}
+
+
+/* =========================================================
+   PROGRESS BAR
+========================================================= */
+
+.crf-progress-bar {
+    width: 100%;
+
+    height: 12px;
+
+    background: #ececec;
+
+    border-radius: 30px;
+
+    overflow: hidden;
+
+    margin-bottom: 45px;
+}
+
+
+.crf-progress-fill {
+    width: 35%;
+
+    height: 100%;
+
+    background:
+        linear-gradient(
+            90deg,
+            #800020,
+            #d4004d
+        );
+
+    border-radius: 30px;
+
+    box-shadow:
+        0 0 18px #800020;
+
+    animation:
+        progress 2s linear infinite alternate;
+}
+
+
+@keyframes progress {
+
+    from {
+        width: 20%;
     }
 
-    to{
-        opacity:1;
-        transform:translateY(0);
+    to {
+        width: 65%;
     }
 
 }
 
-.crf-header{
-    text-align:center;
-    margin-bottom:40px;
+
+/* =========================================================
+   FORM SECTIONS
+========================================================= */
+
+.crf-section {
+    margin-bottom: 40px;
+
+    padding: 28px;
+
+    border-radius: 18px;
+
+    border: 1px solid #eee;
+
+    background: #ffffff;
+
+    backdrop-filter: blur(12px);
+
+    transition: 0.3s;
+
+    animation:
+        slideUp 0.7s ease;
 }
 
-.crf-ai-icon{
-    width:90px;
-    height:90px;
-    border-radius:50%;
-    background:#800020;
-    color:white;
-    margin:auto;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    font-size:38px;
-    box-shadow:0 10px 30px rgba(128,0,32,.3);
+
+.crf-section:hover {
+    box-shadow:
+        0 10px 25px rgba(0, 0, 0, 0.08);
 }
 
-.crf-header h1{
-    margin-top:20px;
-    color:#800020;
-    font-size:38px;
-    font-weight:700;
+
+/* Divider */
+
+.crf-section::after {
+    content: "";
+
+    display: block;
+
+    margin-top: 20px;
+
+    height: 1px;
+
+    background: #ececec;
 }
 
-.crf-header p{
-    margin-top:15px;
-    color:#666;
-    font-size:17px;
-    line-height:28px;
+
+.crf-section:last-child::after {
+    display: none;
 }
 
-.crf-progress-bar{
-    width:100%;
-    height:12px;
-    background:#ececec;
-    border-radius:30px;
-    overflow:hidden;
-    margin-bottom:45px;
+
+/* =========================================================
+   SECTION TITLE
+========================================================= */
+
+.crf-section h2 {
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    color: #800020;
+
+    margin-bottom: 25px;
+
+    font-size: 24px;
 }
 
-.crf-progress-fill{
-    width:35%;
-    height:100%;
-    background:linear-gradient(90deg,#800020,#d4004d);
-    border-radius:30px;
-    animation:progress 2s linear infinite alternate;
+
+.crf-section h2 svg {
+    font-size: 26px;
+
+    color: #800020;
 }
 
-@keyframes progress{
 
-    from{
-        width:20%;
-    }
+/* =========================================================
+   FORM GROUP
+========================================================= */
 
-    to{
-        width:65%;
-    }
+.crf-form-group {
+    display: flex;
 
+    flex-direction: column;
+
+    margin-bottom: 22px;
+
+    position: relative;
 }
 
-.crf-section{
-    margin-bottom:40px;
-    padding:28px;
-    border-radius:18px;
-    border:1px solid #eee;
-    transition:.3s;
-    background:#fff;
+
+/* Labels */
+
+.crf-form-group label {
+    margin-bottom: 8px;
+
+    color: #333;
+
+    font-weight: 600;
 }
 
-.crf-section:hover{
-    box-shadow:0 10px 25px rgba(0,0,0,.08);
-}
 
-.crf-section h2{
-    display:flex;
-    align-items:center;
-    gap:12px;
-    color:#800020;
-    margin-bottom:25px;
-    font-size:24px;
-}
-.crf-form-group{
-    display:flex;
-    flex-direction:column;
-    margin-bottom:22px;
-}
-
-.crf-form-group label{
-    margin-bottom:8px;
-    color:#333;
-    font-weight:600;
-}
+/* =========================================================
+   INPUTS
+========================================================= */
 
 .crf-form-group input,
 .crf-form-group select,
-.crf-form-group textarea{
-    width:100%;
-    padding:15px;
-    border:1px solid #ddd;
-    border-radius:12px;
-    font-size:16px;
-    transition:.3s;
-    outline:none;
+.crf-form-group textarea {
+
+    width: 100%;
+
+    padding: 15px;
+
+    border: 1px solid #ddd;
+
+    border-radius: 12px;
+
+    font-size: 16px;
+
+    transition: 0.3s;
+
+    outline: none;
+
+    background: #fff;
 }
 
-.crf-form-group textarea{
-    resize:vertical;
-    min-height:130px;
+
+/* Textarea */
+
+.crf-form-group textarea {
+
+    resize: vertical;
+
+    min-height: 130px;
 }
 
-.crf-form-group input:focus,
-.crf-form-group select:focus,
-.crf-form-group textarea:focus{
-    border-color:#800020;
-    box-shadow:0 0 0 4px rgba(128,0,32,.15);
-}
 
-.crf-two-column{
-    display:grid;
-    grid-template-columns:repeat(2,1fr);
-    gap:22px;
-}
-
-.crf-checkbox-grid{
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:18px;
-}
-
-.crf-check-card{
-    background:#fafafa;
-    border:2px solid #ececec;
-    border-radius:15px;
-    padding:18px;
-    cursor:pointer;
-    transition:.35s;
-    display:flex;
-    align-items:center;
-    gap:12px;
-    font-weight:500;
-}
-
-.crf-check-card:hover{
-    border-color:#800020;
-    transform:translateY(-5px);
-    box-shadow:0 10px 25px rgba(128,0,32,.18);
-}
-
-.crf-check-card input{
-    width:20px;
-    height:20px;
-    accent-color:#800020;
-}
-
-.crf-check-card span{
-    color:#333;
-}
-
-.crf-next-btn{
-    width:100%;
-    padding:18px;
-    border:none;
-    border-radius:15px;
-    background:linear-gradient(90deg,#800020,#b3003c);
-    color:white;
-    font-size:19px;
-    font-weight:600;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    gap:12px;
-    cursor:pointer;
-    transition:.35s;
-    margin-top:10px;
-}
-
-.crf-next-btn:hover{
-    transform:translateY(-4px);
-    box-shadow:0 15px 35px rgba(128,0,32,.35);
-}
-
-.crf-next-btn svg{
-    transition:.3s;
-}
-
-.crf-next-btn:hover svg{
-    transform:translateX(6px);
-}
-
-input::placeholder,
-textarea::placeholder{
-    color:#999;
-}
-
-select{
-    cursor:pointer;
-}
-
-::-webkit-scrollbar{
-    width:10px;
-}
-
-::-webkit-scrollbar-thumb{
-    background:#800020;
-    border-radius:20px;
-}
-
-::-webkit-scrollbar-track{
-    background:#eee;
-}
-
-@media(max-width:992px){
-
-.crf-checkbox-grid{
-grid-template-columns:repeat(2,1fr);
-}
-
-}
-
-@media(max-width:768px){
-
-.crf-card{
-padding:25px;
-}
-
-.crf-header h1{
-font-size:30px;
-}
-
-.crf-two-column{
-grid-template-columns:1fr;
-}
-
-.crf-checkbox-grid{
-grid-template-columns:1fr;
-}
-
-.crf-section{
-padding:20px;
-}
-
-.crf-ai-icon{
-width:70px;
-height:70px;
-font-size:30px;
-}
-
-.crf-next-btn{
-font-size:17px;
-}
-
-}
-
-@media(max-width:500px){
-
-.crf-page{
-padding:20px 10px;
-}
-
-.crf-card{
-border-radius:18px;
-padding:18px;
-}
-
-.crf-section h2{
-font-size:20px;
-}
-
-.crf-form-group input,
-.crf-form-group select,
-.crf-form-group textarea{
-font-size:15px;
-padding:13px;
-}
-
-/* ===============================
-   EXTRA PREMIUM UI EFFECTS
-=================================*/
-
-/* Selected Checkbox Card */
-
-.crf-check-card:has(input:checked){
-    background:linear-gradient(135deg,#800020,#a00030);
-    color:#fff;
-    border-color:#800020;
-    transform:translateY(-5px);
-    box-shadow:0 15px 35px rgba(128,0,32,.35);
-}
-
-.crf-check-card:has(input:checked) span{
-    color:#fff;
-}
-
-.crf-check-card:has(input:checked) input{
-    accent-color:#fff;
-}
-
-/* Input Hover */
+/* Input hover */
 
 .crf-form-group input:hover,
 .crf-form-group select:hover,
-.crf-form-group textarea:hover{
-    border-color:#800020;
+.crf-form-group textarea:hover {
+
+    border-color: #800020;
 }
 
-/* Floating Labels Effect */
 
-.crf-form-group{
-    position:relative;
-}
-
-/* Card Glow */
-
-.crf-card:hover{
-    box-shadow:0 30px 70px rgba(0,0,0,.20);
-}
-
-/* Section Animation */
-
-.crf-section{
-    animation:slideUp .7s ease;
-}
-
-@keyframes slideUp{
-
-0%{
-opacity:0;
-transform:translateY(40px);
-}
-
-100%{
-opacity:1;
-transform:translateY(0);
-}
-
-}
-
-/* Header Gradient */
-
-.crf-header h1{
-background:linear-gradient(90deg,#800020,#d4004d);
--webkit-background-clip:text;
--webkit-text-fill-color:transparent;
-}
-
-/* Beautiful Divider */
-
-.crf-section::after{
-content:"";
-display:block;
-margin-top:20px;
-height:1px;
-background:#ececec;
-}
-
-.crf-section:last-child::after{
-display:none;
-}
-
-/* Button Ripple */
-
-.crf-next-btn{
-position:relative;
-overflow:hidden;
-}
-
-.crf-next-btn::before{
-content:"";
-position:absolute;
-width:0;
-height:0;
-border-radius:50%;
-background:rgba(255,255,255,.25);
-top:50%;
-left:50%;
-transform:translate(-50%,-50%);
-transition:.6s;
-}
-
-.crf-next-btn:hover::before{
-width:500px;
-height:500px;
-}
-
-/* Nice Scroll Animation */
-
-html{
-scroll-behavior:smooth;
-}
-
-/* Soft Background Shapes */
-
-.crf-page::before{
-content:"";
-position:fixed;
-top:-150px;
-left:-150px;
-width:350px;
-height:350px;
-background:rgba(255,255,255,.10);
-border-radius:50%;
-z-index:0;
-}
-
-.crf-page::after{
-content:"";
-position:fixed;
-bottom:-180px;
-right:-180px;
-width:420px;
-height:420px;
-background:rgba(255,255,255,.10);
-border-radius:50%;
-z-index:0;
-}
-
-.crf-overlay{
-position:relative;
-z-index:1;
-}
-
-/* Glass Sections */
-
-.crf-section{
-backdrop-filter:blur(12px);
-}
-
-/* Title Icon */
-
-.crf-section h2 svg{
-font-size:26px;
-color:#800020;
-}
-
-/* Checkbox Hover */
-
-.crf-check-card:hover span{
-color:#800020;
-font-weight:600;
-}
-
-/* Input Shadow */
+/* Input focus */
 
 .crf-form-group input:focus,
 .crf-form-group select:focus,
-.crf-form-group textarea:focus{
-transform:scale(1.01);
+.crf-form-group textarea:focus {
+
+    border-color: #800020;
+
+    box-shadow:
+        0 0 0 4px rgba(128, 0, 32, 0.15);
+
+    transform: scale(1.01);
 }
 
-/* Better Placeholder */
 
-::placeholder{
-letter-spacing:.3px;
+/* Placeholder */
+
+input::placeholder,
+textarea::placeholder,
+::placeholder {
+
+    color: #999;
+
+    letter-spacing: 0.3px;
 }
 
-/* Button Active */
 
-.crf-next-btn:active{
-transform:scale(.98);
+/* Select */
+
+select {
+    cursor: pointer;
 }
 
-/* Progress Glow */
 
-.crf-progress-fill{
-box-shadow:0 0 18px #800020;
+/* =========================================================
+   TWO COLUMN FORM
+========================================================= */
+
+.crf-two-column {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, 1fr);
+
+    gap: 22px;
 }
 
-/* AI Icon Rotation */
 
-.crf-ai-icon{
-transition:.5s;
+/* =========================================================
+   CHECKBOX GRID
+========================================================= */
+
+.crf-checkbox-grid {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 18px;
 }
 
-.crf-ai-icon:hover{
-transform:rotate(360deg);
+
+/* Checkbox card */
+
+.crf-check-card {
+
+    background: #fafafa;
+
+    border: 2px solid #ececec;
+
+    border-radius: 15px;
+
+    padding: 18px;
+
+    cursor: pointer;
+
+    transition: 0.35s;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    font-weight: 500;
 }
 
-/* Card Border Animation */
 
-.crf-card{
-border:3px solid transparent;
-background:
-linear-gradient(#fff,#fff) padding-box,
-linear-gradient(135deg,#800020,#d4004d) border-box;
-}
+/* Checkbox hover */
 
-/* Page Fade */
+.crf-check-card:hover {
 
-.crf-page{
-animation:pageFade .6s ease;
+    border-color: #800020;
+
+    transform: translateY(-5px);
+
+    box-shadow:
+        0 10px 25px rgba(128, 0, 32, 0.18);
 }
 
-@keyframes pageFade{
-from{
-opacity:0;
+
+.crf-check-card:hover span {
+
+    color: #800020;
+
+    font-weight: 600;
 }
-to{
-opacity:1;
+
+
+/* Checkbox */
+
+.crf-check-card input {
+
+    width: 20px;
+
+    height: 20px;
+
+    accent-color: #800020;
 }
+
+
+/* Text */
+
+.crf-check-card span {
+
+    color: #333;
 }
+
+
+/* Selected checkbox */
+
+.crf-check-card:has(input:checked) {
+
+    background:
+        linear-gradient(
+            135deg,
+            #800020,
+            #a00030
+        );
+
+    color: #fff;
+
+    border-color: #800020;
+
+    transform: translateY(-5px);
+
+    box-shadow:
+        0 15px 35px rgba(128, 0, 32, 0.35);
+}
+
+
+.crf-check-card:has(input:checked) span {
+
+    color: #fff;
+}
+
+
+.crf-check-card:has(input:checked) input {
+
+    accent-color: #fff;
+}
+
+
+/* =========================================================
+   NEXT BUTTON
+========================================================= */
+
+.crf-next-btn {
+
+    width: 100%;
+
+    padding: 18px;
+
+    border: none;
+
+    border-radius: 15px;
+
+    background:
+        linear-gradient(
+            90deg,
+            #800020,
+            #b3003c
+        );
+
+    color: white;
+
+    font-size: 19px;
+
+    font-weight: 600;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    gap: 12px;
+
+    cursor: pointer;
+
+    transition: 0.35s;
+
+    margin-top: 10px;
+
+    position: relative;
+
+    overflow: hidden;
+}
+
+
+/* Button hover */
+
+.crf-next-btn:hover {
+
+    transform: translateY(-4px);
+
+    box-shadow:
+        0 15px 35px rgba(128, 0, 32, 0.35);
+}
+
+
+/* Button icon */
+
+.crf-next-btn svg {
+
+    transition: 0.3s;
+}
+
+
+.crf-next-btn:hover svg {
+
+    transform:
+        translateX(6px);
+}
+
+
+/* Ripple */
+
+.crf-next-btn::before {
+
+    content: "";
+
+    position: absolute;
+
+    width: 0;
+    height: 0;
+
+    border-radius: 50%;
+
+    background:
+        rgba(255, 255, 255, 0.25);
+
+    top: 50%;
+    left: 50%;
+
+    transform:
+        translate(-50%, -50%);
+
+    transition: 0.6s;
+}
+
+
+.crf-next-btn:hover::before {
+
+    width: 500px;
+    height: 500px;
+}
+
+
+/* Active */
+
+.crf-next-btn:active {
+
+    transform: scale(0.98);
+}
+
+
+/* =========================================================
+   COURSE CARDS
+========================================================= */
+
+.course-card {
+
+    position: relative;
+
+    display: flex;
+
+    flex-direction: column;
+
+    min-height: 345px;
+
+    padding:
+        20px 22px 18px;
+
+    background: #ffffff;
+
+    border-left:
+        4px solid #6c5ce7;
+
+    border-radius: 16px;
+
+    box-shadow:
+        0 8px 22px
+        rgba(0, 0, 0, 0.08);
+
+    box-sizing: border-box;
+
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease;
+}
+
+
+.course-card:hover {
+
+    transform:
+        translateY(-5px);
+
+    box-shadow:
+        0 15px 30px
+        rgba(0, 0, 0, 0.12);
+}
+
+
+/* =========================================================
+   COURSE TITLE
+========================================================= */
+
+.course-card h3 {
+
+    margin:
+        0 0 10px;
+
+    font-size: 18px;
+
+    line-height: 1.18;
+
+    font-weight: 700;
+
+    color: #171717;
+}
+
+
+/* =========================================================
+   COURSE DESCRIPTION
+========================================================= */
+
+.course-card p {
+
+    margin: 0;
+
+    font-size: 14px;
+
+    line-height: 1.55;
+
+    color: #666;
+}
+
+
+/* =========================================================
+   COURSE GRID
+========================================================= */
+
+.courses-grid {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, minmax(0, 1fr));
+
+    gap:
+        32px 18px;
+
+    align-items: stretch;
+}
+
+
+/* =========================================================
+   COURSE CARD BOTTOM
+========================================================= */
+
+.course-card-bottom {
+
+    margin-top: auto;
+
+    padding-top: 18px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 12px;
+}
+
+
+/* =========================================================
+   COURSE DURATION
+========================================================= */
+
+.course-duration {
+
+    display: flex;
+
+    align-items: flex-start;
+
+    gap: 5px;
+
+    color: #333;
+
+    font-size: 13px;
+
+    font-weight: 600;
+
+    line-height: 1.25;
+
+    flex: 1;
+
+    min-width: 0;
+}
+
+
+.course-duration .duration-icon {
+
+    flex-shrink: 0;
+
+    font-size: 14px;
+}
+
+
+.course-duration span {
+
+    display: block;
+}
+
+
+/* =========================================================
+   COURSE LEVEL / CATEGORY BUTTON
+========================================================= */
+
+.course-level {
+
+    flex-shrink: 0;
+
+    min-width: 150px;
+
+    min-height: 42px;
+
+    padding:
+        9px 18px;
+
+    border:
+        1px solid #6c5ce7;
+
+    border-radius: 22px;
+
+    background: #6c5ce7;
+
+    color: #ffffff;
+
+    font-size: 13px;
+
+    font-weight: 600;
+
+    line-height: 1.2;
+
+    text-align: center;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    white-space: normal;
+
+    box-shadow:
+        0 4px 10px
+        rgba(108, 92, 231, 0.18);
+
+    cursor: pointer;
+
+    transition: 0.2s ease;
+}
+
+
+.course-level:hover {
+
+    background: #5b4bd8;
+
+    border-color: #5b4bd8;
+
+    transform:
+        translateY(-2px);
+
+    box-shadow:
+        0 6px 14px
+        rgba(108, 92, 231, 0.25);
+}
+
+
+/* =========================================================
+   SCROLLBAR
+========================================================= */
+
+::-webkit-scrollbar {
+
+    width: 10px;
+}
+
+
+::-webkit-scrollbar-thumb {
+
+    background: #800020;
+
+    border-radius: 20px;
+}
+
+
+::-webkit-scrollbar-track {
+
+    background: #eee;
+}
+
+
+/* =========================================================
+   ANIMATIONS
+========================================================= */
+
+@keyframes fadeUp {
+
+    from {
+
+        opacity: 0;
+
+        transform:
+            translateY(40px);
+    }
+
+    to {
+
+        opacity: 1;
+
+        transform:
+            translateY(0);
+    }
+}
+
+
+@keyframes slideUp {
+
+    0% {
+
+        opacity: 0;
+
+        transform:
+            translateY(40px);
+    }
+
+    100% {
+
+        opacity: 1;
+
+        transform:
+            translateY(0);
+    }
+}
+
+
+@keyframes pageFade {
+
+    from {
+
+        opacity: 0;
+    }
+
+    to {
+
+        opacity: 1;
+    }
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 1200px) {
+
+    .courses-grid {
+
+        grid-template-columns:
+            repeat(3, minmax(0, 1fr));
+    }
+}
+
+
+@media (max-width: 992px) {
+
+    .crf-checkbox-grid {
+
+        grid-template-columns:
+            repeat(2, 1fr);
+    }
+
+    .courses-grid {
+
+        grid-template-columns:
+            repeat(3, minmax(0, 1fr));
+    }
+}
+
+
+@media (max-width: 900px) {
+
+    .courses-grid {
+
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+    }
+}
+
+
+@media (max-width: 768px) {
+
+    .crf-page {
+
+        padding:
+            30px 15px;
+    }
+
+
+    .crf-card {
+
+        padding: 25px;
+
+        border-radius: 20px;
+    }
+
+
+    .crf-header h1 {
+
+        font-size: 30px;
+    }
+
+
+    .crf-header p {
+
+        font-size: 15px;
+
+        line-height: 24px;
+    }
+
+
+    .crf-two-column {
+
+        grid-template-columns: 1fr;
+    }
+
+
+    .crf-checkbox-grid {
+
+        grid-template-columns: 1fr;
+    }
+
+
+    .crf-section {
+
+        padding: 20px;
+    }
+
+
+    .crf-section h2 {
+
+        font-size: 21px;
+    }
+
+
+    .crf-ai-icon {
+
+        width: 70px;
+
+        height: 70px;
+
+        font-size: 30px;
+    }
+
+
+    .crf-next-btn {
+
+        font-size: 17px;
+    }
+
+
+    .courses-grid {
+
+        grid-template-columns: 1fr;
+    }
+
+
+    .course-card {
+
+        min-height: 320px;
+    }
+
+
+    .course-card-bottom {
+
+        align-items: flex-end;
+    }
+
+
+    .course-level {
+
+        min-width: 125px;
+    }
+}
+
+
+@media (max-width: 500px) {
+
+    .crf-page {
+
+        padding:
+            20px 10px;
+    }
+
+
+    .crf-card {
+
+        border-radius: 18px;
+
+        padding: 18px;
+    }
+
+
+    .crf-section h2 {
+
+        font-size: 20px;
+    }
+
+
+    .crf-form-group input,
+    .crf-form-group select,
+    .crf-form-group textarea {
+
+        font-size: 15px;
+
+        padding: 13px;
+    }
+
+
+    .course-card-bottom {
+
+        flex-direction: column;
+
+        align-items: stretch;
+    }
+
+
+    .course-level {
+
+        width: 100%;
+
+        min-width: 100%;
+    }
 }

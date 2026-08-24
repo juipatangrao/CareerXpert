@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
+import axios from "axios";
 import "../style/CareerTemplate.css";
 
 import {
@@ -15,7 +16,6 @@ import {
 } from "react-icons/fa";
 
 
-
 const CareerTemplate = ({
   title,
   subtitle,
@@ -23,40 +23,73 @@ const CareerTemplate = ({
   banner,
   overview,
   education,
-  skills,
-  exams,
+  skills = [],
+  exams = [],
   scope,
   salary,
-  dayToDayWork,
-  careerTest,
-  roadmap,
-  realityCheck,
+  dayToDayWork = [],
+  careerTest = [],
+  roadmap = [],
+  realityCheck = {},
   parentCareerPath,
 }) => {
 
-//   const location = useLocation();
+  /* =====================================================
+     SIDEBAR
+  ===================================================== */
 
-// const pathParts = location.pathname
-//   .split("/")
-//   .filter(Boolean);
+  const [activePage, setActivePage] =
+    useState("Overview");
 
-// const parentCareerPath =
-//   pathParts.length > 1
-//     ? `/${pathParts[0]}`
-//     : "/home";
+  /* =====================================================
+     OVERVIEW TABS
+  ===================================================== */
 
-  // Sidebar Pages
-  const [activePage, setActivePage] = useState("Overview");
+  const [activeTab, setActiveTab] =
+    useState("Overview");
 
-  // Top Tabs (Overview)
-  const [activeTab, setActiveTab] = useState("Overview");
+  const [showOverviewMenu, setShowOverviewMenu] =
+    useState(true);
 
-  // Expand / Collapse Overview Menu
-  const [showOverviewMenu, setShowOverviewMenu] = useState(true);
+  /* =====================================================
+     SAVE CAREER
+  ===================================================== */
 
-  const [isSaved, setIsSaved] = useState(false);
-  const [answers, setAnswers] = useState({});
-  const [score, setScore] = useState(null);
+  const [isSaved, setIsSaved] =
+    useState(() => {
+
+      const saved =
+        JSON.parse(
+          localStorage.getItem("savedCareers")
+        ) || [];
+
+      return saved.includes(title);
+    });
+
+  /* =====================================================
+     CAREER TEST
+  ===================================================== */
+
+  const [answers, setAnswers] =
+    useState({});
+
+  const [score, setScore] =
+    useState(null);
+
+  /* =====================================================
+     AI COURSES
+  ===================================================== */
+
+  const [loading, setLoading] =
+    useState(false);
+
+  const [courses, setCourses] =
+    useState([]);
+
+
+  /* =====================================================
+     OVERVIEW TABS
+  ===================================================== */
 
   const tabs = [
     "Overview",
@@ -66,7 +99,13 @@ const CareerTemplate = ({
     "Scope",
     "Salary",
     "Day to Day Work",
+    "AI Courses",
   ];
+
+
+  /* =====================================================
+     SIDEBAR PAGES
+  ===================================================== */
 
   const sidebarPages = [
     "Career Test",
@@ -78,160 +117,386 @@ const CareerTemplate = ({
     "Logout",
   ];
 
+
+  /* =====================================================
+     SAVE / UNSAVE CAREER
+  ===================================================== */
+
   const handleSaveCareer = () => {
-  let savedCareers =
-    JSON.parse(localStorage.getItem("savedCareers")) || [];
 
-  if (isSaved) {
-    savedCareers = savedCareers.filter(
-      (career) => career !== title
-    );
-  } else {
-    savedCareers.push(title);
-  }
+    let savedCareers =
+      JSON.parse(
+        localStorage.getItem("savedCareers")
+      ) || [];
 
-  localStorage.setItem(
-    "savedCareers",
-    JSON.stringify(savedCareers)
-  );
 
-  setIsSaved(!isSaved);
-};
+    if (isSaved) {
 
-const handleAnswer = (questionIndex, answer) => {
-  setAnswers((prev) => ({
-    ...prev,
-    [questionIndex]: answer,
-  }));
-};
+      savedCareers =
+        savedCareers.filter(
+          (career) =>
+            career !== title
+        );
 
-const handleSubmitTest = () => {
+    } else {
 
-  let yesCount = 0;
+      if (
+        !savedCareers.includes(title)
+      ) {
 
-  Object.values(answers).forEach((answer) => {
-    if (answer === "Yes") {
-      yesCount++;
+        savedCareers.push(title);
+
+      }
+
     }
-  });
 
-  const percentage = Math.round(
-    (yesCount / careerTest.length) * 100
-  );
 
-  setScore(percentage);
+    localStorage.setItem(
+      "savedCareers",
+      JSON.stringify(savedCareers)
+    );
 
-};
 
-const roadmapIcons = [
-  <FaBookOpen />,
-  <FaGraduationCap />,
-  <FaGraduationCap />,
-  <FaLaptopCode />,
-  <FaClipboardCheck />,
-  <FaTrophy />,
-  <FaMicrophone />,
-  <FaCertificate />,
-  <FaRocket />,
-  <FaBriefcase />,
-];
+    setIsSaved(!isSaved);
+  };
 
+
+  /* =====================================================
+     CAREER TEST ANSWER
+  ===================================================== */
+
+  const handleAnswer = (
+    questionIndex,
+    answer
+  ) => {
+
+    setAnswers((prev) => ({
+      ...prev,
+      [questionIndex]: answer,
+    }));
+
+  };
+
+
+  /* =====================================================
+     SUBMIT CAREER TEST
+  ===================================================== */
+
+  const handleSubmitTest = () => {
+
+    if (
+      !careerTest ||
+      careerTest.length === 0
+    ) {
+
+      setScore(0);
+      return;
+
+    }
+
+
+    let yesCount = 0;
+
+
+    Object.values(answers).forEach(
+      (answer) => {
+
+        if (answer === "Yes") {
+          yesCount++;
+        }
+
+      }
+    );
+
+
+    const percentage =
+      Math.round(
+        (yesCount /
+          careerTest.length) *
+          100
+      );
+
+
+    setScore(percentage);
+
+  };
+
+
+  /* =====================================================
+     AI COURSE RECOMMENDATION
+  ===================================================== */
+
+  const handleGenerateCourses =
+    async () => {
+
+      try {
+
+        setLoading(true);
+
+        setCourses([]);
+
+
+        const response =
+          await axios.post(
+            "http://localhost:5000/api/ai/recommend-courses",
+            {
+              career: title,
+            }
+          );
+
+
+        /*
+          Supports both:
+
+          response.data = [...]
+
+          OR
+
+          response.data = {
+            courses: [...]
+          }
+        */
+
+        const generatedCourses =
+          Array.isArray(response.data)
+            ? response.data
+            : response.data?.courses ||
+              [];
+
+
+        setCourses(
+          generatedCourses
+        );
+
+
+      } catch (error) {
+
+        console.error(
+          "AI Course Recommendation Error:",
+          error
+        );
+
+        alert(
+          "Unable to generate AI course recommendations."
+        );
+
+
+      } finally {
+
+        setLoading(false);
+
+      }
+
+    };
+
+
+  /* =====================================================
+     ROADMAP ICONS
+  ===================================================== */
+
+  const roadmapIcons = [
+
+    <FaBookOpen />,
+
+    <FaGraduationCap />,
+
+    <FaGraduationCap />,
+
+    <FaLaptopCode />,
+
+    <FaClipboardCheck />,
+
+    <FaTrophy />,
+
+    <FaMicrophone />,
+
+    <FaCertificate />,
+
+    <FaRocket />,
+
+    <FaBriefcase />,
+
+  ];
+
+
+  /* =====================================================
+     RENDER
+  ===================================================== */
 
   return (
+
     <div className="career-template-page">
-            {/* ================= Sidebar ================= */}
+
+
+      {/* =================================================
+          SIDEBAR
+      ================================================= */}
 
       <div className="career-template-sidebar">
 
         <div className="career-template-sidebar-top">
 
-          {/* Logo & Title */}
+
+          {/* =================================================
+              LOGO + TITLE
+          ================================================= */}
 
           <div className="career-template-card">
 
-            <img src={logo} alt={title} />
+            <img
+              src={logo}
+              alt={title}
+            />
 
             <div>
-              <h3>{title}</h3>
-              <p>{subtitle}</p>
+
+              <h3>
+                {title}
+              </h3>
+
+              <p>
+                {subtitle}
+              </p>
+
             </div>
 
           </div>
 
+
+          {/* =================================================
+              SIDEBAR MENU
+          ================================================= */}
+
           <ul className="career-sidebar-menu">
 
-            {/* Home */}
 
-<li>
-  <Link
-    to={parentCareerPath || "/home"}
-    className="career-sidebar-link"
-  >
-    🏠 Home
-  </Link>
-</li>
-            {/* Overview */}
+            {/* HOME */}
+
+            <li>
+
+              <Link
+                to={
+                  parentCareerPath ||
+                  "/home"
+                }
+
+                className="career-sidebar-link"
+              >
+
+                🏠 Home
+
+              </Link>
+
+            </li>
+
+
+            {/* =================================================
+                OVERVIEW
+            ================================================= */}
 
             <li
+
               className={
                 activePage === "Overview"
                   ? "career-active"
                   : ""
               }
+
               onClick={() => {
-                setActivePage("Overview");
-                setShowOverviewMenu(!showOverviewMenu);
+
+                setActivePage(
+                  "Overview"
+                );
+
+                setShowOverviewMenu(
+                  !showOverviewMenu
+                );
+
               }}
+
             >
+
               📖 Overview
+
             </li>
 
-            {/* Dropdown */}
+
+            {/* =================================================
+                OVERVIEW DROPDOWN
+            ================================================= */}
 
             {showOverviewMenu && (
 
               <ul className="career-overview-dropdown">
 
-                {tabs.map((tab) => (
+                {tabs.map(
+                  (tab) => (
 
-                  <li
-                    key={tab}
-                    className={
-                      activeTab === tab
-                        ? "career-active"
-                        : ""
-                    }
-                    onClick={() => {
-                      setActivePage("Overview");
-                      setActiveTab(tab);
-                    }}
-                  >
-                    {tab}
-                  </li>
+                    <li
 
-                ))}
+                      key={tab}
+
+                      className={
+                        activeTab === tab
+                          ? "career-active"
+                          : ""
+                      }
+
+                      onClick={() => {
+
+                        setActivePage(
+                          "Overview"
+                        );
+
+                        setActiveTab(
+                          tab
+                        );
+
+                      }}
+
+                    >
+
+                      {tab}
+
+                    </li>
+
+                  )
+                )}
 
               </ul>
 
             )}
 
-            {/* Remaining Pages */}
 
-            {sidebarPages.map((page) => (
+            {/* =================================================
+                OTHER SIDEBAR PAGES
+            ================================================= */}
 
-              <li
-                key={page}
-                className={
-                  activePage === page
-                    ? "career-active"
-                    : ""
-                }
-                onClick={() => setActivePage(page)}
-              >
-                {page}
-              </li>
+            {sidebarPages.map(
+              (page) => (
 
-            ))}
+                <li
+
+                  key={page}
+
+                  className={
+                    activePage === page
+                      ? "career-active"
+                      : ""
+                  }
+
+                  onClick={() =>
+                    setActivePage(page)
+                  }
+
+                >
+
+                  {page}
+
+                </li>
+
+              )
+            )}
 
           </ul>
 
@@ -239,23 +504,41 @@ const roadmapIcons = [
 
       </div>
 
-      {/* ================= Main Content ================= */}
+
+      {/* =================================================
+          MAIN CONTENT
+      ================================================= */}
 
       <div className="career-template-content">
-              {/* ================= Header ================= */}
+
+
+        {/* =================================================
+            HEADER
+        ================================================= */}
 
         <div className="career-template-header">
 
           <div className="career-template-header-left">
 
-            <img src={logo} alt={title} />
+            <img
+              src={logo}
+              alt={title}
+            />
 
             <div>
-              <h1>{title}</h1>
-              <p>{subtitle}</p>
+
+              <h1>
+                {title}
+              </h1>
+
+              <p>
+                {subtitle}
+              </p>
+
             </div>
 
           </div>
+
 
           <img
             src={banner}
@@ -265,403 +548,1026 @@ const roadmapIcons = [
 
         </div>
 
-        {/* ================= Overview Tabs ================= */}
+
+        {/* =================================================
+            OVERVIEW
+        ================================================= */}
 
         {activePage === "Overview" && (
 
           <>
 
+            {/* TOP TABS */}
+
             <div className="career-template-top-tabs">
 
-              {tabs.map((tab) => (
+              {tabs.map(
+                (tab) => (
 
-                <button
-                  key={tab}
-                  className={
-                    activeTab === tab
-                      ? "career-template-tab career-template-active-tab"
-                      : "career-template-tab"
-                  }
-                  onClick={() => setActiveTab(tab)}
-                >
-                  {tab}
-                </button>
+                  <button
 
-              ))}
+                    key={tab}
+
+                    className={
+                      activeTab === tab
+                        ? "career-template-tab career-template-active-tab"
+                        : "career-template-tab"
+                    }
+
+                    onClick={() =>
+                      setActiveTab(tab)
+                    }
+
+                  >
+
+                    {tab}
+
+                  </button>
+
+                )
+              )}
 
             </div>
 
-            <div className="career-template-tab-content">
-                          {activeTab === "Overview" && (
-                <>
-                  <div className="career-template-about-header">
-                    <h2>About {title}</h2>
 
-                    <button className="career-heart-btn" onClick={handleSaveCareer}>
-                      {isSaved ? "❤️" : "🤍"}
+            {/* TAB CONTENT */}
+
+            <div className="career-template-tab-content">
+
+
+              {/* =================================================
+                  OVERVIEW
+              ================================================= */}
+
+              {activeTab === "Overview" && (
+
+                <>
+
+                  <div className="career-template-about-header">
+
+                    <h2>
+                      About {title}
+                    </h2>
+
+
+                    <button
+
+                      className="career-heart-btn"
+
+                      onClick={
+                        handleSaveCareer
+                      }
+
+                    >
+
+                      {isSaved
+                        ? "❤️"
+                        : "🤍"}
+
                     </button>
+
                   </div>
 
+
                   <p className="career-template-about-text">
+
                     {overview}
+
                   </p>
 
-                  {/* Information Table */}
 
                   <div className="career-info-table">
 
-                    <div className="career-info-row">
-                      <span>Educational Path</span>
-                      <span>{education}</span>
-                    </div>
 
                     <div className="career-info-row">
-                      <span>Required Skills</span>
-                      <span>{skills.join(", ")}</span>
+
+                      <span>
+                        Educational Path
+                      </span>
+
+                      <span>
+                        {education}
+                      </span>
+
                     </div>
 
-                    <div className="career-info-row">
-                      <span>Top Exams</span>
-                      <span>{exams.join(", ")}</span>
-                    </div>
 
                     <div className="career-info-row">
-                      <span>Future Scope</span>
-                      <span>{scope}</span>
+
+                      <span>
+                        Required Skills
+                      </span>
+
+                      <span>
+                        {skills.join(
+                          ", "
+                        )}
+                      </span>
+
                     </div>
 
-                    <div className="career-info-row">
-                      <span>Average Salary</span>
-                      <span>{salary}</span>
-                    </div>
 
                     <div className="career-info-row">
-                      <span>Day to Day Work</span>
-                      <span>{dayToDayWork.join(", ")}</span>
+
+                      <span>
+                        Top Exams
+                      </span>
+
+                      <span>
+                        {exams.join(
+                          ", "
+                        )}
+                      </span>
+
+                    </div>
+
+
+                    <div className="career-info-row">
+
+                      <span>
+                        Future Scope
+                      </span>
+
+                      <span>
+                        {scope}
+                      </span>
+
+                    </div>
+
+
+                    <div className="career-info-row">
+
+                      <span>
+                        Average Salary
+                      </span>
+
+                      <span>
+                        {salary}
+                      </span>
+
+                    </div>
+
+
+                    <div className="career-info-row">
+
+                      <span>
+                        Day to Day Work
+                      </span>
+
+                      <span>
+                        {dayToDayWork.join(
+                          ", "
+                        )}
+                      </span>
+
+                    </div>
+
+
+                  </div>
+
+                </>
+
+              )}
+
+
+              {/* =================================================
+                  EDUCATION
+              ================================================= */}
+
+              {activeTab === "Education" && (
+
+                <>
+
+                  <h2>
+                    Education
+                  </h2>
+
+                  <p className="career-template-about-text">
+
+                    {education}
+
+                  </p>
+
+                </>
+
+              )}
+
+
+              {/* =================================================
+                  SKILLS
+              ================================================= */}
+
+              {activeTab === "Skills" && (
+
+                <>
+
+                  <h2>
+                    Skills Required
+                  </h2>
+
+                  <ul className="career-template-list">
+
+                    {skills.map(
+                      (skill, index) => (
+
+                        <li key={index}>
+                          {skill}
+                        </li>
+
+                      )
+                    )}
+
+                  </ul>
+
+                </>
+
+              )}
+
+
+              {/* =================================================
+                  EXAMS
+              ================================================= */}
+
+              {activeTab === "Exams" && (
+
+                <>
+
+                  <h2>
+                    Entrance Exams
+                  </h2>
+
+                  <ul className="career-template-list">
+
+                    {exams.map(
+                      (exam, index) => (
+
+                        <li key={index}>
+                          {exam}
+                        </li>
+
+                      )
+                    )}
+
+                  </ul>
+
+                </>
+
+              )}
+
+
+              {/* =================================================
+                  SCOPE
+              ================================================= */}
+
+              {activeTab === "Scope" && (
+
+                <>
+
+                  <h2>
+                    Future Scope
+                  </h2>
+
+                  <p className="career-template-about-text">
+
+                    {scope}
+
+                  </p>
+
+                </>
+
+              )}
+
+
+              {/* =================================================
+                  SALARY
+              ================================================= */}
+
+              {activeTab === "Salary" && (
+
+                <>
+
+                  <h2>
+                    Salary
+                  </h2>
+
+                  <p className="career-template-about-text">
+
+                    {salary}
+
+                  </p>
+
+                </>
+
+              )}
+
+
+              {/* =================================================
+                  DAY TO DAY WORK
+              ================================================= */}
+
+              {activeTab ===
+                "Day to Day Work" && (
+
+                <>
+
+                  <h2>
+                    Day to Day Work
+                  </h2>
+
+                  <ul className="career-template-list">
+
+                    {dayToDayWork.map(
+                      (work, index) => (
+
+                        <li key={index}>
+                          {work}
+                        </li>
+
+                      )
+                    )}
+
+                  </ul>
+
+                </>
+
+              )}
+
+
+              {/* =================================================
+                  AI COURSES
+              ================================================= */}
+
+              {activeTab ===
+                "AI Courses" && (
+
+                <>
+
+                  <h2>
+                    🤖 AI Course Recommendations
+                  </h2>
+
+
+                  <p className="career-template-about-text">
+
+                    Discover the best
+                    AI-recommended courses
+                    to become a{" "}
+
+                    <strong>
+                      {title}
+                    </strong>.
+
+                  </p>
+
+
+                  <div className="ai-course-box">
+
+
+                    {/* GENERATE BUTTON */}
+
+                    <button
+
+                      className="generate-ai-btn"
+
+                      onClick={
+                        handleGenerateCourses
+                      }
+
+                      disabled={loading}
+
+                    >
+
+                      {loading
+                        ? "🤖 Generating..."
+                        : "✨ Get AI Course Recommendations"}
+
+                    </button>
+
+
+                    {/* LOADING */}
+
+                    {loading && (
+
+                      <p
+                        style={{
+                          marginTop:
+                            "20px",
+                        }}
+                      >
+
+                        🤖 Generating AI
+                        Recommendations...
+
+                      </p>
+
+                    )}
+
+
+                    {/* COURSE RESULTS */}
+
+                    {courses.length > 0 && (
+
+                      <>
+
+                        <h2 className="recommended-title">
+
+                          📚 Recommended Courses
+
+                        </h2>
+
+
+                        <div className="courses-grid">
+
+                          {courses.map(
+                            (
+                              course,
+                              index
+                            ) => (
+
+                              <div
+
+                                key={index}
+
+                                className="ai-course-card"
+                              >
+
+
+                                <div className="course-header">
+
+                                  <h3>
+                                    {
+                                      course.name
+                                    }
+                                  </h3>
+
+                                </div>
+
+
+                                <p className="course-description">
+
+                                  {
+                                    course.description
+                                  }
+
+                                </p>
+
+
+                                <div className="course-footer">
+
+                                  <span className="course-duration">
+
+                                    ⏳{" "}
+
+                                    {
+                                      course.duration ||
+                                      "Flexible"
+                                    }
+
+                                  </span>
+
+
+                                  <button
+
+                                    className={`level-btn ${
+                                      (
+                                        course.level ||
+                                        "Beginner"
+                                      )
+                                        .toLowerCase()
+                                        .replace(
+                                          /\s+/g,
+                                          "-"
+                                        )
+                                    }`}
+
+                                  >
+
+                                    {
+                                      course.level ||
+                                      "Beginner"
+                                    }
+
+                                  </button>
+
+                                </div>
+
+                              </div>
+
+                            )
+                          )}
+
+                        </div>
+
+                      </>
+
+                    )}
+
+
+                    {/* NO RESULTS */}
+
+                    {!loading &&
+                      courses.length === 0 && (
+
+                        <p
+                          style={{
+                            marginTop:
+                              "20px",
+                          }}
+                        >
+
+                          Click the button above
+                          to get AI-powered
+                          course recommendations.
+
+                        </p>
+
+                      )}
+
+                  </div>
+
+                </>
+
+              )}
+
+            </div>
+
+          </>
+
+        )}
+
+
+        {/* =================================================
+            CAREER TEST
+        ================================================= */}
+
+        {activePage ===
+          "Career Test" && (
+
+          <div className="career-test-page">
+
+            <h2>
+              Career Suitability Test
+            </h2>
+
+            <p className="career-test-subtitle">
+
+              Answer these questions honestly.
+
+            </p>
+
+
+            {careerTest.length === 0 ? (
+
+              <p>
+                No career test questions
+                available.
+              </p>
+
+            ) : (
+
+              careerTest.map(
+                (
+                  question,
+                  index
+                ) => (
+
+                  <div
+                    className="career-question-card"
+                    key={index}
+                  >
+
+                    <h3>
+                      {index + 1}.{" "}
+                      {question}
+                    </h3>
+
+
+                    <div className="career-answer-buttons">
+
+
+                      <button
+
+                        className={
+                          answers[index] ===
+                          "Yes"
+                            ? "answer-btn active-answer"
+                            : "answer-btn"
+                        }
+
+                        onClick={() =>
+                          handleAnswer(
+                            index,
+                            "Yes"
+                          )
+                        }
+
+                      >
+
+                        Yes
+
+                      </button>
+
+
+                      <button
+
+                        className={
+                          answers[index] ===
+                          "No"
+                            ? "answer-btn active-answer"
+                            : "answer-btn"
+                        }
+
+                        onClick={() =>
+                          handleAnswer(
+                            index,
+                            "No"
+                          )
+                        }
+
+                      >
+
+                        No
+
+                      </button>
+
+
                     </div>
 
                   </div>
-                </>
-              )}
 
-              {activeTab === "Education" && (
-                <>
-                  <h2>Education</h2>
+                )
+              )
 
-                  <p className="career-template-about-text">
-                    {education}
-                  </p>
-                </>
-              )}
+            )}
 
-              {activeTab === "Skills" && (
-                <>
-                  <h2>Skills Required</h2>
 
-                  <ul className="career-template-list">
-                    {skills.map((skill, index) => (
-                      <li key={index}>{skill}</li>
-                    ))}
-                  </ul>
-                </>
-              )}
+            {careerTest.length > 0 && (
 
-              {activeTab === "Exams" && (
-                <>
-                  <h2>Entrance Exams</h2>
+              <button
 
-                  <ul className="career-template-list">
-                    {exams.map((exam, index) => (
-                      <li key={index}>{exam}</li>
-                    ))}
-                  </ul>
-                </>
-              )}
+                className="submit-test-btn"
 
-              {activeTab === "Scope" && (
-                <>
-                  <h2>Future Scope</h2>
+                onClick={
+                  handleSubmitTest
+                }
 
-                  <p className="career-template-about-text">
-                    {scope}
-                  </p>
-                </>
-              )}
+              >
 
-              {activeTab === "Salary" && (
-                <>
-                  <h2>Salary</h2>
+                Submit Test
 
-                  <p className="career-template-about-text">
-                    {salary}
-                  </p>
-                </>
-              )}
+              </button>
 
-              {activeTab === "Day to Day Work" && (
-                <>
-                  <h2>Day to Day Work</h2>
+            )}
 
-                  <ul className="career-template-list">
-                    {dayToDayWork.map((work, index) => (
-                      <li key={index}>{work}</li>
-                    ))}
-                  </ul>
-                </>
-              )}
-                          </div>
 
-          </>
-        
+            {score !== null && (
+
+              <div className="career-result-card">
+
+                <h2>
+                  Your Career Match
+                </h2>
+
+
+                <div className="career-progress">
+
+                  <div
+
+                    className="career-progress-fill"
+
+                    style={{
+                      width:
+                        `${score}%`,
+                    }}
+
+                  />
+
+                </div>
+
+
+                <h1>
+                  {score}%
+                </h1>
+
+
+                <p>
+
+                  {score >= 80
+
+                    ? "🎉 Excellent Match! You are highly suitable for this career."
+
+                    : score >= 60
+
+                    ? "😊 Good Match! You have many qualities needed."
+
+                    : score >= 40
+
+                    ? "🙂 Average Match. You can improve your skills."
+
+                    : "⚡ This career may not match your interests yet."
+
+                  }
+
+                </p>
+
+              </div>
+
+            )}
+
+          </div>
+
+        )}
+
+
+        {/* =================================================
+            ROADMAP
+        ================================================= */}
+
+        {activePage ===
+          "Roadmap" && (
+
+          <div className="career-roadmap-page">
+
+            <div className="roadmap-heading">
+
+              <h2>
+                Career Roadmap
+              </h2>
+
+              <p>
+
+                Your journey to become a{" "}
+
+                <strong>
+                  {title}
+                </strong>
+
+              </p>
+
+            </div>
+
+
+            {roadmap.length === 0 ? (
+
+              <p>
+                No roadmap available.
+              </p>
+
+            ) : (
+
+              <div className="roadmap-timeline">
+
+                {roadmap.map(
+                  (
+                    step,
+                    index
+                  ) => (
+
+                    <div
+                      className="roadmap-item"
+                      key={index}
+                    >
+
+                      <div className="roadmap-left">
+
+                        <div className="roadmap-icon">
+
+                          {
+                            roadmapIcons[
+                              index
+                            ] || (
+                              <FaRocket />
+                            )
+                          }
+
+                        </div>
+
+
+                        {index !==
+                          roadmap.length -
+                            1 && (
+
+                          <div className="roadmap-line" />
+
+                        )}
+
+                      </div>
+
+
+                      <div className="roadmap-card">
+
+                        <h3>
+                          Stage{" "}
+                          {index + 1}
+                        </h3>
+
+                        <p>
+                          {step}
+                        </p>
+
+                      </div>
+
+                    </div>
+
+                  )
                 )}
 
-        
+              </div>
 
-
-{/* ================= Career Test ================= */}
-
-{activePage === "Career Test" && (
-
-<div className="career-test-page">
-
-<h2>Career Suitability Test</h2>
-
-<p className="career-test-subtitle">
-Answer these questions honestly.
-</p>
-
-{careerTest.map((question,index)=>(
-
-<div className="career-question-card" key={index}>
-
-<h3>{index+1}. {question}</h3>
-
-<div className="career-answer-buttons">
-
-<button
-className={
-answers[index]==="Yes"
-?
-"answer-btn active-answer"
-:
-"answer-btn"
-}
-onClick={()=>handleAnswer(index,"Yes")}
->
-Yes
-</button>
-
-<button
-className={
-answers[index]==="No"
-?
-"answer-btn active-answer"
-:
-"answer-btn"
-}
-onClick={()=>handleAnswer(index,"No")}
->
-No
-</button>
-
-</div>
-
-</div>
-
-))}
-
-<button
-className="submit-test-btn"
-onClick={handleSubmitTest}
->
-Submit Test
-</button>
-{score !== null && (
-
-<div className="career-result-card">
-
-<h2>Your Career Match</h2>
-
-<div className="career-progress">
-
-<div
-className="career-progress-fill"
-style={{width:`${score}%`}}
-></div>
-
-</div>
-
-<h1>{score}%</h1>
-
-<p>
-
-{score>=80
-?"🎉 Excellent Match! You are highly suitable for this career."
-
-:score>=60
-?"😊 Good Match! You have many qualities needed."
-
-:score>=40
-?"🙂 Average Match. You can improve your skills."
-
-:"⚡ This career may not match your interests yet."
-}
-
-</p>
-
-</div>
-
-)}
-
-</div>
-
-)}
-
-        {/* ================= Roadmap ================= */}
-
-{/* ================= Roadmap ================= */}
-
-{activePage === "Roadmap" && (
-
-<div className="career-roadmap-page">
-
-<div className="roadmap-heading">
-
-<h2>Career Roadmap</h2>
-
-<p>
-Your journey to become a <strong>{title}</strong>
-</p>
-
-</div>
-
-<div className="roadmap-timeline">
-
-{roadmap.map((step,index)=>(
-
-<div className="roadmap-item" key={index}>
-
-<div className="roadmap-left">
-
-<div className="roadmap-icon">
-
-{roadmapIcons[index] || <FaRocket />}
-
-</div>
-
-{index !== roadmap.length-1 && (
-<div className="roadmap-line"></div>
-)}
-
-</div>
-
-<div className="roadmap-card">
-
-<h3>Stage {index+1}</h3>
-
-<p>{step}</p>
-
-</div>
-
-</div>
-
-))}
-
-</div>
-
-</div>
-
-)}
-
-        {/* ================= Reality Check ================= */}
-
-{activePage === "Reality Check" && (
-
-<div className="career-template-tab-content">
-
-<h2>Reality Check</h2>
-
-<div className="career-info-table">
-
-{Object.entries(realityCheck).map(([key, value]) => (
-
-<div key={key} className="career-info-row">
-
-<span>{key}</span>
-
-<span>{value}</span>
-
-</div>
-
-))}
-
-</div>
-
-</div>
-
-)}
-
-        {/* ================= Saved Careers ================= */}
-
-        {activePage === "Saved Careers" && (
-
-          <div className="career-template-tab-content">
-
-            <h2>Saved Careers</h2>
-
-            {(JSON.parse(localStorage.getItem("savedCareers")) || []).length === 0 ? (
-  <p>No saved careers yet.</p>
-) : (
-  <ul className="career-template-list">
-    {(JSON.parse(localStorage.getItem("savedCareers")) || []).map(
-      (career, index) => (
-        <li key={index}>{career}</li>
-      )
-    )}
-  </ul>
-)}
+            )}
 
           </div>
 
         )}
 
-        {/* ================= Profile ================= */}
 
-        {activePage === "Profile" && (
+        {/* =================================================
+            REALITY CHECK
+        ================================================= */}
+
+        {activePage ===
+          "Reality Check" && (
 
           <div className="career-template-tab-content">
 
-            <h2>Profile</h2>
+            <h2>
+              Reality Check
+            </h2>
 
-            <p>Profile page coming soon.</p>
+
+            {Object.keys(
+              realityCheck
+            ).length === 0 ? (
+
+              <p>
+                No reality check data
+                available.
+              </p>
+
+            ) : (
+
+              <div className="career-info-table">
+
+                {Object.entries(
+                  realityCheck
+                ).map(
+                  (
+                    [key, value]
+                  ) => (
+
+                    <div
+                      key={key}
+                      className="career-info-row"
+                    >
+
+                      <span>
+                        {key}
+                      </span>
+
+                      <span>
+                        {value}
+                      </span>
+
+                    </div>
+
+                  )
+                )}
+
+              </div>
+
+            )}
 
           </div>
 
         )}
 
-        {/* ================= Settings ================= */}
 
-        {activePage === "Settings" && (
+        {/* =================================================
+            SAVED CAREERS
+        ================================================= */}
+
+        {activePage ===
+          "Saved Careers" && (
 
           <div className="career-template-tab-content">
 
-            <h2>Settings</h2>
+            <h2>
+              Saved Careers
+            </h2>
 
-            <p>Settings page coming soon.</p>
+
+            {(() => {
+
+              const savedCareers =
+                JSON.parse(
+                  localStorage.getItem(
+                    "savedCareers"
+                  )
+                ) || [];
+
+
+              if (
+                savedCareers.length === 0
+              ) {
+
+                return (
+                  <p>
+                    No saved careers yet.
+                  </p>
+                );
+
+              }
+
+
+              return (
+
+                <ul className="career-template-list">
+
+                  {savedCareers.map(
+                    (
+                      career,
+                      index
+                    ) => (
+
+                      <li key={index}>
+                        {career}
+                      </li>
+
+                    )
+                  )}
+
+                </ul>
+
+              );
+
+            })()}
 
           </div>
 
         )}
 
-        {/* ================= Logout ================= */}
 
-        {activePage === "Logout" && (
+        {/* =================================================
+            PROFILE
+        ================================================= */}
+
+        {activePage ===
+          "Profile" && (
 
           <div className="career-template-tab-content">
 
-            <h2>Logout</h2>
+            <h2>
+              Profile
+            </h2>
 
-            <p>Logout functionality will be added later.</p>
+            <p>
+              Profile page coming soon.
+            </p>
+
+          </div>
+
+        )}
+
+
+        {/* =================================================
+            SETTINGS
+        ================================================= */}
+
+        {activePage ===
+          "Settings" && (
+
+          <div className="career-template-tab-content">
+
+            <h2>
+              Settings
+            </h2>
+
+            <p>
+              Settings page coming soon.
+            </p>
+
+          </div>
+
+        )}
+
+
+        {/* =================================================
+            LOGOUT
+        ================================================= */}
+
+        {activePage ===
+          "Logout" && (
+
+          <div className="career-template-tab-content">
+
+            <h2>
+              Logout
+            </h2>
+
+            <p>
+              Logout functionality will be
+              added later.
+            </p>
 
           </div>
 
@@ -672,7 +1578,7 @@ Your journey to become a <strong>{title}</strong>
     </div>
 
   );
-
 };
+
 
 export default CareerTemplate;

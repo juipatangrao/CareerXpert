@@ -3,257 +3,293 @@
 import careerData from "../data/careerData";
 
 
-const calculateRecommendations = (studentData, aptitude) => {
+/* =========================================================
+   CALCULATE CAREER RECOMMENDATIONS
+========================================================= */
+
+const calculateRecommendations = (
+    studentData = {},
+    aptitude = {}
+) => {
+
+    const results = [];
 
 
-    let results = [];
+    /* =====================================================
+       APTITUDE CATEGORY SCORES
+    ===================================================== */
+
+    const categoryScores =
+        aptitude?.categoryScores || {};
 
 
-    careerData.forEach((career)=>{
+    /* =====================================================
+       CHECK EACH CAREER
+    ===================================================== */
 
+    careerData.forEach((career) => {
 
         let score = 0;
 
-        let reasons = [];
+        const reasons = [];
 
 
+        /* =================================================
+           SAFE CAREER DATA
+        ================================================= */
 
-        /* ===============================
-              SUBJECT MATCHING
-        =============================== */
+        const careerSubjects =
+            career.subjects || [];
+
+        const careerSkills =
+            career.skills || [];
+
+        const careerInterests =
+            career.interests || [];
+
+        const careerPersonality =
+            career.personality || [];
 
 
-        if(studentData.favoriteSubjects){
+        /* =================================================
+           SUBJECT MATCHING
+        ================================================= */
 
-            studentData.favoriteSubjects.forEach((subject)=>{
+        if (
+            Array.isArray(
+                studentData.favoriteSubjects
+            )
+        ) {
 
-                if(career.subjects.includes(subject)){
+            studentData.favoriteSubjects.forEach(
+                (subject) => {
 
-                    score += 10;
+                    if (
+                        careerSubjects.includes(
+                            subject
+                        )
+                    ) {
 
-                    reasons.push(
-                        `${subject} interest matches this career`
-                    );
+                        score += 10;
+
+                        reasons.push(
+                            `${subject} interest matches this career`
+                        );
+
+                    }
 
                 }
-
-            });
+            );
 
         }
 
 
+        /* =================================================
+           SKILLS MATCHING
+        ================================================= */
 
-        /* ===============================
-              SKILLS MATCHING
-        =============================== */
+        if (
+            Array.isArray(
+                studentData.skills
+            )
+        ) {
 
+            studentData.skills.forEach(
+                (skill) => {
 
-        if(studentData.skills){
+                    if (
+                        careerSkills.includes(
+                            skill
+                        )
+                    ) {
 
-            studentData.skills.forEach((skill)=>{
+                        score += 12;
 
+                        reasons.push(
+                            `${skill} skill is suitable`
+                        );
 
-                if(career.skills.includes(skill)){
-
-
-                    score += 12;
-
-
-                    reasons.push(
-                        `${skill} skill is suitable`
-                    );
-
+                    }
 
                 }
-
-
-            });
-
+            );
 
         }
 
 
+        /* =================================================
+           INTEREST MATCHING
+        ================================================= */
 
-        /* ===============================
-              INTEREST MATCHING
-        =============================== */
+        if (
+            Array.isArray(
+                studentData.interests
+            )
+        ) {
 
+            studentData.interests.forEach(
+                (interest) => {
 
-        if(studentData.interests){
+                    if (
+                        careerInterests.includes(
+                            interest
+                        )
+                    ) {
 
+                        score += 15;
 
-            studentData.interests.forEach((interest)=>{
+                        reasons.push(
+                            `${interest} interest matches`
+                        );
 
-
-                if(career.interests.includes(interest)){
-
-
-                    score += 15;
-
-
-                    reasons.push(
-                        `${interest} interest matches`
-                    );
-
+                    }
 
                 }
-
-
-            });
-
+            );
 
         }
 
 
+        /* =================================================
+           PERSONALITY MATCHING
+        ================================================= */
 
-        /* ===============================
-              PERSONALITY MATCH
-        =============================== */
-
-
-        if(
-            career.personality.includes(
+        if (
+            studentData.personality &&
+            careerPersonality.includes(
                 studentData.personality
             )
-        ){
+        ) {
 
             score += 10;
-
 
             reasons.push(
                 "Personality matches this career"
             );
 
-
         }
 
 
+        /* =================================================
+           APTITUDE CATEGORY MATCHING
+        ================================================= */
+
+        const aptitudeScore =
+            categoryScores[
+                career.aptitude
+            ];
 
 
-        /* ===============================
-              APTITUDE CATEGORY MATCH
-        =============================== */
+        if (
+            aptitudeScore !== undefined &&
+            aptitudeScore !== null
+        ) {
 
-
-        const categoryScores =
-        aptitude.categoryScores;
-
-
-
-        if(
-            categoryScores &&
-            categoryScores[career.aptitude]
-        ){
-
-
-            score += 
-            categoryScores[career.aptitude] * 3;
-
-
+            score +=
+                Number(aptitudeScore) * 3;
 
             reasons.push(
                 "Aptitude test result supports this career"
             );
 
-
         }
 
 
+        /* =================================================
+           ACADEMIC MARKS BONUS
+        ================================================= */
 
-        /* ===============================
-              MARKS BONUS
-        =============================== */
+        if (
+            studentData.marks !== undefined &&
+            studentData.marks !== ""
+        ) {
 
-
-        if(studentData.marks){
-
-
-            let marks =
-            Number(studentData.marks);
-
-
-
-            if(marks >= 80){
-
-                score += 10;
-
-                reasons.push(
-                    "Good academic performance"
+            const marks =
+                Number(
+                    studentData.marks
                 );
 
+
+            if (!Number.isNaN(marks)) {
+
+                if (marks >= 80) {
+
+                    score += 10;
+
+                    reasons.push(
+                        "Good academic performance"
+                    );
+
+                }
+
+                else if (marks >= 60) {
+
+                    score += 5;
+
+                }
+
             }
-
-            else if(marks >=60){
-
-                score +=5;
-
-            }
-
 
         }
 
 
+        /* =================================================
+           FINAL PERCENTAGE
+        ================================================= */
 
-        /* ===============================
-              FINAL PERCENTAGE
-        =============================== */
-
-
-        let percentage =
-        Math.min(
-            Math.round(
-                (score/80)*100
-            ),
-            99
-        );
+        const percentage =
+            Math.min(
+                Math.round(
+                    (score / 80) * 100
+                ),
+                99
+            );
 
 
+        /* =================================================
+           ADD RESULT
+        ================================================= */
 
         results.push({
 
-            id:career.id,
+            id: career.id,
 
-            name:career.name,
+            name: career.name,
 
-            category:career.category,
+            category: career.category,
 
-            route:career.route,
+            route: career.route,
 
-            percentage:percentage,
-
+            percentage,
 
             reasons:
-            reasons.length > 0
-            ?
-            reasons.slice(0,4)
-            :
-            [
-              "Based on overall profile analysis"
-            ]
-
+                reasons.length > 0
+                    ? reasons.slice(0, 4)
+                    : [
+                        "Based on overall profile analysis"
+                    ]
 
         });
-
-
 
     });
 
 
-
-    /* ===============================
-          SORT TOP CAREERS
-    =============================== */
-
+    /* =====================================================
+       SORT BY HIGHEST MATCH
+    ===================================================== */
 
     results.sort(
-        (a,b)=>
-        b.percentage-a.percentage
+        (a, b) =>
+            b.percentage -
+            a.percentage
     );
 
 
+    /* =====================================================
+       RETURN TOP 3 CAREERS
+    ===================================================== */
 
-    return results.slice(0,3);
-
+    return results.slice(0, 3);
 
 };
 
