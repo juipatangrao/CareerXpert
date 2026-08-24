@@ -1,0 +1,202 @@
+/* Page */
+
+.coaching-page {
+    min-height: 100vh;
+    background: #f7f7f7;
+    padding: 40px 8%;
+    font-family: "Segoe UI", sans-serif;
+}
+
+/* Heading */
+
+.coaching-page h1 {
+    text-align: center;
+    color: #800020;
+    margin-bottom: 35px;
+    font-size: 38px;
+    font-weight: bold;
+}
+
+/* Form Card */
+
+.coaching-form {
+    background: white;
+    max-width: 900px;
+    margin: auto;
+    padding: 30px;
+    border-radius: 18px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 20px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.12);
+}
+
+/* Dropdown */
+
+.coaching-form select {
+    padding: 14px;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+    outline: none;
+    transition: .3s;
+}
+
+.coaching-form select:focus {
+    border-color: #800020;
+    box-shadow: 0 0 8px rgba(128,0,32,.2);
+}
+
+/* Button */
+
+.coaching-form button {
+    background: #800020;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    padding: 14px;
+    font-size: 17px;
+    cursor: pointer;
+    transition: .3s;
+}
+
+.coaching-form button:hover {
+    background: #5f0018;
+    transform: translateY(-2px);
+}
+
+/* Loading */
+
+.loading-box {
+    text-align: center;
+    margin-top: 40px;
+    color: #800020;
+}
+
+/* Result Card */
+
+.coaching-result {
+    margin-top: 40px;
+    background: white;
+    padding: 35px;
+    border-radius: 18px;
+    box-shadow: 0 10px 30px rgba(0,0,0,.12);
+    line-height: 1.8;
+}
+
+/* AI Generated HTML Styling */
+
+.coaching-result h1 {
+    color: #800020;
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.coaching-result h2 {
+    color: #800020;
+    margin-top: 35px;
+    margin-bottom: 12px;
+    border-left: 6px solid #800020;
+    padding-left: 12px;
+}
+
+.coaching-result h3 {
+    color: #800020;
+    margin-top: 20px;
+}
+
+.coaching-result p {
+    color: #444;
+    margin: 12px 0;
+}
+
+.coaching-result ul {
+    padding-left: 20px;
+}
+
+.coaching-result li {
+    margin: 8px 0;
+}
+
+/* Table */
+
+.coaching-result table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    margin-bottom: 30px;
+}
+
+.coaching-result table th {
+    background: #800020;
+    color: white;
+    padding: 12px;
+}
+
+.coaching-result table td {
+    border: 1px solid #ddd;
+    padding: 12px;
+    text-align: center;
+}
+
+.coaching-result table tr:nth-child(even) {
+    background: #fafafa;
+}
+
+.coaching-result table tr:hover {
+    background: #f3e8ec;
+}
+
+/* Highlight Box */
+
+.coaching-result blockquote {
+    background: #fff5f7;
+    border-left: 6px solid #800020;
+    padding: 18px;
+    margin-top: 20px;
+    border-radius: 10px;
+}
+
+/* Spinner */
+
+.spinner{
+    width:45px;
+    height:45px;
+    border:5px solid #ddd;
+    border-top:5px solid #800020;
+    border-radius:50%;
+    animation:spin 1s linear infinite;
+}
+
+@keyframes spin{
+    100%{
+        transform:rotate(360deg);
+    }
+}
+
+/* Responsive */
+
+@media (max-width:768px){
+
+    .coaching-page{
+        padding:25px;
+    }
+
+    .coaching-page h1{
+        font-size:30px;
+    }
+
+    .coaching-form{
+        grid-template-columns:1fr;
+    }
+
+    .coaching-result{
+        padding:20px;
+        overflow-x:auto;
+    }
+
+    .coaching-result table{
+        min-width:700px;
+    }
+
+}

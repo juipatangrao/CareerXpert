@@ -19,6 +19,7 @@ body {
 
 .home {
   width: 100%;
+  overflow-x: hidden;
 }
 
 
@@ -29,146 +30,189 @@ body {
 .navbar {
   width: 100%;
   height: 100px;
-  background: #7b1023;
 
+  background: #7b1023;
+  margin-left: 0px;
   display: flex;
-  justify-content: space-between;
   align-items: center;
 
-  padding: 0 8%;
+  padding: 0px;
 
-  position: sticky;
   top: 0;
   z-index: 1000;
-
-  gap: 10px;
 }
 
 
-/* Logo */
+/* =========================================================
+   LOGO
+========================================================= */
 
 .logo {
+  width: 180px;
+  height: 100px;
+
   display: flex;
   align-items: center;
-  gap: 12px;
+  justify-content: flex-start;
+
+  flex-shrink: 0;
 }
 
 .logo img {
-  margin-left: -400px;
-  width: 290px;
-  height: 170px;
-  margin-top: 70px;
-  border-radius: 50%;
-}
-
-.logo h2 {
-  color: white;
-  font-size: 28px;
+  width: 175px;
+  height: auto;
+ margin-left: -190px;
+ margin-top: 45px;
+  display: block;
+  object-fit: contain;
 }
 
 
-/* Profile */
+/* =========================================================
+   RIGHT SIDE OF NAVBAR
+========================================================= */
 
-.profile-icon {
-  cursor: pointer;
-  font-size: 28px;
-  color: aliceblue;
-}
-
-.navbar-profile-image {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  object-fit: cover;
-  border: 2px solid white;
-}
-
-
-/* Navbar list */
-
-.list {
-  margin-left: 19px;
-}
-
-
-/* Navbar icons */
-
-.nav-icons {
+.navbar-right {
   display: flex;
   align-items: center;
-  gap: 29px;
-  margin-left: 250px;
+
+  gap: 30px;
 }
 
 
-/* Search */
-
-.nav-search {
-  display: flex;
-  height: 30px;
-  align-items: center;
-
-  background: white;
-
-  padding: 7px 14px;
-
-  border-radius: 30px;
-}
-
-.nav-search input {
-  border: none;
-  outline: none;
-
-  width: 150px;
-
-  font-size: 14px;
-}
-
-.search-icon {
-  color: #6B1126;
-  font-size: 16px;
-}
-
-
-/* Nav icons */
-
-.nav-icon {
-  font-size: 28px;
-  cursor: pointer;
-  color: aliceblue;
-
-  transition: 0.3s;
-}
-
-.nav-icon:hover {
-  color: #FFD54F;
-}
-
-
-/* Navbar links */
+/* =========================================================
+   NAV LINKS
+========================================================= */
 
 .nav-links {
   display: flex;
   align-items: center;
-  justify-content: center;
-
-  gap: 40px;
+ margin-left: -50px;
+  gap: 70px;
 }
 
 .nav-links a {
-  text-decoration: none;
   color: white;
 
-  font-size: 20px;
+  text-decoration: none;
+
+  font-size: 18px;
   font-weight: 500;
 
-  transition: color 0.3s;
+  cursor: pointer;
+
+  transition: 0.3s ease;
 }
 
 .nav-links a:hover {
-  color: #FFD54F;
+  color: #ffd54f;
 }
 
+
+/* =========================================================
+   SEARCH BAR
+========================================================= */
+
+.nav-search {
+  width: 195px;
+  height: 34px;
+ margin-left: 20px;
+  display: flex;
+  align-items: center;
+
+  background: white;
+
+  padding: 0 13px;
+
+  border-radius: 25px;
+}
+
+.nav-search input {
+  width: 100%;
+
+  border: none;
+  outline: none;
+
+  font-size: 14px;
+
+  margin-left: 7px;
+}
+
+.search-icon {
+  color: #7b1023;
+
+  font-size: 16px;
+}
+
+
+/* =========================================================
+   NOTIFICATION
+========================================================= */
+
+.notification-wrapper {
+  position: relative;
+ margin-left: 0px;
+  display: flex;
+  align-items: center;
+
+  cursor: pointer;
+}
+
+.nav-icon {
+  color: white;
+ 
+  font-size: 25px;
+
+  transition: 0.3s ease;
+}
+
+.nav-icon:hover {
+  color: #ffd54f;
+}
+
+.notification-badge {
+  position: absolute;
+
+  top: -8px;
+  right: -9px;
+
+  width: 19px;
+  height: 19px;
+  border-radius: 50%;
+
+  background: red;
+  color: white;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 10px;
+  font-weight: bold;
+}
+
+
+/* =========================================================
+   PROFILE
+========================================================= */
+
+.profile-icon {
+  display: flex;
+  align-items: center;
+  margin-left: 0px;
+  cursor: pointer;
+}
+
+.navbar-profile-image {
+  width: 42px;
+  height: 42px;
+
+  border-radius: 50%;
+
+  object-fit: cover;
+
+  border: 2px solid white;
+}
 
 /* =========================================================
    HERO
@@ -176,65 +220,62 @@ body {
 
 .hero {
   width: 100%;
-  height: 550px;
+  min-height: 550px;
 
-  background-color: #7b1023;
+  background: #7b1023;
 
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  justify-content: space-between;
 
-  padding: 60px;
+  padding: 55px 5%;
+
+  color: white;
+
+  scroll-margin-top: 100px;
+}
+
+
+/* Hero left */
+
+.hero-left {
+  width: 52%;
+  padding-left: 10px;
+}
+
+.hero-left h1 {
+  font-size: 58px;
+  line-height: 1.18;
+
+  font-weight: 700;
+
+  margin-bottom: 22px;
+}
+
+.hero-left h1 span {
+  color: #ffd54f;
+}
+
+.hero-left > p {
+  max-width: 650px;
+
+  font-size: 18px;
+  line-height: 1.7;
+
+  margin-bottom: 20px;
 
   color: white;
 }
 
-.hero-left {
-  width: 50%;
-}
 
-.hero-left h1 {
-  font-size: 60px;
-  line-height: 1.2;
-}
-
-.hero-left span {
-  color: #ffd54f;
-}
-
-.hero-left p {
-  margin: 25px 0;
-
-  font-size: 18px;
-  line-height: 1.8;
-
-  margin-top: -1px;
-
-  color: #ffffff !important;
-}
-
-.hero-left input {
-  width: 420px;
-
-  padding: 15px;
-
-  border-radius: 10px;
-
-  border: none;
-  outline: none;
-
-  font-size: 16px;
-}
-
-
-/* Features */
+/* Hero bullet features */
 
 .features {
-  margin-top: -25px;
+  margin-top: 15px;
 }
 
 .features p {
-  margin: 15px 0;
+  margin: 13px 0;
 
   font-size: 17px;
 
@@ -242,150 +283,348 @@ body {
 }
 
 
-/* Hero right */
-
-.hero-right {
-  width: 45%;
-  text-align: center;
-}
+/* Hero image */
 
 .home-hero {
-  height: 350px;
-  width: 70%;
+  width: 43%;
+  height: 400px;
 
-  margin-top: -200px;
-  margin-left: -200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.hero-right img {
+.home-hero img {
   width: 100%;
-  max-width: 480px;
+  max-width: 520px;
+
+  height: auto;
+
+  object-fit: contain;
 }
 
 
 /* =========================================================
-   ABOUT
+   CAREER JOURNEY / FEATURES
 ========================================================= */
 
-.about {
-  width: 90%;
+.career-journey-section {
+  width: 100%;
 
-  margin: 80px auto;
+  padding: 70px 5% 75px;
 
-  display: flex;
+  background: #ffffff;
 
-  justify-content: space-between;
-  align-items: center;
-
-  gap: 60px;
+  scroll-margin-top: 100px;
 }
 
-.about-left {
-  flex: 1;
+
+/* Heading */
+
+.journey-heading {
+  text-align: center;
+
+  margin-bottom: 42px;
 }
 
-.about-left h2 {
+.journey-heading h2 {
   color: #7b1023;
 
-  font-size: 59px;
+  font-size: 39px;
+
+  font-weight: 700;
+
+  margin-bottom: 8px;
+}
+
+.journey-heading p {
+  color: #666;
+
+  font-size: 17px;
+}
+
+
+/* Four cards */
+
+.journey-grid {
+  width: 100%;
+  max-width: 1250px;
+
+  margin: 0 auto;
+
+  display: grid;
+
+  grid-template-columns: repeat(4, 1fr);
+
+  gap: 22px;
+}
+
+
+/* Journey card */
+
+.journey-card {
+  min-height: 365px;
+
+  border-radius: 18px;
+
+  padding: 25px 20px 22px;
+
+  position: relative;
+
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+
+  border: 1px solid rgba(0, 0, 0, 0.04);
+
+  transition: all 0.3s ease;
+}
+
+.journey-card:hover {
+  transform: translateY(-7px);
+
+  box-shadow: 0 16px 35px rgba(0, 0, 0, 0.12);
+}
+
+
+/* Individual colors */
+
+.journey-card.discover {
+  background: linear-gradient(
+    145deg,
+    #fff1f3,
+    #ffe2e7
+  );
+}
+
+.journey-card.understand {
+  background: linear-gradient(
+    145deg,
+    #f2edff,
+    #e7ddff
+  );
+}
+
+.journey-card.prepare {
+  background: linear-gradient(
+    145deg,
+    #eef8ff,
+    #dcefff
+  );
+}
+
+.journey-card.grow {
+  background: linear-gradient(
+    145deg,
+    #effff1,
+    #dff8e4
+  );
+}
+
+
+/* Number */
+
+.journey-number {
+  width: 42px;
+  height: 42px;
+
+  border-radius: 50%;
+
+  background: #7b1023;
+
+  color: white;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 14px;
+  font-weight: 700;
+
+  margin-bottom: 12px;
+}
+
+.understand .journey-number {
+  background: #7041c8;
+}
+
+.prepare .journey-number {
+  background: #2086c9;
+}
+
+.grow .journey-number {
+  background: #199447;
+}
+
+
+/* Main icon */
+
+.journey-icon {
+  font-size: 25px;
+
+  color: #7b1023;
+
+  margin-bottom: 3px;
+}
+
+.understand .journey-icon {
+  color: #7041c8;
+}
+
+.prepare .journey-icon {
+  color: #2086c9;
+}
+
+.grow .journey-icon {
+  color: #199447;
+}
+
+
+/* Title */
+
+.journey-card h3 {
+  font-size: 25px;
+
+  color: #222;
 
   margin-bottom: 20px;
 }
 
-.about-left p {
-  color: #555;
 
-  line-height: 1.9;
+/* Feature list */
 
-  font-size: 25px;
-}
+.journey-feature-list {
+  display: flex;
 
-.about-right {
-  flex: 1;
+  flex-direction: column;
 
-  text-align: center;
-}
-
-.about-right img {
-  width: 110%;
-  height: 16%;
+  gap: 9px;
 }
 
 
-/* =========================================================
-   COPY
-========================================================= */
+/* Clickable feature */
 
-.copy {
-  height: 100px;
+.journey-feature {
   width: 100%;
-
-  background-color: oklch(27.872% 0.11293 28.94);
-
-  margin-top: -50px;
-}
-
-
-/* =========================================================
-   FOOTER
-========================================================= */
-
-.footer {
-  background: #6d0f1b;
-
-  color: white;
-
-  padding: 50px 20px 25px;
-
-  margin-top: -40px;
-
-  height: 200px;
-}
-
-.footer-content {
-  max-width: 1100px;
-
-  margin: auto;
-
-  text-align: center;
-}
-
-.footer-content h3 {
-  font-size: 32px;
-
-  margin-bottom: 5px;
-
-  font-weight: 700;
-
-  margin-top: -20px;
-}
-
-.footer-content p {
-  font-size: 17px;
-
-  line-height: 1.8;
-
-  opacity: 0.95;
-}
-
-.footer-content hr {
-  margin: 30px auto 20px;
-
-  width: 85%;
 
   border: none;
 
-  margin-top: 20px;
+  background: rgba(255, 255, 255, 0.72);
 
-  border-top: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 9px;
+
+  padding: 10px 9px;
+
+  display: flex;
+
+  align-items: center;
+
+  text-align: left;
+
+  cursor: pointer;
+
+  color: #333;
+
+  font-family: inherit;
+
+  font-size: 13.5px;
+
+  font-weight: 500;
+
+  transition: all 0.25s ease;
 }
 
-.copyright {
+.journey-feature:hover {
+  background: white;
+
+  transform: translateX(5px);
+
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+
+/* Small icons */
+
+.feature-small-icon {
+  width: 23px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  margin-right: 7px;
+
+  color: #7b1023;
+}
+
+.understand .feature-small-icon {
+  color: #7041c8;
+}
+
+.prepare .feature-small-icon {
+  color: #2086c9;
+}
+
+.grow .feature-small-icon {
+  color: #199447;
+}
+
+
+/* Arrow */
+
+.feature-arrow {
+  margin-left: auto;
+
+  font-size: 16px;
+
+  opacity: 0;
+
+  transform: translateX(-5px);
+
+  transition: all 0.25s ease;
+}
+
+.journey-feature:hover .feature-arrow {
+  opacity: 1;
+
+  transform: translateX(0);
+}
+
+
+/* Bottom slogan */
+
+.journey-bottom-line {
+  max-width: 800px;
+
+  margin: 35px auto 0;
+
+  padding: 14px 25px;
+
+  border-radius: 30px;
+
+  background: linear-gradient(
+    90deg,
+    #fff0f3,
+    #fff6e9
+  );
+
+  display: flex;
+
+  justify-content: center;
+
+  align-items: center;
+
+  gap: 13px;
+
+  color: #7b1023;
+
   font-size: 15px;
 
-  letter-spacing: 1px;
+  font-weight: 600;
+}
 
-  color: #f5f5f5;
+.journey-bottom-line b {
+  color: #d49a19;
 }
 
 
@@ -396,42 +635,73 @@ body {
 .career-section {
   width: 100%;
 
-  margin: 0 auto;
-
-  padding: 30px 55px 70px;
+  padding: 70px 5%;
 
   background: #f8f8fa;
+
+  scroll-margin-top: 100px;
 }
 
 
 /* Career heading */
 
 .career-heading {
+  max-width: 1200px;
+
+  margin: 0 auto 40px;
+
   display: flex;
 
-  justify-content: space-between;
   align-items: center;
 
-  margin-bottom: 45px;
+  justify-content: space-between;
 }
 
 .career-heading h2 {
-  font-size: 40px;
-
-  margin: 0;
-
   color: #111827;
 
-  font-weight: 700;
+  font-size: 38px;
+
+  margin-bottom: 7px;
+}
+
+.career-heading p {
+  color: #666;
+
+  font-size: 16px;
 }
 
 
-/* =========================================================
-   CAREER GRID
-========================================================= */
+/* Show less */
+
+.view-btn {
+  background: #7b1023;
+
+  color: white;
+
+  border: none;
+
+  padding: 10px 20px;
+
+  border-radius: 25px;
+
+  cursor: pointer;
+
+  font-size: 14px;
+
+  transition: 0.3s;
+}
+
+.view-btn:hover {
+  background: #5d0c1a;
+}
+
+
+/* Career grid */
 
 .career-grid {
-  width: 85%;
+  width: 100%;
+  max-width: 1200px;
 
   margin: 0 auto;
 
@@ -439,25 +709,19 @@ body {
 
   grid-template-columns: repeat(4, 1fr);
 
-  column-gap: 65px;
-
-  row-gap: 28px;
+  gap: 28px;
 
   justify-items: center;
-
-  align-items: start;
 }
 
 
-/* =========================================================
-   CAREER CARD
-========================================================= */
+/* Career card */
 
 .career-card {
   width: 225px;
-  height: 300px;
+  height: 295px;
 
-  background: #ffffff;
+  background: white;
 
   border-radius: 20px;
 
@@ -469,7 +733,7 @@ body {
 
   justify-content: flex-start;
 
-  padding-top: 28px;
+  padding-top: 25px;
 
   text-align: center;
 
@@ -477,13 +741,8 @@ body {
 
   box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
 
-  transition:
-    transform 0.3s ease,
-    box-shadow 0.3s ease;
+  transition: all 0.3s ease;
 }
-
-
-/* Career card hover */
 
 .career-card:hover {
   transform: translateY(-7px);
@@ -492,25 +751,22 @@ body {
 }
 
 
-/* =========================================================
-   CAREER IMAGE
-========================================================= */
+/* Career image */
 
 .career-image {
-  width: 170px;
-  height: 170px;
+  width: 165px;
+  height: 165px;
 
   border-radius: 50%;
 
   overflow: hidden;
 
-  background: #ffffff;
+  background: white;
 
   display: flex;
 
-  justify-content: center;
-
   align-items: center;
+  justify-content: center;
 
   flex-shrink: 0;
 }
@@ -523,50 +779,35 @@ body {
 }
 
 
-/* =========================================================
-   CAREER TITLE
-========================================================= */
+/* Career title */
 
 .career-card p {
-  margin-top: 22px;
+  margin-top: 20px;
 
-  font-size: 17px;
+  padding: 0 10px;
+
+  font-size: 16px;
 
   font-weight: 600;
 
-  color: #333333;
-
-  text-align: center;
+  color: #333;
 
   line-height: 1.4;
 }
 
 
-/* =========================================================
-   MORE BUTTON
-========================================================= */
+/* More */
 
 .more-circle {
-  width: 170px;
-  height: 170px;
-
-  border-radius: 50%;
-
   background: #7b1023;
 
   color: white;
-
-  display: flex;
-
-  justify-content: center;
-
-  align-items: center;
 }
 
 .more-circle span {
-  font-size: 45px;
+  font-size: 42px;
 
-  line-height: 1;
+  letter-spacing: 3px;
 }
 
 .more-card:hover .more-circle {
@@ -575,476 +816,112 @@ body {
 
 
 /* =========================================================
-   AI CAREER RECOMMENDATION BUTTON
+   ABOUT
 ========================================================= */
 
-.career-ai-btn {
-  position: fixed;
+.about {
+  width: 90%;
 
-  right: 28px;
+  max-width: 1250px;
 
-  bottom: 100px;
-
-  height: 70px;
-
-  width: 70px;
-
-  border-radius: 50%;
-
-  background: linear-gradient(
-    135deg,
-    #800020,
-    #b30045
-  );
+  margin: 80px auto;
 
   display: flex;
 
-  justify-content: center;
-
   align-items: center;
 
-  cursor: pointer;
+  justify-content: space-between;
 
-  box-shadow:
-    0 10px 30px rgba(128, 0, 32, 0.35);
+  gap: 60px;
 
-  transition: 0.3s;
-
-  z-index: 9999;
-
-  animation: careerFloat 2.5s infinite;
+  scroll-margin-top: 100px;
 }
 
-.career-ai-btn:hover {
-  transform: scale(1.12);
+.about-left {
+  flex: 1;
 }
 
-.career-ai-icon {
-  font-size: 32px;
+.about-left h2 {
+  color: #7b1023;
 
-  color: white;
+  font-size: 52px;
+
+  margin-bottom: 20px;
+}
+
+.about-left p {
+  color: #555;
+
+  font-size: 20px;
+
+  line-height: 1.8;
+}
+
+.about-right {
+  flex: 1;
+
+  text-align: center;
+}
+
+.about-right img {
+  width: 100%;
+
+  max-width: 550px;
+
+  height: auto;
 }
 
 
 /* =========================================================
-   AI CAREER COMPARISON BUTTON
+   FOOTER
 ========================================================= */
 
-.comparison-ai-btn {
-  position: fixed;
+.footer {
+  background: #6d0f1b;
 
-  right: 28px;
+  color: white;
 
-  bottom: 185px;
+  padding: 45px 20px 25px;
 
-  height: 70px;
-
-  width: 70px;
-
-  border-radius: 50%;
-
-  background: linear-gradient(
-    135deg,
-    #5b0d1b,
-    #9c1b35
-  );
-
-  display: flex;
-
-  justify-content: center;
-
-  align-items: center;
-
-  cursor: pointer;
-
-  box-shadow:
-    0 10px 30px rgba(128, 0, 32, 0.35);
-
-  transition: 0.3s;
-
-  z-index: 9999;
-
-  animation: careerFloat 2.5s infinite;
+  min-height: 190px;
 }
 
-.comparison-ai-btn:hover {
-  transform: scale(1.12);
+.footer-content {
+  max-width: 1100px;
+
+  margin: auto;
+
+  text-align: center;
 }
 
-.comparison-ai-icon {
+.footer-content h3 {
   font-size: 30px;
 
-  color: white;
+  margin-bottom: 8px;
 }
 
+.footer-content p {
+  font-size: 16px;
 
-/* Comparison tooltip */
+  line-height: 1.7;
 
-.comparison-tooltip {
-  position: absolute;
-
-  right: 85px;
-
-  background: #800020;
-
-  color: white;
-
-  padding: 10px 15px;
-
-  border-radius: 8px;
-
-  font-size: 15px;
-
-  white-space: nowrap;
-
-  opacity: 0;
-
-  visibility: hidden;
-
-  transition: 0.3s;
+  opacity: 0.95;
 }
 
-.comparison-ai-btn:hover .comparison-tooltip {
-  opacity: 1;
+.footer-content hr {
+  margin: 25px auto 18px;
 
-  visibility: visible;
+  width: 85%;
+
+  border: none;
+
+  border-top: 1px solid rgba(255, 255, 255, 0.3);
 }
 
+.copyright {
+  font-size: 14px !important;
 
-/* =========================================================
-   COLLEGE FLOATING BUTTON
-========================================================= */
-
-.college-floating-icon {
-  font-size: 32px;
-
-  color: white;
-
-  flex-shrink: 0;
-}
-
-.college-tooltip {
-  position: absolute;
-
-  right: 85px;
-
-  top: 50%;
-
-  transform: translateY(-50%);
-
-  background: #800020;
-
-  color: white;
-
-  padding: 10px 15px;
-
-  border-radius: 8px;
-
-  white-space: nowrap;
-
-  opacity: 0;
-
-  visibility: hidden;
-
-  transition: 0.3s;
-}
-
-.college-tooltip:hover {
-  opacity: 1;
-
-  visibility: visible;
-}
-
-.college-floating-btn {
-  position: fixed;
-
-  right: 28px;
-
-  bottom: 265px;
-
-  width: 70px;
-  height: 70px;
-
-  border-radius: 50%;
-
-  background: linear-gradient(
-    135deg,
-    #800020,
-    #b91c4a
-  );
-
-  display: flex;
-
-  justify-content: center;
-
-  align-items: center;
-
-  color: white;
-
-  font-size: 15px;
-
-  cursor: pointer;
-
-  box-shadow:
-    0 10px 30px rgba(128, 0, 32, 0.35);
-
-  z-index: 9999;
-
-  transition: 0.3s;
-
-  animation: careerFloat 2.5s infinite;
-
-  overflow: visible;
-}
-
-.college-floating-btn:hover .college-tooltip {
-  opacity: 1;
-
-  visibility: visible;
-}
-
-
-/* =========================================================
-   CAREER TOOLTIP
-========================================================= */
-
-.career-tooltip {
-  position: absolute;
-
-  right: 85px;
-
-  background: #800020;
-
-  color: white;
-
-  padding: 10px 16px;
-
-  border-radius: 8px;
-
-  font-size: 15px;
-
-  font-weight: 500;
-
-  white-space: nowrap;
-
-  opacity: 0;
-
-  visibility: hidden;
-
-  transition: 0.3s;
-}
-
-.career-ai-btn:hover .career-tooltip {
-  opacity: 1;
-
-  visibility: visible;
-}
-
-
-/* =========================================================
-   CAREER FLOAT ANIMATION
-========================================================= */
-
-@keyframes careerFloat {
-  0% {
-    transform: translateY(0);
-  }
-
-  50% {
-    transform: translateY(-8px);
-  }
-
-  100% {
-    transform: translateY(0);
-  }
-}
-
-
-/* =========================================================
-   JOB AI BUTTON
-========================================================= */
-
-.job-ai-btn {
-  position: fixed;
-
-  right: 30px;
-
-  bottom: 345px;
-
-  width: 65px;
-  height: 65px;
-
-  border-radius: 50%;
-
-  background: linear-gradient(
-    135deg,
-    #7b1023,
-    #b10d42
-  );
-
-  display: flex;
-
-  justify-content: center;
-
-  align-items: center;
-
-  cursor: pointer;
-
-  z-index: 9999;
-
-  box-shadow:
-    0 10px 25px rgba(123, 16, 35, 0.35);
-
-  animation:
-    aiFloat 2.5s ease-in-out infinite,
-    aiPulse 2s infinite;
-
-  transition: all 0.3s ease;
-}
-
-.job-ai-btn:hover {
-  transform: scale(1.12) rotate(8deg);
-
-  box-shadow:
-    0 15px 35px rgba(123, 16, 35, 0.5);
-}
-
-.job-ai-icon {
-  font-size: 32px;
-
-  color: white;
-
-  animation:
-    iconRotate 5s linear infinite;
-}
-
-
-/* Job tooltip */
-
-.job-tooltip {
-  position: absolute;
-
-  right: 80px;
-
-  background: #7b1023;
-
-  color: #fff;
-
-  padding: 8px 14px;
-
-  border-radius: 8px;
-
-  white-space: nowrap;
-
-  opacity: 0;
-
-  transform: translateX(10px);
-
-  transition: 0.3s;
-}
-
-.job-ai-btn:hover .job-tooltip {
-  opacity: 1;
-
-  transform: translateX(0);
-}
-
-
-/* =========================================================
-   JOB AI ANIMATIONS
-========================================================= */
-
-@keyframes aiFloat {
-  0%,
-  100% {
-    transform: translateY(0);
-  }
-
-  50% {
-    transform: translateY(-8px);
-  }
-}
-
-@keyframes aiPulse {
-  0% {
-    box-shadow:
-      0 0 0 0 rgba(177, 13, 66, 0.5);
-  }
-
-  70% {
-    box-shadow:
-      0 0 0 15px rgba(177, 13, 66, 0);
-  }
-
-  100% {
-    box-shadow:
-      0 0 0 0 rgba(177, 13, 66, 0);
-  }
-}
-
-@keyframes iconRotate {
-  0% {
-    transform: rotate(0deg);
-  }
-
-  10% {
-    transform: rotate(-12deg);
-  }
-
-  20% {
-    transform: rotate(12deg);
-  }
-
-  30% {
-    transform: rotate(0deg);
-  }
-
-  100% {
-    transform: rotate(0deg);
-  }
-}
-
-
-/* =========================================================
-   NOTIFICATION
-========================================================= */
-
-.notification-wrapper {
-  position: relative;
-
-  display: flex;
-
-  align-items: center;
-
-  cursor: pointer;
-}
-
-.notification-badge {
-  position: absolute;
-
-  top: -8px;
-
-  right: -8px;
-
-  background: red;
-
-  color: white;
-
-  height: 20px;
-
-  width: 20px;
-
-  border-radius: 50%;
-
-  display: flex;
-
-  justify-content: center;
-
-  align-items: center;
-
-  font-size: 11px;
-
-  font-weight: bold;
+  letter-spacing: 1px;
 }
 
 
@@ -1054,37 +931,36 @@ body {
 
 @media (max-width: 1200px) {
 
-  /* Hero */
-
-  .hero {
-    flex-direction: column;
-
-    text-align: center;
+  .navbar {
+    padding: 0 25px;
   }
 
-  .hero-left,
-  .hero-right {
-    width: 100%;
+  .navbar-right {
+    gap: 18px;
   }
 
-  .hero-left input {
-    width: 100%;
+  .nav-links {
+    gap: 22px;
   }
 
-  /* About */
-
-  .about {
-    flex-direction: column;
+  .nav-links a {
+    font-size: 16px;
   }
 
-  /* Career */
+  .nav-search {
+    width: 160px;
+  }
+
+  .hero-left h1 {
+    font-size: 48px;
+  }
+
+  .journey-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
 
   .career-grid {
-    width: 90%;
-
     grid-template-columns: repeat(3, 1fr);
-
-    column-gap: 35px;
   }
 }
 
@@ -1095,164 +971,199 @@ body {
 
 @media (max-width: 900px) {
 
-  /* Navbar */
-
   .navbar {
-    flex-direction: column;
-
     height: auto;
 
-    padding: 20px;
+    padding: 15px 20px;
+
+    flex-wrap: wrap;
+
+    gap: 15px;
   }
 
-  nav {
-    flex-wrap: wrap;
+  .navbar-right {
+    width: 100%;
 
     justify-content: center;
 
-    margin-top: 15px;
+    flex-wrap: wrap;
   }
-
-  /* Hero */
-
-  .hero-left h1 {
-    font-size: 42px;
-  }
-
-  /* Career */
-
-  .career-grid {
-    width: 100%;
-
-    grid-template-columns: repeat(2, 1fr);
-
-    column-gap: 25px;
-
-    row-gap: 25px;
-  }
-
-  .career-card {
-    width: 220px;
-  }
-
-  .career-heading h2 {
-    font-size: 34px;
-  }
-}
-
-
-/* =========================================================
-   RESPONSIVE - 700px
-========================================================= */
-
-@media (max-width: 700px) {
-
-  /* Career */
-
-  .career-section {
-    padding: 30px 25px 60px;
-  }
-
-  .career-grid {
-    grid-template-columns: repeat(2, 1fr);
-
-    width: 100%;
-
-    column-gap: 20px;
-
-    row-gap: 25px;
-  }
-
-  .career-card {
-    width: 200px;
-    height: 285px;
-  }
-
-  .career-image {
-    width: 155px;
-    height: 155px;
-  }
-
-  /* Hero */
 
   .hero {
-    padding: 35px;
+    flex-direction: column;
+
+    text-align: center;
+
+    gap: 30px;
+
+    padding: 55px 30px;
+  }
+
+  .hero-left {
+    width: 100%;
+
+    padding: 0;
   }
 
   .hero-left h1 {
-    font-size: 35px;
+    font-size: 43px;
   }
 
-  /* Career heading */
+  .hero-left > p {
+    margin-left: auto;
+    margin-right: auto;
+  }
 
-  .career-heading {
+  .home-hero {
+    width: 75%;
+    height: auto;
+  }
+
+  .journey-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .career-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .about {
     flex-direction: column;
 
-    align-items: flex-start;
-
-    gap: 20px;
-  }
-
-  .career-heading h2 {
-    font-size: 32px;
-  }
-
-  /* About */
-
-  .about-left h2 {
-    font-size: 32px;
+    text-align: center;
   }
 }
 
 
 /* =========================================================
-   RESPONSIVE - 500px
+   RESPONSIVE - 650px
 ========================================================= */
 
-@media (max-width: 500px) {
+@media (max-width: 650px) {
 
-  /* Career */
+  .logo img {
+    width: 140px;
+  }
 
-  .career-section {
-    padding: 25px 15px 50px;
+  .nav-links {
+    gap: 15px;
+
+    flex-wrap: wrap;
+
+    justify-content: center;
+  }
+
+  .nav-links a {
+    font-size: 14px;
+  }
+
+  .nav-search {
+    width: 140px;
+  }
+
+  .hero {
+    padding: 45px 20px;
+  }
+
+  .hero-left h1 {
+    font-size: 36px;
+  }
+
+  .hero-left > p {
+    font-size: 16px;
+  }
+
+  .journey-heading h2 {
+    font-size: 30px;
+  }
+
+  .journey-heading p {
+    font-size: 15px;
+  }
+
+  .journey-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .journey-card {
+    min-height: auto;
+  }
+
+  .journey-bottom-line {
+    flex-wrap: wrap;
+
+    text-align: center;
+
+    border-radius: 18px;
   }
 
   .career-grid {
     grid-template-columns: 1fr;
-
-    width: 100%;
   }
 
-  .career-card {
-    width: 230px;
+  .career-heading {
+    flex-direction: column;
 
-    height: 300px;
+    align-items: center;
+
+    text-align: center;
+
+    gap: 15px;
   }
 
-  .career-image {
-    width: 160px;
-    height: 160px;
+  .career-heading h2 {
+    font-size: 30px;
   }
 
-  /* Logo */
-
-  .logo h2 {
-    font-size: 22px;
+  .about {
+    width: 85%;
   }
 
-  /* Hero */
+  .about-left h2 {
+    font-size: 38px;
+  }
+
+  .about-left p {
+    font-size: 17px;
+  }
+}
+
+
+/* =========================================================
+   RESPONSIVE - 450px
+========================================================= */
+
+@media (max-width: 450px) {
+
+  .navbar-right {
+    gap: 12px;
+  }
+
+  .nav-links {
+    gap: 10px;
+  }
+
+  .nav-links a {
+    font-size: 13px;
+  }
+
+  .nav-search {
+    width: 125px;
+  }
 
   .hero-left h1 {
     font-size: 30px;
   }
 
-  .hero-left p {
-    font-size: 16px;
+  .features p {
+    font-size: 15px;
   }
 
-  /* Career heading */
+  .journey-card {
+    padding: 20px 15px;
+  }
 
-  .career-heading h2 {
-    font-size: 28px;
+  .career-card {
+    width: 230px;
   }
 }

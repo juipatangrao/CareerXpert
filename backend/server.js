@@ -11,9 +11,10 @@ const app = express();
 const chatRoutes = require("./routes/chatRoutes");
 const comparisonRoutes = require("./routes/comparisonRoutes");
 const collegeRoutes = require("./routes/collegeRoutes");
+const coachingRoutes = require("./routes/coachingRoutes");
 const jobRecommendationRoutes = require("./routes/jobRecommendationRoutes");
 const newsRoutes = require("./routes/newsRoutes");
-
+const locationRoutes = require("./routes/locationRoutes");
 
 app.use(cors());
 app.use(express.json());
@@ -24,6 +25,8 @@ app.use("/api/profile", require("./routes/profileRoutes"));
 app.use("/api/careers", require("./routes/careerRoutes"));
 app.use("/api/jobs", jobRecommendationRoutes);
 app.use("/api/college", collegeRoutes);
+app.use("/api/coaching", coachingRoutes);
+app.use("/api/location", locationRoutes);
 // Image folder public
 app.use("/uploads", express.static("uploads"));
 app.use("/api/chat", chatRoutes);

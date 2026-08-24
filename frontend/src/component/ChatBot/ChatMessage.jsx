@@ -1,3 +1,5 @@
+import ReactMarkdown from "react-markdown";
+
 const ChatMessage = ({ sender, text }) => {
   return (
     <div
@@ -7,7 +9,13 @@ const ChatMessage = ({ sender, text }) => {
           : "message ai-message"
       }
     >
-      {text}
+      {sender === "ai" ? (
+        <div className="chatbot-message-content">
+          <ReactMarkdown>{text}</ReactMarkdown>
+        </div>
+      ) : (
+        text
+      )}
     </div>
   );
 };

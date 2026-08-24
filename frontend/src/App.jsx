@@ -5,6 +5,7 @@ import Home from "./component/Home";
 import EditProfile from "./pages/EditProfile";
 import CareerComparison from "./pages/CareerComparison";
 import CollegeRecommendation from "./pages/CollegeRecommendation";
+import CoachingRecommendation from "./pages/CoachingRecommendation";
 import Government from "./component/Government";
 import IT from "./component/IT";
 import BankingANDFinance from "./component/BankingANDFinance";
@@ -21,30 +22,6 @@ import Environmental from "./component/Environmental";
 import MediaJournalism from "./component/MediaJournalism";
 import AIJobRecommendation from "./pages/AIJobRecommendation";
 import Design from "./component/Design";
-//Government
-//IT
-
-
-//Banking and Finance pages
-
-//Law pages
-
-//Aviation pages
-
-//Science and Research pages
-
-//Engineering pages
-
-//Hotel Management pages
-
-//environmental
-
-//navy
-
-//Designer
-
-//Space
-
 import "./App.css";
 // import ChatBot from "./component/ChatBot/ChatBot";
 import GetStarted from "./component/GetStarted";
@@ -69,7 +46,6 @@ function App() {
           <Route path="/home" element={<Home />} />
         </Route>
         
-
         <Route path="/government" element={<Government />} />
         <Route path="/it" element={<IT />} />
         <Route path="/banking-and-finance" element={<BankingANDFinance />} />
@@ -80,102 +56,10 @@ function App() {
         <Route path="/engineering" element={<Engineering />} />
         <Route path="/doctor" element={<Doctor />} />
         <Route path="/science-research" element={<ScienceResearch />} />
-        
-        
-        
-        
-        
-        
-        
-        
-        
         <Route path="/media-and-journalism" element={<MediaJournalism />} />
         <Route path="/space-astronomy" element={<SpaceAstronomy />} />
         <Route path="/environmental" element={<Environmental />} />
         <Route path="/design" element={<Design />} />
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        {/* Banking and Finance routes */}
-        
-        
-        
-        
-        
-        
-        {/* Law */}
-        
-        
-        
-        
-        
-        
-        {/* Aviation */}
-        
-        
-        
-        
-        
-        
-        {/* Science and Research */}
-        
-        
-        
-        
-        
-        
-        {/* Engineering */}
-        
-        
-        
-        
-        
-        
-        
-        
-        {/* Hotel Management */}
-        
-        
-        
-        
-        {/*Environment*/}
-        
-        
-        
-        {/* Merchant Navy */}
-        
-        
-        
-        
-        
-
-        {/*Design */}
-        
-        
-        
-        
-
-        {/*Space*/}
-        
-        
-        
-        
-        {/*Doctor*/}
-        
-        
-        
-        
-        
-        
-        
-        
         
         <Route
           path="/career-recommendation"
@@ -191,6 +75,7 @@ function App() {
           path="/college-recommendation"
           element={<CollegeRecommendation />}
         />
+        <Route path="/coaching-recommendation" element={<CoachingRecommendation />} />
         <Route path="/job-recommendation" element={<AIJobRecommendation />} />
         <Route path="/settings" element={<Settings />} />
         <Route path="/portfolio-generator" element={<PortfolioGenerator />} />

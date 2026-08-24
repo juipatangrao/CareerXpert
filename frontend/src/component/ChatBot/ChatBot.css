@@ -1,4 +1,104 @@
 /* Floating AI Button */
+/* =========================================================
+   CHATBOT MESSAGE FORMATTING
+========================================================= */
+/* =========================================================
+   CHATBOT MARKDOWN FORMATTING
+========================================================= */
+
+.chatbot-message-content {
+    font-size: 15px;
+    line-height: 1.7;
+    color: #222;
+}
+
+
+/* Paragraphs */
+
+.chatbot-message-content p {
+    margin: 0 0 12px 0;
+}
+
+
+/* Headings */
+
+.chatbot-message-content h1,
+.chatbot-message-content h2,
+.chatbot-message-content h3 {
+    color: #800020;
+    line-height: 1.35;
+    margin-top: 14px;
+    margin-bottom: 8px;
+}
+
+.chatbot-message-content h1 {
+    font-size: 21px;
+}
+
+.chatbot-message-content h2 {
+    font-size: 19px;
+}
+
+.chatbot-message-content h3 {
+    font-size: 17px;
+}
+
+
+/* Bold text */
+
+.chatbot-message-content strong {
+    font-weight: 700;
+    color: #800020;
+}
+
+
+/* Bullet points */
+
+.chatbot-message-content ul {
+    margin: 8px 0 12px 0;
+    padding-left: 22px;
+}
+
+.chatbot-message-content ul li {
+    margin-bottom: 6px;
+}
+
+
+/* Numbered lists */
+
+.chatbot-message-content ol {
+    margin: 8px 0 12px 0;
+    padding-left: 22px;
+}
+
+.chatbot-message-content ol li {
+    margin-bottom: 6px;
+}
+
+
+/* Links */
+
+.chatbot-message-content a {
+    color: #800020;
+    text-decoration: underline;
+}
+
+
+/* Code */
+
+.chatbot-message-content code {
+    background: #f3f3f3;
+    padding: 2px 5px;
+    border-radius: 4px;
+    font-size: 13px;
+}
+
+
+/* Remove extra space from last element */
+
+.chatbot-message-content > *:last-child {
+    margin-bottom: 0;
+}
 /* Wrapper */
 .chat-toggle-wrapper{
     position: fixed;
