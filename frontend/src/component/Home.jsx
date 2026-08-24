@@ -18,7 +18,9 @@ import {
   FaUserTie,
 } from "react-icons/fa";
 
-import { FaMapSigns, FaScaleBalanced } from "react-icons/fa6";
+import { FaScaleBalanced } from "react-icons/fa6";
+import { FaMapMarkedAlt } from "react-icons/fa";
+
 import { GiArtificialIntelligence } from "react-icons/gi";
 
 import "../style/Home.css";
@@ -35,7 +37,7 @@ import defaultProfile from "../assets/defaultProfile.png";
 import ProfileSidebar from "../component/ProfileSidebar";
 import ChatBot from "../component/ChatBot/ChatBot";
 import Notification from "../component/Notification/Notification";
-
+import PortfolioGenerator from "../pages/PortfolioGenerator";
 import logo from "../assets/logo.png";
 import hero from "../assets/home-hero.jpg";
 import about from "../assets/about.png";
@@ -364,7 +366,7 @@ function Home() {
         },
         {
           name: "Portfolio Review",
-          path: "/portfolio-review",
+          path: "/PortfolioGenerator",
           icon: <FaImages />,
         },
         {
@@ -887,170 +889,7 @@ function Home() {
 
       </footer>
 
-      {/* =================================================
-          FLOATING FEATURES
-      ================================================= */}
-
-      {/* JOB RECOMMENDATION */}
-
-      <div
-        className="job-ai-btn"
-        onClick={() =>
-          navigate(
-            "/job-recommendation"
-          )
-        }
-      >
-
-        <GiArtificialIntelligence
-          className="job-ai-icon"
-        />
-
-        <span className="job-tooltip">
-          Job Recommendation
-        </span>
-
-      </div>
-
-      {/* COLLEGE RECOMMENDATION */}
-
-      <div
-        className="college-floating-btn"
-        onClick={() =>
-          navigate(
-            "/college-recommendation"
-          )
-        }
-      >
-
-        <FaUniversity
-          className="college-floating-icon"
-        />
-
-        <span className="college-tooltip">
-          College Recommendation
-        </span>
-
-      </div>
-
-      {/* CAREER COMPARISON */}
-
-      <div
-        className="comparison-ai-btn"
-        onClick={() =>
-          navigate(
-            "/career-comparison"
-          )
-        }
-      >
-
-        <FaBalanceScale
-          className="comparison-ai-icon"
-        />
-
-        <span className="comparison-tooltip">
-          Career Comparison
-        </span>
-
-      </div>
-
-      {/* CAREER RECOMMENDATION */}
-
-      <div
-        className="career-ai-btn"
-        onClick={() =>
-          navigate(
-            "/career-recommendation"
-          )
-        }
-      >
-
-        <FaBrain
-          className="career-ai-icon"
-        />
-
-        <span className="career-tooltip">
-          Career Recommendation
-        </span>
-
-      </div>
-
-      {/* SKILL GAP ANALYSIS */}
-
-      <div
-        className="skill-gap-btn"
-        onClick={() =>
-          navigate("/skill-gap")
-        }
-      >
-
-        <FaChartLine
-          className="skill-gap-icon"
-        />
-
-        <span className="skill-gap-tooltip">
-          Skill Gap Analysis
-        </span>
-
-      </div>
-
-      {/* STUDY PLANNER */}
-
-      <div
-        className="study-planner-btn"
-        onClick={() =>
-          navigate("/study-planner")
-        }
-      >
-
-        <FaBookOpen
-          className="study-planner-icon"
-        />
-
-        <span className="study-planner-tooltip">
-          Study Planner
-        </span>
-
-      </div>
-
-      {/* CAREER ROADMAP */}
-
-      <div
-        className="roadmap-btn"
-        onClick={() =>
-          navigate("/career-roadmap")
-        }
-      >
-
-        <FaMapSigns
-          className="roadmap-icon"
-        />
-
-        <span className="roadmap-tooltip">
-          Career Roadmap
-        </span>
-
-      </div>
-
-      {/* COVER LETTER */}
-
-      <div
-        className="cover-letter-btn"
-        onClick={() =>
-          navigate("/cover-letter")
-        }
-        title="Cover Letter"
-      >
-
-        <FaFileAlt
-          className="cover-letter-icon"
-        />
-
-        <span className="cover-letter-tooltip">
-          Cover Letter
-        </span>
-
-      </div>
+      
 
       {/* =================================================
           CHATBOT

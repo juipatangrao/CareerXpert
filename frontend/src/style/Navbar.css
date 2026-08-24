@@ -1,75 +1,439 @@
+/* =========================================================
+   NAVBAR
+========================================================= */
+
 .navbar {
   width: 100%;
-  height: 80px;
-  background: #6b0f0f;
+  height: 90px;
+  background: #7b1023;
+
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  padding: 0 40px;
-  box-sizing: border-box;
+
+  padding: 0 55px;
+
+  position: relative;
+  top: 0;
+  left: 0;
+
+  z-index: 1000;
+}
+
+
+/* =========================================================
+   LOGO
+========================================================= */
+
+.logo {
+  width: 200px;
+  height: 90px;
+
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+
+  flex-shrink: 0;
 }
 
 .logo img {
-  height: 55px;
+  width: 145px;
+  height: auto;
+
+  margin: 0;
+
+  display: block;
+  object-fit: contain;
 }
+
+
+/* =========================================================
+   NAVBAR RIGHT SIDE
+========================================================= */
+
+.navbar-right {
+  display: flex;
+  align-items: center;
+
+  gap: 25px;
+
+  /*
+     IMPORTANT:
+     Do NOT use margin-left: auto.
+     It was pushing the navbar items too far right.
+  */
+  margin-left: 0;
+}
+
+
+/* =========================================================
+   NAV LINKS
+========================================================= */
 
 .nav-links {
   display: flex;
-  list-style: none;
-  gap: 40px;
-  color: white;
-  font-size: 20px;
+  align-items: center;
+
+  margin-left: 0;
+
+  gap: 50px;
+}
+
+.nav-links a {
+  color: #ffffff;
+
+  text-decoration: none;
+
+  font-size: 18px;
   font-weight: 500;
-}
 
-.nav-links li {
   cursor: pointer;
+
+  transition: color 0.3s ease;
 }
 
-.right-section {
-  display: flex;
-  align-items: center;
-  gap: 20px;
+.nav-links a:hover {
+  color: #ffd54f;
 }
 
-.search-box {
+
+/* =========================================================
+   SEARCH BAR
+========================================================= */
+
+.nav-search {
+  width: 210px;
+  height: 40px;
+
+  margin-left: 0;
+
   display: flex;
   align-items: center;
-  background: white;
-  padding: 8px 15px;
+
+  background: #ffffff;
+
+  padding: 0 15px;
+
   border-radius: 25px;
+
+  box-sizing: border-box;
 }
 
-.search-box input {
+.nav-search input {
+  width: 100%;
+
   border: none;
   outline: none;
-  margin-left: 10px;
-  font-size: 16px;
+
+  background: transparent;
+
+  font-size: 14px;
+
+  margin-left: 8px;
+
+  color: #333;
+}
+
+.nav-search input::placeholder {
+  color: #999;
 }
 
 .search-icon {
-  color: #6b0f0f;
+  color: #7b1023;
+
+  font-size: 16px;
+
+  flex-shrink: 0;
 }
 
-.icon {
-  color: white;
-  font-size: 22px;
+
+/* =========================================================
+   NOTIFICATION
+========================================================= */
+
+.notification-wrapper {
+  position: relative;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
   cursor: pointer;
+
+  margin-left: 0;
 }
 
-.profile {
-  cursor: pointer;
+.nav-icon {
+  color: #ffffff;
+
+  font-size: 25px;
+
+  transition: color 0.3s ease;
 }
+
+.nav-icon:hover {
+  color: #ffd54f;
+}
+
+
+/* =========================================================
+   NOTIFICATION BADGE
+========================================================= */
+
+.notification-badge {
+  position: absolute;
+
+  top: -8px;
+  right: -9px;
+
+  width: 19px;
+  height: 19px;
+
+  border-radius: 50%;
+
+  background: #ff2020;
+
+  color: #ffffff;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 10px;
+  font-weight: 700;
+}
+
+
+/* =========================================================
+   PROFILE
+========================================================= */
 
 .profile-icon {
-  color: white;
-  font-size: 42px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  margin-left: 0;
+
+  cursor: pointer;
 }
 
-.profile-img {
-  width: 42px;
-  height: 42px;
+.navbar-profile-image {
+  width: 44px;
+  height: 44px;
+
   border-radius: 50%;
+
   object-fit: cover;
-  border: 2px solid white;
+
+  border: 2px solid #ffffff;
+
+  display: block;
+}
+
+
+/* =========================================================
+   NAVBAR RESPONSIVE
+========================================================= */
+
+@media (max-width: 1200px) {
+
+  .navbar {
+    padding: 0 40px;
+  }
+
+  .logo {
+    width: 180px;
+  }
+
+  .logo img {
+    width: 135px;
+  }
+
+  .nav-links {
+    gap: 35px;
+  }
+
+  .nav-links a {
+    font-size: 17px;
+  }
+
+  .nav-search {
+    width: 190px;
+  }
+
+  .navbar-right {
+    gap: 20px;
+  }
+}
+
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 950px) {
+
+  .navbar {
+    padding: 0 25px;
+  }
+
+  .logo {
+    width: 160px;
+  }
+
+  .logo img {
+    width: 125px;
+  }
+
+  .nav-links {
+    gap: 25px;
+  }
+
+  .nav-links a {
+    font-size: 16px;
+  }
+
+  .nav-search {
+    width: 170px;
+  }
+
+  .navbar-right {
+    gap: 15px;
+  }
+}
+
+
+/* =========================================================
+   SMALL TABLET
+========================================================= */
+
+@media (max-width: 800px) {
+
+  .navbar {
+    height: auto;
+    min-height: 80px;
+
+    padding: 12px 20px;
+
+    flex-wrap: wrap;
+  }
+
+  .logo {
+    width: auto;
+    height: 60px;
+  }
+
+  .logo img {
+    width: 120px;
+  }
+
+  .navbar-right {
+    margin-left: auto;
+
+    gap: 15px;
+  }
+
+  .nav-links {
+    gap: 20px;
+  }
+
+  .nav-links a {
+    font-size: 15px;
+  }
+
+  .nav-search {
+    width: 160px;
+    height: 36px;
+  }
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 650px) {
+
+  .navbar {
+    min-height: 70px;
+
+    padding: 10px 18px;
+
+    justify-content: space-between;
+  }
+
+  .logo {
+    height: 50px;
+  }
+
+  .logo img {
+    width: 110px;
+  }
+
+  .nav-links {
+    display: none;
+  }
+
+  .navbar-right {
+    margin-left: auto;
+
+    gap: 12px;
+  }
+
+  .nav-search {
+    width: 140px;
+    height: 36px;
+
+    padding: 0 12px;
+  }
+
+  .nav-search input {
+    font-size: 13px;
+  }
+
+  .notification-wrapper {
+    margin-left: 0;
+  }
+
+  .nav-icon {
+    font-size: 23px;
+  }
+
+  .navbar-profile-image {
+    width: 40px;
+    height: 40px;
+  }
+}
+
+
+/* =========================================================
+   VERY SMALL MOBILE
+========================================================= */
+
+@media (max-width: 480px) {
+
+  .navbar {
+    padding: 8px 12px;
+  }
+
+  .logo img {
+    width: 100px;
+  }
+
+  .nav-search {
+    width: 120px;
+  }
+
+  .navbar-right {
+    gap: 10px;
+  }
+
+  .nav-icon {
+    font-size: 21px;
+  }
+
+  .navbar-profile-image {
+    width: 36px;
+    height: 36px;
+  }
 }
