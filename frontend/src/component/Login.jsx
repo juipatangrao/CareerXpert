@@ -49,9 +49,15 @@ localStorage.setItem("userEmail", res.data.user.email);
 localStorage.setItem("userId", res.data.user._id);
 localStorage.setItem("token", res.data.token);
 
-      alert("Login Successful!");
+     alert("Login Successful!");
 
-      navigate("/home");
+const isNewUser = localStorage.getItem("isNewUser");
+
+if (isNewUser === "true") {
+  navigate("/edit-profile");
+} else {
+  navigate("/home");
+}
 
     } catch (err) {
       alert(

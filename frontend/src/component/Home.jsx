@@ -18,7 +18,8 @@ import {
   FaUserTie,
 } from "react-icons/fa";
 
-import { FaScaleBalanced } from "react-icons/fa6";
+import { FaMapSigns, FaScaleBalanced } from "react-icons/fa6";
+import { GiArtificialIntelligence } from "react-icons/gi";
 
 import "../style/Home.css";
 
@@ -54,54 +55,43 @@ import space from "../assets/Space-astronomy.png";
 import environment from "../assets/Environmental.png";
 import navy from "../assets/Merchant-navy.png";
 
-
 function Home() {
   const location = useLocation();
   const navigate = useNavigate();
 
-  /* =====================================================
-     PROFILE
-  ===================================================== */
+  // =====================================================
+  // PROFILE
+  // =====================================================
 
   const [open, setOpen] = useState(false);
-
   const [profileImage, setProfileImage] =
     useState(defaultProfile);
+  const [username, setUsername] = useState("");
 
-  const [username, setUsername] =
-    useState("");
+  // =====================================================
+  // CAREER SECTION
+  // =====================================================
 
+  const [showMore, setShowMore] = useState(false);
 
-  /* =====================================================
-     CAREER SECTION
-  ===================================================== */
-
-  const [showMore, setShowMore] =
-    useState(false);
-
-
-  /* =====================================================
-     NOTIFICATION
-  ===================================================== */
+  // =====================================================
+  // NOTIFICATION
+  // =====================================================
 
   const [showNotification, setShowNotification] =
     useState(false);
 
-  const [unreadCount, setUnreadCount] =
-    useState(1);
+  const [unreadCount, setUnreadCount] = useState(1);
 
+  // =====================================================
+  // USER ID
+  // =====================================================
 
-  /* =====================================================
-     USER ID
-  ===================================================== */
+  const userId = localStorage.getItem("userId");
 
-  const userId =
-    localStorage.getItem("userId");
-
-
-  /* =====================================================
-     GET USER PROFILE
-  ===================================================== */
+  // =====================================================
+  // GET USER PROFILE
+  // =====================================================
 
   useEffect(() => {
     const storedUser =
@@ -109,13 +99,12 @@ function Home() {
 
     if (storedUser) {
       try {
-        const parsedUser =
-          JSON.parse(storedUser);
+        const parsedUser = JSON.parse(storedUser);
 
         setUsername(
           parsedUser?.name ||
-          parsedUser?.username ||
-          storedUser
+            parsedUser?.username ||
+            storedUser
         );
       } catch (error) {
         setUsername(storedUser);
@@ -129,13 +118,17 @@ function Home() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [location.state]);
 
-
-  /* =====================================================
-     GET PROFILE IMAGE
-  ===================================================== */
+  // =====================================================
+  // GET PROFILE IMAGE
+  // =====================================================
 
   const getProfile = async () => {
     try {
+      if (!userId) {
+        setProfileImage(defaultProfile);
+        return;
+      }
+
       await axios.get(
         `http://localhost:5000/api/profile/${userId}`
       );
@@ -143,36 +136,30 @@ function Home() {
       setProfileImage(
         `http://localhost:5000/api/profile/image/${userId}?t=${Date.now()}`
       );
-
     } catch (error) {
       console.log(error);
       setProfileImage(defaultProfile);
     }
   };
 
-
-  /* =====================================================
-     PROFILE IMAGE UPLOAD
-  ===================================================== */
+  // =====================================================
+  // PROFILE IMAGE UPLOAD
+  // =====================================================
 
   const handleImageUpload = async (e) => {
-    const file =
-      e.target.files[0];
+    const file = e.target.files[0];
 
     if (!file) return;
 
-    const formData =
-      new FormData();
+    if (!userId) {
+      alert("User not logged in");
+      return;
+    }
 
-    formData.append(
-      "image",
-      file
-    );
+    const formData = new FormData();
 
-    formData.append(
-      "userId",
-      userId
-    );
+    formData.append("image", file);
+    formData.append("userId", userId);
 
     try {
       await axios.post(
@@ -193,7 +180,6 @@ function Home() {
       alert(
         "Profile image uploaded successfully!"
       );
-
     } catch (error) {
       console.log(error);
 
@@ -203,10 +189,9 @@ function Home() {
     }
   };
 
-
-  /* =====================================================
-     CAREER DATA
-  ===================================================== */
+  // =====================================================
+  // CAREER DATA
+  // =====================================================
 
   const careers = [
     {
@@ -214,79 +199,66 @@ function Home() {
       image: engineering,
       path: "/engineering",
     },
-
     {
       name: "Medical",
       image: medical,
       path: "/doctor",
     },
-
     {
       name: "Information Technology",
       image: it,
       path: "/it",
     },
-
     {
       name: "Government Jobs",
       image: government,
       path: "/government",
     },
-
     {
       name: "Banking & Finance",
       image: banking,
       path: "/banking-and-finance",
     },
-
     {
       name: "Law",
       image: law,
       path: "/law",
     },
-
     {
       name: "Aviation",
       image: aviation,
       path: "/aviation",
     },
-
     {
       name: "Science & Research",
       image: science,
       path: "/science-research",
     },
-
     {
       name: "Design",
       image: design,
       path: "/design",
     },
-
     {
       name: "Media & Journalism",
       image: media,
       path: "/media-and-journalism",
     },
-
     {
       name: "Hotel Management",
       image: hotel,
       path: "/hotel-management",
     },
-
     {
       name: "Space & Astronomy",
       image: space,
       path: "/space-astronomy",
     },
-
     {
       name: "Environmental",
       image: environment,
       path: "/environmental",
     },
-
     {
       name: "Merchant Navy",
       image: navy,
@@ -294,28 +266,19 @@ function Home() {
     },
   ];
 
+  const visibleCareers = showMore
+    ? careers
+    : careers.slice(0, 9);
 
-  const visibleCareers =
-    showMore
-      ? careers
-      : careers.slice(0, 9);
-
-
-  /* =====================================================
-     CAREER JOURNEY
-     
-     11 FEATURES
-     + PERMANENT CHATBOT = 12 FEATURES
-  ===================================================== */
+  // =====================================================
+  // CAREER JOURNEY
+  // =====================================================
 
   const careerJourney = [
     {
       number: "01",
-
       title: "Discover",
-
       className: "discover",
-
       icon: <FaSearch />,
 
       features: [
@@ -324,44 +287,36 @@ function Home() {
           path: "/job-recommendation",
           icon: <FaUserTie />,
         },
-
         {
           name: "College Recommendations",
           path: "/college-recommendation",
           icon: <FaUniversity />,
         },
-
         {
           name: "Career Comparison",
           path: "/career-comparison",
-          icon: <FaBalanceScale />,
+          icon: <FaScaleBalanced />,
         },
       ],
     },
 
-
     {
       number: "02",
-
       title: "Understand",
-
       className: "understand",
-
       icon: <FaChartLine />,
 
       features: [
         {
           name: "Skill Gap Analysis",
-          path: "/skill-gap-analysis",
+          path: "/skill-gap",
           icon: <FaChartLine />,
         },
-
         {
           name: "Career Roadmap",
           path: "/career-roadmap",
           icon: <FaRoute />,
         },
-
         {
           name: "Coaching Recommendations",
           path: "/coaching-recommendation",
@@ -370,14 +325,10 @@ function Home() {
       ],
     },
 
-
     {
       number: "03",
-
       title: "Prepare",
-
       className: "prepare",
-
       icon: <FaBookOpen />,
 
       features: [
@@ -386,13 +337,11 @@ function Home() {
           path: "/study-planner",
           icon: <FaCalendarCheck />,
         },
-
         {
           name: "Resume Tools",
           path: "/resume-tools",
           icon: <FaFileAlt />,
         },
-
         {
           name: "Interview Practice",
           path: "/interview-practice",
@@ -401,14 +350,10 @@ function Home() {
       ],
     },
 
-
     {
       number: "04",
-
       title: "Grow",
-
       className: "grow",
-
       icon: <FaTrophy />,
 
       features: [
@@ -417,13 +362,11 @@ function Home() {
           path: "/scholarship-finder",
           icon: <FaTrophy />,
         },
-
         {
           name: "Portfolio Review",
           path: "/portfolio-review",
           icon: <FaImages />,
         },
-
         {
           name: "Career News",
           path: "/career-news",
@@ -433,10 +376,9 @@ function Home() {
     },
   ];
 
-
-  /* =====================================================
-     NAVIGATION
-  ===================================================== */
+  // =====================================================
+  // NAVIGATION
+  // =====================================================
 
   const scrollToSection = (id) => {
     const section =
@@ -450,14 +392,12 @@ function Home() {
     }
   };
 
-
-  /* =====================================================
-     RETURN
-  ===================================================== */
+  // =====================================================
+  // RETURN
+  // =====================================================
 
   return (
     <div className="home">
-
 
       {/* =================================================
           NAVBAR
@@ -474,6 +414,7 @@ function Home() {
           />
         </div>
 
+        {/* NAVBAR RIGHT */}
 
         <div className="navbar-right">
 
@@ -491,7 +432,6 @@ function Home() {
               Home
             </a>
 
-
             <a
               href="#features"
               onClick={(e) => {
@@ -502,7 +442,6 @@ function Home() {
               Features
             </a>
 
-
             <a
               href="#career"
               onClick={(e) => {
@@ -512,7 +451,6 @@ function Home() {
             >
               Careers
             </a>
-
 
             <a
               href="#about"
@@ -526,14 +464,11 @@ function Home() {
 
           </nav>
 
-
           {/* SEARCH */}
 
           <div className="nav-search">
 
-            <FaSearch
-              className="search-icon"
-            />
+            <FaSearch className="search-icon" />
 
             <input
               type="text"
@@ -541,7 +476,6 @@ function Home() {
             />
 
           </div>
-
 
           {/* NOTIFICATION */}
 
@@ -556,9 +490,7 @@ function Home() {
             }}
           >
 
-            <FaBell
-              className="nav-icon"
-            />
+            <FaBell className="nav-icon" />
 
             {unreadCount > 0 && (
               <span className="notification-badge">
@@ -568,7 +500,6 @@ function Home() {
 
           </div>
 
-
           {showNotification && (
             <Notification
               setUnreadCount={
@@ -576,7 +507,6 @@ function Home() {
               }
             />
           )}
-
 
           {/* PROFILE */}
 
@@ -594,7 +524,6 @@ function Home() {
               }
               alt="Profile"
               className="navbar-profile-image"
-
               onError={(e) => {
                 e.target.onerror = null;
                 e.target.src =
@@ -608,7 +537,6 @@ function Home() {
 
       </header>
 
-
       {/* =================================================
           HERO
       ================================================= */}
@@ -621,17 +549,13 @@ function Home() {
         <div className="hero-left">
 
           <h1>
-
             Explore Today,
-
             <br />
 
             <span>
               Succeed Tomorrow.
             </span>
-
           </h1>
-
 
           <p>
             Explore careers, compare
@@ -639,7 +563,6 @@ function Home() {
             career decisions with
             CareerXpert.
           </p>
-
 
           <div className="features">
 
@@ -663,7 +586,6 @@ function Home() {
 
         </div>
 
-
         <div className="home-hero">
 
           <img
@@ -674,7 +596,6 @@ function Home() {
         </div>
 
       </section>
-
 
       {/* =================================================
           FEATURES / CAREER JOURNEY
@@ -699,7 +620,6 @@ function Home() {
 
         </div>
 
-
         <div className="journey-grid">
 
           {careerJourney.map(
@@ -716,20 +636,17 @@ function Home() {
                   {journey.number}
                 </div>
 
-
                 {/* ICON */}
 
                 <div className="journey-icon">
                   {journey.icon}
                 </div>
 
-
                 {/* TITLE */}
 
                 <h3>
                   {journey.title}
                 </h3>
-
 
                 {/* FEATURES */}
 
@@ -741,7 +658,6 @@ function Home() {
                       <button
                         key={feature.name}
                         className="journey-feature"
-
                         onClick={() =>
                           navigate(
                             feature.path
@@ -753,11 +669,9 @@ function Home() {
                           {feature.icon}
                         </span>
 
-
                         <span>
                           {feature.name}
                         </span>
-
 
                         <span className="feature-arrow">
                           →
@@ -776,7 +690,6 @@ function Home() {
           )}
 
         </div>
-
 
         <div className="journey-bottom-line">
 
@@ -799,7 +712,6 @@ function Home() {
         </div>
 
       </section>
-
 
       {/* =================================================
           CAREER SECTION
@@ -826,23 +738,18 @@ function Home() {
 
           </div>
 
-
           {showMore && (
-
             <button
               className="view-btn"
-
               onClick={() =>
                 setShowMore(false)
               }
             >
               Show Less
             </button>
-
           )}
 
         </div>
-
 
         <div className="career-grid">
 
@@ -852,7 +759,6 @@ function Home() {
               <div
                 className="career-card"
                 key={index}
-
                 onClick={() =>
                   navigate(
                     career.path
@@ -869,7 +775,6 @@ function Home() {
 
                 </div>
 
-
                 <p>
                   {career.name}
                 </p>
@@ -879,12 +784,12 @@ function Home() {
             )
           )}
 
+          {/* MORE */}
 
           {!showMore && (
 
             <div
               className="career-card more-card"
-
               onClick={() =>
                 setShowMore(true)
               }
@@ -898,7 +803,6 @@ function Home() {
 
               </div>
 
-
               <p>
                 More
               </p>
@@ -910,7 +814,6 @@ function Home() {
         </div>
 
       </section>
-
 
       {/* =================================================
           ABOUT
@@ -929,7 +832,6 @@ function Home() {
             </b>
           </h2>
 
-
           <p>
             CareerXpert helps students
             discover the right career path
@@ -944,7 +846,6 @@ function Home() {
 
         </div>
 
-
         <div className="about-right">
 
           <img
@@ -955,7 +856,6 @@ function Home() {
         </div>
 
       </section>
-
 
       {/* =================================================
           FOOTER
@@ -969,7 +869,6 @@ function Home() {
             CareerXpert
           </h3>
 
-
           <p>
             Empowering students to explore
             opportunities, plan their careers
@@ -977,9 +876,7 @@ function Home() {
             future.
           </p>
 
-
           <hr />
-
 
           <p className="copyright">
             © 2026 CareerXpert.
@@ -990,45 +887,198 @@ function Home() {
 
       </footer>
 
+      {/* =================================================
+          FLOATING FEATURES
+      ================================================= */}
+
+      {/* JOB RECOMMENDATION */}
+
+      <div
+        className="job-ai-btn"
+        onClick={() =>
+          navigate(
+            "/job-recommendation"
+          )
+        }
+      >
+
+        <GiArtificialIntelligence
+          className="job-ai-icon"
+        />
+
+        <span className="job-tooltip">
+          Job Recommendation
+        </span>
+
+      </div>
+
+      {/* COLLEGE RECOMMENDATION */}
+
+      <div
+        className="college-floating-btn"
+        onClick={() =>
+          navigate(
+            "/college-recommendation"
+          )
+        }
+      >
+
+        <FaUniversity
+          className="college-floating-icon"
+        />
+
+        <span className="college-tooltip">
+          College Recommendation
+        </span>
+
+      </div>
+
+      {/* CAREER COMPARISON */}
+
+      <div
+        className="comparison-ai-btn"
+        onClick={() =>
+          navigate(
+            "/career-comparison"
+          )
+        }
+      >
+
+        <FaBalanceScale
+          className="comparison-ai-icon"
+        />
+
+        <span className="comparison-tooltip">
+          Career Comparison
+        </span>
+
+      </div>
+
+      {/* CAREER RECOMMENDATION */}
+
+      <div
+        className="career-ai-btn"
+        onClick={() =>
+          navigate(
+            "/career-recommendation"
+          )
+        }
+      >
+
+        <FaBrain
+          className="career-ai-icon"
+        />
+
+        <span className="career-tooltip">
+          Career Recommendation
+        </span>
+
+      </div>
+
+      {/* SKILL GAP ANALYSIS */}
+
+      <div
+        className="skill-gap-btn"
+        onClick={() =>
+          navigate("/skill-gap")
+        }
+      >
+
+        <FaChartLine
+          className="skill-gap-icon"
+        />
+
+        <span className="skill-gap-tooltip">
+          Skill Gap Analysis
+        </span>
+
+      </div>
+
+      {/* STUDY PLANNER */}
+
+      <div
+        className="study-planner-btn"
+        onClick={() =>
+          navigate("/study-planner")
+        }
+      >
+
+        <FaBookOpen
+          className="study-planner-icon"
+        />
+
+        <span className="study-planner-tooltip">
+          Study Planner
+        </span>
+
+      </div>
+
+      {/* CAREER ROADMAP */}
+
+      <div
+        className="roadmap-btn"
+        onClick={() =>
+          navigate("/career-roadmap")
+        }
+      >
+
+        <FaMapSigns
+          className="roadmap-icon"
+        />
+
+        <span className="roadmap-tooltip">
+          Career Roadmap
+        </span>
+
+      </div>
+
+      {/* COVER LETTER */}
+
+      <div
+        className="cover-letter-btn"
+        onClick={() =>
+          navigate("/cover-letter")
+        }
+        title="Cover Letter"
+      >
+
+        <FaFileAlt
+          className="cover-letter-icon"
+        />
+
+        <span className="cover-letter-tooltip">
+          Cover Letter
+        </span>
+
+      </div>
 
       {/* =================================================
-          PERMANENT CHATBOT
-          
-          ONLY ONE CHATBOT
+          CHATBOT
       ================================================= */}
 
       <ChatBot />
-
 
       {/* =================================================
           PROFILE SIDEBAR
       ================================================= */}
 
       <ProfileSidebar
-
         open={open}
-
         setOpen={setOpen}
-
         profileImage={profileImage}
-
         handleImageUpload={
           handleImageUpload
         }
-
         username={username}
-
         email={
           localStorage.getItem(
             "userEmail"
           )
         }
-
       />
 
     </div>
   );
 }
-
 
 export default Home;

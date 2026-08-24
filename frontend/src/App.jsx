@@ -8,16 +8,18 @@ import {
 
 import { useEffect } from "react";
 
+// =========================================================
+// AUTH / MAIN COMPONENTS
+// =========================================================
 import Signup from "./component/Signup";
 import Login from "./component/Login";
 import Home from "./component/Home";
+import GetStarted from "./component/GetStarted";
+import ProtectedRoute from "./component/ProtectedRoute";
 
-import EditProfile from "./pages/EditProfile";
-import CareerComparison from "./pages/CareerComparison";
-import CollegeRecommendation from "./pages/CollegeRecommendation";
-
-import CoachingRecommendation from "./pages/CoachingRecommendation";
-
+// =========================================================
+// CAREER PAGES
+// =========================================================
 import Government from "./component/Government";
 import IT from "./component/IT";
 import BankingANDFinance from "./component/BankingANDFinance";
@@ -27,44 +29,53 @@ import HotelManagement from "./component/HotelManagement";
 import MerchantNavy from "./component/MerchantNavy";
 import Engineering from "./component/Engineering";
 import Doctor from "./component/Doctor";
-
 import ScienceResearch from "./component/ScienceResearch";
 import SpaceAstronomy from "./component/SpaceAstronomy";
 import Environmental from "./component/Environmental";
 import MediaJournalism from "./component/MediaJournalism";
 import Design from "./component/Design";
 
-import AIJobRecommendation from "./pages/AIJobRecommendation";
-
-
-import "./App.css";
-
-import GetStarted from "./component/GetStarted";
+// =========================================================
+// CAREER FEATURES
+// =========================================================
+import CareerDetails from "./pages/CareerDetails";
 import CareerRecommendation from "./pages/CareerRecommendation";
 import AptitudeTest from "./pages/AptitudeTest";
 import CareerResult from "./pages/CareerResult";
+import CareerComparison from "./pages/CareerComparison";
+import CollegeRecommendation from "./pages/CollegeRecommendation";
+import AIJobRecommendation from "./pages/AIJobRecommendation";
+import CoachingRecommendation from "./pages/CoachingRecommendation";
 
+// =========================================================
+// USER / OTHER FEATURES
+// =========================================================
+import EditProfile from "./pages/EditProfile";
 import Settings from "./pages/Settings";
 import PortfolioGenerator from "./pages/PortfolioGenerator";
-import ProtectedRoute from "./component/ProtectedRoute";
 
-import CareerDetails from "./pages/CareerDetails";
-
-/* =========================================================
-   FRIEND'S FEATURES
-   ========================================================= */
-
+// =========================================================
+// FRIEND'S FEATURES
+// =========================================================
 import SkillGapAnalysis from "./pages/SkillGapAnalysis";
 import SkillGapResult from "./pages/SkillGapResult";
 import StudyPlanner from "./pages/StudyPlanner";
 import CareerRoadmap from "./pages/CareerRoadmap";
 import CareerRoadmapResult from "./pages/CareerRoadmapResult";
 
+// =========================================================
+// COVER LETTER
+// =========================================================
+import CoverLetter from "./pages/CoverLetter";
 
-/* =========================================================
-   SCROLL TO TOP
-   ========================================================= */
+// =========================================================
+// CSS
+// =========================================================
+import "./App.css";
 
+// =========================================================
+// SCROLL TO TOP
+// =========================================================
 const ScrollToTop = () => {
   const { pathname } = useLocation();
 
@@ -75,11 +86,9 @@ const ScrollToTop = () => {
   return null;
 };
 
-
-/* =========================================================
-   APP
-   ========================================================= */
-
+// =========================================================
+// APP
+// =========================================================
 function App() {
   return (
     <BrowserRouter>
@@ -114,31 +123,11 @@ function App() {
             ================================================= */}
 
         <Route element={<ProtectedRoute />}>
-
           <Route
             path="/home"
             element={<Home />}
           />
-
         </Route>
-
-        
-        <Route path="/government" element={<Government />} />
-        <Route path="/it" element={<IT />} />
-        <Route path="/banking-and-finance" element={<BankingANDFinance />} />
-        <Route path="/law" element={<Law />} />
-        <Route path="/aviation" element={<Aviation />} />
-        <Route path="/hotel-management" element={<HotelManagement />} />
-        <Route path="/merchant-navy" element={<MerchantNavy />} />
-        <Route path="/engineering" element={<Engineering />} />
-        <Route path="/doctor" element={<Doctor />} />
-        <Route path="/science-research" element={<ScienceResearch />} />
-        <Route path="/media-and-journalism" element={<MediaJournalism />} />
-        <Route path="/space-astronomy" element={<SpaceAstronomy />} />
-        <Route path="/environmental" element={<Environmental />} />
-        <Route path="/design" element={<Design />} />
-        
-=======
 
 
         {/* =================================================
@@ -217,7 +206,7 @@ function App() {
 
 
         {/* =================================================
-            GENERIC CAREER DETAIL ROUTES FROM MAIN APP
+            CAREER DETAILS
             ================================================= */}
 
         <Route
@@ -285,6 +274,7 @@ function App() {
           element={<CareerDetails />}
         />
 
+        {/* Compatibility for old /Design/... URLs */}
         <Route
           path="/Design/:careerId"
           element={<CareerDetails />}
@@ -295,6 +285,7 @@ function App() {
           element={<CareerDetails />}
         />
 
+        {/* Compatibility for old /Doctor/... URLs */}
         <Route
           path="/Doctor/:careerId"
           element={<CareerDetails />}
@@ -307,76 +298,162 @@ function App() {
 
 
         {/* =================================================
-            OLD GOVERNMENT COMPATIBILITY ROUTES
-            Keep existing links using CareerDetails
+            OLD GOVERNMENT ROUTES
             ================================================= */}
 
-        <Route path="/ias" element={<CareerDetails />} />
-        <Route path="/ips" element={<CareerDetails />} />
-        <Route path="/police" element={<CareerDetails />} />
-        <Route path="/army" element={<CareerDetails />} />
-        <Route path="/income-tax" element={<CareerDetails />} />
-        <Route path="/railway" element={<CareerDetails />} />
-        <Route path="/forest" element={<CareerDetails />} />
-        <Route path="/food" element={<CareerDetails />} />
-        <Route path="/talathi" element={<CareerDetails />} />
+        <Route
+          path="/ias"
+          element={<CareerDetails />}
+        />
+
+        <Route
+          path="/ips"
+          element={<CareerDetails />}
+        />
+
+        <Route
+          path="/police"
+          element={<CareerDetails />}
+        />
+
+        <Route
+          path="/army"
+          element={<CareerDetails />}
+        />
+
+        <Route
+          path="/income-tax"
+          element={<CareerDetails />}
+        />
+
+        <Route
+          path="/railway"
+          element={<CareerDetails />}
+        />
+
+        <Route
+          path="/forest"
+          element={<CareerDetails />}
+        />
+
+        <Route
+          path="/food"
+          element={<CareerDetails />}
+        />
+
+        <Route
+          path="/talathi"
+          element={<CareerDetails />}
+        />
 
 
         {/* =================================================
-            FEATURES
+            CAREER RECOMMENDATION
             ================================================= */}
-
 
         <Route
           path="/career-recommendation"
           element={<CareerRecommendation />}
         />
 
+
+        {/* =================================================
+            APTITUDE TEST
+            ================================================= */}
+
         <Route
           path="/aptitude-test"
           element={<AptitudeTest />}
         />
+
+
+        {/* =================================================
+            CAREER RESULT
+            ================================================= */}
 
         <Route
           path="/career-result"
           element={<CareerResult />}
         />
 
+
+        {/* =================================================
+            EDIT PROFILE
+            ================================================= */}
+
         <Route
           path="/edit-profile"
           element={<EditProfile />}
         />
+
+
+        {/* =================================================
+            CAREER COMPARISON
+            ================================================= */}
 
         <Route
           path="/career-comparison"
           element={<CareerComparison />}
         />
 
+
+        {/* =================================================
+            COLLEGE RECOMMENDATION
+            ================================================= */}
+
         <Route
           path="/college-recommendation"
           element={<CollegeRecommendation />}
         />
 
-        <Route path="/coaching-recommendation" element={<CoachingRecommendation />} />
-        <Route path="/job-recommendation" element={<AIJobRecommendation />} />
-        <Route path="/settings" element={<Settings />} />
-        <Route path="/portfolio-generator" element={<PortfolioGenerator />} />
-        <Route path="*" element={<CareerDetails />} />
 
+        {/* =================================================
+            COACHING RECOMMENDATION
+            ================================================= */}
+
+        <Route
+          path="/coaching-recommendation"
+          element={<CoachingRecommendation />}
+        />
+
+
+        {/* =================================================
+            JOB RECOMMENDATION
+            ================================================= */}
 
         <Route
           path="/job-recommendation"
           element={<AIJobRecommendation />}
         />
 
+
+        {/* =================================================
+            SETTINGS
+            ================================================= */}
+
         <Route
           path="/settings"
           element={<Settings />}
         />
 
+
+        {/* =================================================
+            PORTFOLIO GENERATOR
+            ================================================= */}
+
         <Route
           path="/portfolio-generator"
           element={<PortfolioGenerator />}
+        />
+
+
+        {/* =================================================
+            COVER LETTER
+            ================================================= */}
+
+        <Route
+          path="/cover-letter"
+          element={<CoverLetter />}
         />
 
 
@@ -419,12 +496,9 @@ function App() {
           element={<Navigate to="/" replace />}
         />
 
-
       </Routes>
-
     </BrowserRouter>
   );
 }
-
 
 export default App;
