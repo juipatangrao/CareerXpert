@@ -11,22 +11,66 @@ const {
   downloadDOCX,
 } = require("../controllers/coverLetterController");
 
-// Generate Cover Letter
-router.post("/generate", createCoverLetter);
 
-// Get All Cover Letters
-router.get("/", getAllCoverLetters);
+// =====================================================
+// GENERATE COVER LETTER
+// =====================================================
 
-// Get Single Cover Letter
-router.get("/:id", getCoverLetterById);
+router.post(
+  "/generate",
+  createCoverLetter
+);
 
-// Delete Cover Letter
-router.delete("/:id", deleteCoverLetter);
 
-// Download PDF
-router.get("/download/pdf/:id", downloadPDF);
+// =====================================================
+// GET ALL COVER LETTERS
+// =====================================================
 
-// Download DOCX
-router.get("/download/docx/:id", downloadDOCX);
+router.get(
+  "/",
+  getAllCoverLetters
+);
+
+
+// =====================================================
+// DOWNLOAD PDF
+// IMPORTANT: Keep these BEFORE /:id
+// =====================================================
+
+router.get(
+  "/download/pdf/:id",
+  downloadPDF
+);
+
+
+// =====================================================
+// DOWNLOAD DOCX
+// =====================================================
+
+router.get(
+  "/download/docx/:id",
+  downloadDOCX
+);
+
+
+// =====================================================
+// GET SINGLE COVER LETTER
+// =====================================================
+
+router.get(
+  "/:id",
+  getCoverLetterById
+);
+
+
+// =====================================================
+// DELETE COVER LETTER
+// =====================================================
+
+router.delete(
+  "/:id",
+  deleteCoverLetter
+);
+
 
 module.exports = router;

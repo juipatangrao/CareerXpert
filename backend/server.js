@@ -12,6 +12,16 @@ const app = express();
 
 
 // =====================================================
+// MIDDLEWARE
+// =====================================================
+
+app.use(cors());
+
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+
+// =====================================================
 // ROUTES
 // =====================================================
 
@@ -21,41 +31,14 @@ const collegeRoutes = require("./routes/collegeRoutes");
 const coachingRoutes = require("./routes/coachingRoutes");
 const jobRecommendationRoutes = require("./routes/jobRecommendationRoutes");
 const newsRoutes = require("./routes/newsRoutes");
-
 const locationRoutes = require("./routes/locationRoutes");
-
-
-// AI ROUTES - ADD THIS
 const aiRoutes = require("./routes/aiRoutes");
 
+// COVER LETTER ROUTES
+const coverLetterRoutes = require("./routes/coverLetterRoutes");
 
 // =====================================================
-// MIDDLEWARE
-// =====================================================
-
-
-app.use(cors());
-
-app.use(express.json());
-
-
-// Routes
-app.use("/api/auth", require("./routes/authRoutes"));
-app.use("/api/profile", require("./routes/profileRoutes"));
-app.use("/api/careers", require("./routes/careerRoutes"));
-app.use("/api/jobs", jobRecommendationRoutes);
-app.use("/api/college", collegeRoutes);
-app.use("/api/coaching", coachingRoutes);
-app.use("/api/location", locationRoutes);
-// Image folder public
-app.use("/uploads", express.static("uploads"));
-app.use("/api/chat", chatRoutes);
-app.use("/api/career-comparison", comparisonRoutes);
-app.use("/api/news", newsRoutes);
-
-
-// =====================================================
-// API ROUTES
+// AUTH / PROFILE / CAREER ROUTES
 // =====================================================
 
 app.use(
@@ -73,6 +56,11 @@ app.use(
   require("./routes/careerRoutes")
 );
 
+
+// =====================================================
+// JOB / COLLEGE / COACHING
+// =====================================================
+
 app.use(
   "/api/jobs",
   jobRecommendationRoutes
@@ -84,14 +72,44 @@ app.use(
 );
 
 app.use(
+  "/api/coaching",
+  coachingRoutes
+);
+
+
+// =====================================================
+// LOCATION
+// =====================================================
+
+app.use(
+  "/api/location",
+  locationRoutes
+);
+
+
+// =====================================================
+// CHAT
+// =====================================================
+
+app.use(
   "/api/chat",
   chatRoutes
 );
+
+
+// =====================================================
+// CAREER COMPARISON
+// =====================================================
 
 app.use(
   "/api/career-comparison",
   comparisonRoutes
 );
+
+
+// =====================================================
+// NEWS
+// =====================================================
 
 app.use(
   "/api/news",
@@ -100,7 +118,7 @@ app.use(
 
 
 // =====================================================
-// AI ROUTES
+// AI
 // =====================================================
 
 app.use(
@@ -110,7 +128,15 @@ app.use(
 
 
 // =====================================================
-// IMAGE FOLDER
+// COVER LETTER
+// =====================================================
+app.use(
+  "/api/cover-letter",
+  coverLetterRoutes
+);
+
+// =====================================================
+// UPLOADS
 // =====================================================
 
 app.use(
@@ -127,15 +153,13 @@ mongoose
   .connect(process.env.MONGO_URI)
   .then(() => {
 
-    console.log(
-      "✅ MongoDB Connected"
-    );
+    console.log("✅ MongoDB Connected");
 
   })
   .catch((err) => {
 
     console.error(
-      "MongoDB Error:",
+      "❌ MongoDB Error:",
       err
     );
 
@@ -146,8 +170,7 @@ mongoose
 // SERVER
 // =====================================================
 
-const PORT =
-  process.env.PORT || 5000;
+const PORT = process.env.PORT || 5000;
 
 app.listen(
   PORT,
