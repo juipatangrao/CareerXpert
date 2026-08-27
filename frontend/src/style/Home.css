@@ -32,37 +32,45 @@ body {
   height: 110px;
 
   background: #7b1023;
-  margin-left: 0px;
+
   display: flex;
   align-items: center;
-  padding: 0px;
+
+  padding: 0 25px;
+
+  position: relative;
 
   top: 0;
+  left: 0;
+
   z-index: 1000;
 }
-
 
 /* =========================================================
    LOGO
 ========================================================= */
 
 .logo {
-  width: 200px;
-  height: 150px;
+  width: 210px;
+  height: 100%;
 
   display: flex;
   align-items: center;
   justify-content: flex-start;
 
   flex-shrink: 0;
+
+  padding-left: 25px;
 }
 
 .logo img {
-  width: 218px;
+  width: 165px;
   height: auto;
- margin-left: -190px;
- margin-top: 55px;
+
+  margin: 0;
+
   display: block;
+
   object-fit: contain;
 }
 
@@ -85,7 +93,7 @@ body {
 
 .nav-links {
   display: flex;
- margin-left:100px;
+ margin-left:380px;
   gap: 70px;
 }
 

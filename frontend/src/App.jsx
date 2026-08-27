@@ -14,7 +14,7 @@ import { useEffect } from "react";
 import Signup from "./component/Signup";
 import Login from "./component/Login";
 import Home from "./component/Home";
-import GetStarted from "./component/GetStarted";
+import LandingPage from "./component/LandingPage";
 import ProtectedRoute from "./component/ProtectedRoute";
 
 // =========================================================
@@ -102,10 +102,10 @@ function App() {
             AUTH / START
             ================================================= */}
 
-        <Route
-          path="/"
-          element={<GetStarted />}
-        />
+<Route
+  path="/"
+  element={<LandingPage />}
+/>
 
         <Route
           path="/signup"

@@ -11,6 +11,13 @@ import {
   FaEyeSlash,
   FaGoogle,
   FaGithub,
+  FaCompass,
+  FaClipboardCheck,
+  FaMapMarkedAlt,
+  FaTrophy,
+  FaBullseye,
+  FaArrowUp,
+  FaGraduationCap,
 } from "react-icons/fa";
 
 const Login = () => {
@@ -38,26 +45,20 @@ const Login = () => {
         }
       );
 
+      localStorage.setItem("loggedInUser", res.data.user.name);
+      localStorage.setItem("userEmail", res.data.user.email);
+      localStorage.setItem("userId", res.data.user._id);
+      localStorage.setItem("token", res.data.token);
 
-//       localStorage.setItem(
-//  "loggedInUser",
-//  res.data.user.name
-// )
+      alert("Login Successful!");
 
-localStorage.setItem("loggedInUser", res.data.user.name);
-localStorage.setItem("userEmail", res.data.user.email);
-localStorage.setItem("userId", res.data.user._id);
-localStorage.setItem("token", res.data.token);
+      const isNewUser = localStorage.getItem("isNewUser");
 
-     alert("Login Successful!");
-
-const isNewUser = localStorage.getItem("isNewUser");
-
-if (isNewUser === "true") {
-  navigate("/edit-profile");
-} else {
-  navigate("/home");
-}
+      if (isNewUser === "true") {
+        navigate("/edit-profile");
+      } else {
+        navigate("/home");
+      }
 
     } catch (err) {
       alert(
@@ -67,186 +68,359 @@ if (isNewUser === "true") {
     }
   };
 
-
   return (
-    <div className="auth-container">
+    <div className="login-page">
 
-      <div className="auth-card">
+      {/* ================= LEFT CAREER PANEL ================= */}
 
-        <div className="auth-icon">
-          <FaUser />
+      <section className="login-career-panel">
+
+        {/* Background circles */}
+        <div className="login-bg-circle login-circle-one"></div>
+        <div className="login-bg-circle login-circle-two"></div>
+        <div className="login-bg-circle login-circle-three"></div>
+
+        {/* Brand */}
+        <div className="login-brand">
+
+          <div className="login-brand-icon">
+            <FaGraduationCap />
+          </div>
+
+          <div className="login-brand-name">
+
+            <div>
+              <span>Career</span>
+              <strong>Xpert</strong>
+            </div>
+
+            <small>
+              Your Career. Our Guidance.
+            </small>
+
+          </div>
+
         </div>
 
-        <h1>Welcome Back!</h1>
 
-        <p>
-          Login to continue your journey
-        </p>
+        {/* Intro */}
+        <div className="login-career-intro">
+
+          <div className="login-career-label">
+            YOUR FUTURE STARTS HERE
+          </div>
+
+          <h1>
+            Continue Your
+            <br />
+            <span>Career Journey</span>
+          </h1>
+
+          <div className="login-yellow-line"></div>
+
+          <p>
+            Discover your possibilities, understand your strengths
+            and move towards the right career.
+          </p>
+
+        </div>
 
 
-        <form onSubmit={handleSubmit}>
+        {/* Career Journey */}
 
+        <div className="login-career-journey">
 
-          {/* Email */}
+          <div className="login-journey-line"></div>
 
-          <label>Email Address</label>
+          <div className="login-journey-item">
 
-          <div className="input-box">
+            <div className="login-journey-icon">
+              <FaCompass />
+            </div>
 
-            <FaEnvelope className="icon" />
-
-            <input
-              type="email"
-              placeholder="Enter your email"
-              value={email}
-              onChange={(e) =>
-                setEmail(e.target.value)
-              }
-            />
+            <div className="login-journey-content">
+              <strong>Explore</strong>
+              <span>Discover possibilities</span>
+            </div>
 
           </div>
 
 
+          <div className="login-journey-item">
 
-          {/* Password */}
+            <div className="login-journey-icon">
+              <FaClipboardCheck />
+            </div>
 
-          <label>Password</label>
+            <div className="login-journey-content">
+              <strong>Assess</strong>
+              <span>Understand your strengths</span>
+            </div>
 
-          <div className="input-box">
-
-            <FaLock className="icon" />
-
-
-            <input
-              type={
-                showPassword
-                  ? "text"
-                  : "password"
-              }
-              placeholder="Enter your password"
-              value={password}
-              onChange={(e) =>
-                setPassword(e.target.value)
-              }
-            />
+          </div>
 
 
-            <span
-              className="eye"
-              onClick={() =>
-                setShowPassword(!showPassword)
-              }
+          <div className="login-journey-item">
+
+            <div className="login-journey-icon">
+              <FaMapMarkedAlt />
+            </div>
+
+            <div className="login-journey-content">
+              <strong>Plan</strong>
+              <span>Build your career path</span>
+            </div>
+
+          </div>
+
+
+          <div className="login-journey-item">
+
+            <div className="login-journey-icon">
+              <FaTrophy />
+            </div>
+
+            <div className="login-journey-content">
+              <strong>Achieve</strong>
+              <span>Reach your goals</span>
+            </div>
+
+          </div>
+
+        </div>
+
+
+        {/* Career Visual */}
+
+        <div className="login-career-visual">
+
+          <div className="login-visual-glow"></div>
+
+
+          {/* Target */}
+
+          <div className="login-career-target">
+
+            <div className="login-target-ring login-target-ring-outer"></div>
+
+            <div className="login-target-ring login-target-ring-middle"></div>
+
+            <div className="login-target-ring login-target-ring-inner"></div>
+
+            <div className="login-target-center"></div>
+
+
+
+          </div>
+
+
+          {/* Stairs */}
+
+          <div className="login-career-stairs">
+
+            <div className="login-stair login-stair-one"></div>
+            <div className="login-stair login-stair-two"></div>
+            <div className="login-stair login-stair-three"></div>
+            <div className="login-stair login-stair-four"></div>
+            <div className="login-stair login-stair-five"></div>
+
+          </div>
+
+
+          {/* Person */}
+
+          <div className="login-career-person">
+
+            <div className="login-person-head"></div>
+
+            <div className="login-person-body"></div>
+
+            <div className="login-person-backpack"></div>
+
+            <div className="login-person-leg login-leg-left"></div>
+
+            <div className="login-person-leg login-leg-right"></div>
+
+          </div>
+
+
+          {/* Books */}
+
+          <div className="login-career-books">
+
+            <div></div>
+            <div></div>
+            <div></div>
+
+          </div>
+
+        </div>
+
+
+      </section>
+
+
+      {/* ================= RIGHT LOGIN SIDE ================= */}
+
+      <section className="login-form-side">
+
+        <div className="login-card">
+
+
+          {/* Icon */}
+
+          <div className="login-form-icon">
+            <FaUser />
+          </div>
+
+
+          {/* Heading */}
+
+          <div className="login-heading">
+
+            <h2>
+              Welcome <span>Back!</span>
+            </h2>
+
+            <p>
+              Login to continue your journey
+            </p>
+
+            <div className="login-heading-line"></div>
+
+          </div>
+
+
+          <form onSubmit={handleSubmit}>
+
+
+            {/* Email */}
+
+            <div className="login-field">
+
+              <label>
+                Email Address
+              </label>
+
+              <div className="login-input">
+
+                <FaEnvelope className="login-input-icon" />
+
+                <input
+                  type="email"
+                  placeholder="Enter your email"
+                  value={email}
+                  onChange={(e) =>
+                    setEmail(e.target.value)
+                  }
+                />
+
+              </div>
+
+            </div>
+
+
+            {/* Password */}
+
+            <div className="login-field">
+
+              <label>
+                Password
+              </label>
+
+              <div className="login-input">
+
+                <FaLock className="login-input-icon" />
+
+                <input
+                  type={
+                    showPassword
+                      ? "text"
+                      : "password"
+                  }
+                  placeholder="Enter your password"
+                  value={password}
+                  onChange={(e) =>
+                    setPassword(e.target.value)
+                  }
+                />
+
+                <span
+                  className="login-eye"
+                  onClick={() =>
+                    setShowPassword(!showPassword)
+                  }
+                >
+                  {showPassword
+                    ? <FaEyeSlash />
+                    : <FaEye />
+                  }
+                </span>
+
+              </div>
+
+            </div>
+
+
+            {/* Remember / Forgot */}
+
+            <div className="login-options">
+
+              <label className="login-remember">
+
+                <input
+                  type="checkbox"
+                />
+
+                <span>
+                  Remember Me
+                </span>
+
+              </label>
+
+
+              <Link
+                to="/forgot-password"
+                className="login-forgot"
+              >
+                Forgot Password?
+              </Link>
+
+            </div>
+
+
+            {/* Login button */}
+
+            <button
+              type="submit"
+              className="login-main-btn"
             >
 
-              {
-                showPassword
-                  ? <FaEyeSlash />
-                  : <FaEye />
-              }
+              <span>Login</span>
 
-            </span>
+              <strong>→</strong>
 
+            </button>
+            {/* Signup */}
 
-          </div>
+            <div className="login-signup-text">
 
+              New to CareerXpert?
 
+              <Link to="/signup">
+                Sign Up
+              </Link>
 
-          <div className="login-options">
+            </div>
 
-            <label className="remember">
+          </form>
 
-              <input
-                type="checkbox"
-              />
+        </div>
 
-              Remember Me
-
-            </label>
-
-
-            <a
-              href="/"
-              className="forgot"
-            >
-              Forgot Password?
-            </a>
-
-
-          </div>
-
-
-
-          <button
-            className="main-btn"
-            type="submit"
-          >
-
-            Login
-
-          </button>
-
-
-
-
-          <div className="divider">
-
-            <span>
-              OR
-            </span>
-
-          </div>
-
-
-
-
-          <button
-            type="button"
-            className="google-btn"
-          >
-
-            <FaGoogle />
-
-            Continue with Google
-
-          </button>
-
-
-
-
-          <button
-            type="button"
-            className="github-btn"
-          >
-
-            <FaGithub />
-
-            Continue with GitHub
-
-          </button>
-
-
-
-
-          <div className="bottom-text">
-
-            New to CareerXpert?
-
-            <Link to="/signup">
-              {" "}Sign Up
-            </Link>
-
-          </div>
-
-
-
-        </form>
-
-
-      </div>
+      </section>
 
     </div>
   );
 };
-
 
 export default Login;
