@@ -422,17 +422,17 @@ function Home() {
           icon: <FaCalendarCheck />,
         },
 
-        {
-          name: "Resume Tools",
-          path: "/resume-tools",
-          icon: <FaFileAlt />,
-        },
+        // {
+        //   name: "Resume Tools",
+        //   path: "/resume-tools",
+        //   icon: <FaFileAlt />,
+        // },
 
-        {
-          name: "Interview Practice",
-          path: "/interview-practice",
-          icon: <FaMicrophone />,
-        },
+        // {
+        //   name: "Interview Practice",
+        //   path: "/interview-practice",
+        //   icon: <FaMicrophone />,
+        // },
 
       ],
     },
@@ -453,11 +453,11 @@ function Home() {
 
       features: [
 
-        {
-          name: "Scholarship Finder",
-          path: "/scholarship-finder",
-          icon: <FaTrophy />,
-        },
+        // {
+        //   name: "Scholarship Finder",
+        //   path: "/scholarship-finder",
+        //   icon: <FaTrophy />,
+        // },
 
         {
           name: "Cover Letter",
@@ -465,11 +465,11 @@ function Home() {
           icon: <FaFileAlt />,
         },
 
-        {
-          name: "Career News",
-          path: "/career-news",
-          icon: <FaNewspaper />,
-        },
+        // {
+        //   name: "Career News",
+        //   path: "/career-news",
+        //   icon: <FaNewspaper />,
+        // },
 
       ],
     },
