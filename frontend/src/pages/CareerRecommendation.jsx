@@ -341,7 +341,14 @@ const CareerRecommendation = () => {
 
   return (
     <div className="crf-page">
-
+<button
+        className="back-btn"
+        onClick={() =>
+          navigate("/home")
+        }
+      >
+        ← Back to Home
+      </button>
       <div className="crf-overlay">
 
         <div className="crf-card">

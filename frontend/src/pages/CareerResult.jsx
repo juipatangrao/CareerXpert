@@ -71,7 +71,14 @@ const CareerResult = () => {
 
   return (
     <div className="result-page">
-
+<button
+        className="back-btn"
+        onClick={() =>
+          navigate("/home")
+        }
+      >
+        ← Back to Home
+      </button>
       <div className="result-card">
 
         {/* ================= HEADER ================= */}
