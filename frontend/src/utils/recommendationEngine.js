@@ -1,295 +1,524 @@
+// // src/utils/recommendationEngine.js
+
+// import careerData from "../data/careerData";
+
+// /* =========================================================
+//    CALCULATE CAREER RECOMMENDATIONS
+// ========================================================= */
+
+// const calculateRecommendations = (studentData = {}, aptitude = {}) => {
+//   const results = [];
+
+//   /* =====================================================
+//        APTITUDE CATEGORY SCORES
+//     ===================================================== */
+
+//   const categoryScores = aptitude?.categoryScores || {};
+
+//   /* =====================================================
+//        CHECK EACH CAREER
+//     ===================================================== */
+
+//   careerData.forEach((career) => {
+//     let score = 0;
+
+//     const reasons = [];
+
+//     /* =================================================
+//            SAFE CAREER DATA
+//         ================================================= */
+
+//     const careerSubjects = career.subjects || [];
+
+//     const careerSkills = career.skills || [];
+
+//     const careerInterests = career.interests || [];
+
+//     const careerPersonality = career.personality || [];
+
+//     /* =================================================
+//            SUBJECT MATCHING
+//         ================================================= */
+
+//     if (Array.isArray(studentData.favoriteSubjects)) {
+//       studentData.favoriteSubjects.forEach((subject) => {
+//         if (careerSubjects.includes(subject)) {
+//           score += 10;
+
+//           reasons.push(`${subject} interest matches this career`);
+//         }
+//       });
+//     }
+
+//     /* =================================================
+//            SKILLS MATCHING
+//         ================================================= */
+
+//     if (Array.isArray(studentData.skills)) {
+//       studentData.skills.forEach((skill) => {
+//         if (careerSkills.includes(skill)) {
+//           score += 12;
+
+//           reasons.push(`${skill} skill is suitable`);
+//         }
+//       });
+//     }
+
+//     /* =================================================
+//            INTEREST MATCHING
+//         ================================================= */
+
+//     if (Array.isArray(studentData.interests)) {
+//       studentData.interests.forEach((interest) => {
+//         if (careerInterests.includes(interest)) {
+//           score += 15;
+
+//           reasons.push(`${interest} interest matches`);
+//         }
+//       });
+//     }
+
+//     /* =================================================
+//            PERSONALITY MATCHING
+//         ================================================= */
+
+//     if (
+//       studentData.personality &&
+//       careerPersonality.includes(studentData.personality)
+//     ) {
+//       score += 10;
+
+//       reasons.push("Personality matches this career");
+//     }
+
+//     /* =================================================
+//            APTITUDE CATEGORY MATCHING
+//         ================================================= */
+
+//     const aptitudeScore = categoryScores[career.aptitude];
+
+//     if (aptitudeScore !== undefined && aptitudeScore !== null) {
+//       score += Number(aptitudeScore) * 3;
+
+//       reasons.push("Aptitude test result supports this career");
+//     }
+
+//     /* =================================================
+//            ACADEMIC MARKS BONUS
+//         ================================================= */
+
+//     if (studentData.marks !== undefined && studentData.marks !== "") {
+//       const marks = Number(studentData.marks);
+
+//       if (!Number.isNaN(marks)) {
+//         if (marks >= 80) {
+//           score += 10;
+
+//           reasons.push("Good academic performance");
+//         } else if (marks >= 60) {
+//           score += 5;
+//         }
+//       }
+//     }
+
+//     /* =================================================
+//            FINAL PERCENTAGE
+//         ================================================= */
+
+//     const percentage = Math.min(Math.round((score / 80) * 100), 99);
+
+//     /* =================================================
+//            ADD RESULT
+//         ================================================= */
+
+//     results.push({
+//       id: career.id,
+
+//       name: career.name,
+
+//       category: career.category,
+
+//       route: career.route,
+
+//       percentage,
+
+//       reasons:
+//         reasons.length > 0
+//           ? reasons.slice(0, 4)
+//           : ["Based on overall profile analysis"],
+//     });
+//   });
+
+//   /* =====================================================
+//        SORT BY HIGHEST MATCH
+//     ===================================================== */
+
+//   results.sort((a, b) => b.percentage - a.percentage);
+
+//   /* =====================================================
+//        RETURN TOP 3 CAREERS
+//     ===================================================== */
+
+//   return results.slice(0, 3);
+// };
+
+// export default calculateRecommendations;
+
+
 // src/utils/recommendationEngine.js
 
 import careerData from "../data/careerData";
 
-
 /* =========================================================
-   CALCULATE CAREER RECOMMENDATIONS
+   RULE-BASED CAREER RECOMMENDATION
+   No AI / No API / No Backend
 ========================================================= */
 
 const calculateRecommendations = (
-    studentData = {},
-    aptitude = {}
+  studentData = {},
+  aptitude = {}
 ) => {
 
-    const results = [];
+  const results = [];
+
+  const categoryScores =
+    aptitude?.categoryScores || {};
+
+  /* =======================================================
+     CHECK EACH CAREER
+  ======================================================= */
+
+  careerData.forEach((career) => {
+
+    let score = 0;
+
+    const reasons = [];
+
+    const careerSubjects =
+      career.subjects || [];
+
+    const careerSkills =
+      career.skills || [];
+
+    const careerInterests =
+      career.interests || [];
+
+    const careerPersonality =
+      career.personality || [];
 
 
     /* =====================================================
-       APTITUDE CATEGORY SCORES
+       1. SUBJECT MATCH
+       Maximum: 20 points
     ===================================================== */
 
-    const categoryScores =
-        aptitude?.categoryScores || {};
+    let subjectMatches = 0;
+
+    if (
+      Array.isArray(
+        studentData.favoriteSubjects
+      )
+    ) {
+
+      studentData.favoriteSubjects.forEach(
+        (subject) => {
+
+          if (
+            careerSubjects.includes(subject)
+          ) {
+
+            subjectMatches++;
+
+          }
+
+        }
+      );
+
+    }
+
+    if (subjectMatches > 0) {
+
+      const subjectScore =
+        Math.min(
+          subjectMatches * 5,
+          20
+        );
+
+      score += subjectScore;
+
+      reasons.push(
+        `${subjectMatches} subject(s) match`
+      );
+
+    }
 
 
     /* =====================================================
-       CHECK EACH CAREER
+       2. SKILL MATCH
+       Maximum: 20 points
     ===================================================== */
 
-    careerData.forEach((career) => {
+    let skillMatches = 0;
 
-        let score = 0;
+    if (
+      Array.isArray(
+        studentData.skills
+      )
+    ) {
 
-        const reasons = [];
+      studentData.skills.forEach(
+        (skill) => {
+
+          if (
+            careerSkills.includes(skill)
+          ) {
+
+            skillMatches++;
+
+          }
+
+        }
+      );
+
+    }
+
+    if (skillMatches > 0) {
+
+      const skillScore =
+        Math.min(
+          skillMatches * 5,
+          20
+        );
+
+      score += skillScore;
+
+      reasons.push(
+        `${skillMatches} skill(s) match`
+      );
+
+    }
 
 
-        /* =================================================
-           SAFE CAREER DATA
-        ================================================= */
+    /* =====================================================
+       3. INTEREST MATCH
+       Maximum: 20 points
+    ===================================================== */
 
-        const careerSubjects =
-            career.subjects || [];
+    let interestMatches = 0;
 
-        const careerSkills =
-            career.skills || [];
+    if (
+      Array.isArray(
+        studentData.interests
+      )
+    ) {
 
-        const careerInterests =
-            career.interests || [];
+      studentData.interests.forEach(
+        (interest) => {
 
-        const careerPersonality =
-            career.personality || [];
-
-
-        /* =================================================
-           SUBJECT MATCHING
-        ================================================= */
-
-        if (
-            Array.isArray(
-                studentData.favoriteSubjects
+          if (
+            careerInterests.includes(
+              interest
             )
-        ) {
+          ) {
 
-            studentData.favoriteSubjects.forEach(
-                (subject) => {
+            interestMatches++;
 
-                    if (
-                        careerSubjects.includes(
-                            subject
-                        )
-                    ) {
-
-                        score += 10;
-
-                        reasons.push(
-                            `${subject} interest matches this career`
-                        );
-
-                    }
-
-                }
-            );
+          }
 
         }
+      );
+
+    }
+
+    if (interestMatches > 0) {
+
+      const interestScore =
+        Math.min(
+          interestMatches * 5,
+          20
+        );
+
+      score += interestScore;
+
+      reasons.push(
+        `${interestMatches} interest(s) match`
+      );
+
+    }
 
 
-        /* =================================================
-           SKILLS MATCHING
-        ================================================= */
+    /* =====================================================
+       4. PERSONALITY MATCH
+       Maximum: 10 points
+    ===================================================== */
 
-        if (
-            Array.isArray(
-                studentData.skills
-            )
-        ) {
+    if (
+      studentData.personality &&
+      careerPersonality.includes(
+        studentData.personality
+      )
+    ) {
 
-            studentData.skills.forEach(
-                (skill) => {
+      score += 10;
 
-                    if (
-                        careerSkills.includes(
-                            skill
-                        )
-                    ) {
+      reasons.push(
+        "Personality matches"
+      );
 
-                        score += 12;
-
-                        reasons.push(
-                            `${skill} skill is suitable`
-                        );
-
-                    }
-
-                }
-            );
-
-        }
+    }
 
 
-        /* =================================================
-           INTEREST MATCHING
-        ================================================= */
+    /* =====================================================
+       5. APTITUDE MATCH
+       Maximum: 20 points
+    ===================================================== */
 
-        if (
-            Array.isArray(
-                studentData.interests
-            )
-        ) {
+    const aptitudeScore =
+      Number(
+        categoryScores[
+          career.aptitude
+        ] || 0
+      );
 
-            studentData.interests.forEach(
-                (interest) => {
+    if (aptitudeScore > 0) {
 
-                    if (
-                        careerInterests.includes(
-                            interest
-                        )
-                    ) {
+      /*
+        Assuming aptitude category score
+        is out of 10.
 
-                        score += 15;
+        Convert it to maximum 20 points.
+      */
 
-                        reasons.push(
-                            `${interest} interest matches`
-                        );
+      const aptitudePoints =
+        Math.min(
+          aptitudeScore * 2,
+          20
+        );
 
-                    }
+      score += aptitudePoints;
 
-                }
-            );
+      reasons.push(
+        "Aptitude result supports this career"
+      );
 
-        }
-
-
-        /* =================================================
-           PERSONALITY MATCHING
-        ================================================= */
-
-        if (
-            studentData.personality &&
-            careerPersonality.includes(
-                studentData.personality
-            )
-        ) {
-
-            score += 10;
-
-            reasons.push(
-                "Personality matches this career"
-            );
-
-        }
+    }
 
 
-        /* =================================================
-           APTITUDE CATEGORY MATCHING
-        ================================================= */
+    /* =====================================================
+       6. ACADEMIC PERFORMANCE
+       Maximum: 10 points
+    ===================================================== */
 
-        const aptitudeScore =
-            categoryScores[
-                career.aptitude
-            ];
+    const marks =
+      Number(
+        studentData.marks || 0
+      );
 
+    if (marks >= 80) {
 
-        if (
-            aptitudeScore !== undefined &&
-            aptitudeScore !== null
-        ) {
+      score += 10;
 
-            score +=
-                Number(aptitudeScore) * 3;
+      reasons.push(
+        "Strong academic performance"
+      );
 
-            reasons.push(
-                "Aptitude test result supports this career"
-            );
+    }
 
-        }
+    else if (marks >= 60) {
 
+      score += 7;
 
-        /* =================================================
-           ACADEMIC MARKS BONUS
-        ================================================= */
+      reasons.push(
+        "Good academic performance"
+      );
 
-        if (
-            studentData.marks !== undefined &&
-            studentData.marks !== ""
-        ) {
+    }
 
-            const marks =
-                Number(
-                    studentData.marks
-                );
+    else if (marks >= 40) {
+
+      score += 4;
+
+    }
 
 
-            if (!Number.isNaN(marks)) {
+    /* =====================================================
+       7. FINAL PERCENTAGE
+       
+       Maximum possible score = 100
+    ===================================================== */
 
-                if (marks >= 80) {
-
-                    score += 10;
-
-                    reasons.push(
-                        "Good academic performance"
-                    );
-
-                }
-
-                else if (marks >= 60) {
-
-                    score += 5;
-
-                }
-
-            }
-
-        }
+    const percentage =
+      Math.min(
+        Math.round(score),
+        100
+      );
 
 
-        /* =================================================
-           FINAL PERCENTAGE
-        ================================================= */
+    /* =====================================================
+       ADD RESULT
+    ===================================================== */
 
-        const percentage =
-            Math.min(
-                Math.round(
-                    (score / 80) * 100
-                ),
-                99
-            );
+    results.push({
 
+      id: career.id,
 
-        /* =================================================
-           ADD RESULT
-        ================================================= */
+      name: career.name,
 
-        results.push({
+      category: career.category,
 
-            id: career.id,
+      route: career.route,
 
-            name: career.name,
+      percentage,
 
-            category: career.category,
-
-            route: career.route,
-
-            percentage,
-
-            reasons:
-                reasons.length > 0
-                    ? reasons.slice(0, 4)
-                    : [
-                        "Based on overall profile analysis"
-                    ]
-
-        });
+      reasons:
+        reasons.length > 0
+          ? reasons.slice(0, 4)
+          : [
+              "Limited matching information available"
+            ],
 
     });
 
-
-    /* =====================================================
-       SORT BY HIGHEST MATCH
-    ===================================================== */
-
-    results.sort(
-        (a, b) =>
-            b.percentage -
-            a.percentage
-    );
+  });
 
 
-    /* =====================================================
-       RETURN TOP 3 CAREERS
-    ===================================================== */
+  /* =======================================================
+     SORT HIGH → LOW
+  ======================================================= */
 
-    return results.slice(0, 3);
+  results.sort(
+    (a, b) => {
+
+      if (
+        b.percentage !==
+        a.percentage
+      ) {
+
+        return (
+          b.percentage -
+          a.percentage
+        );
+
+      }
+
+      /*
+        If two careers have the same
+        percentage, keep the original
+        career-data order instead of
+        creating an artificial score.
+      */
+
+      return 0;
+
+    }
+  );
+
+
+  /* =======================================================
+     RETURN TOP 3
+  ======================================================= */
+
+  return results.slice(0, 3);
 
 };
 

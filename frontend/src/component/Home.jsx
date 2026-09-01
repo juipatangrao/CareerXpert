@@ -390,12 +390,12 @@ function Home() {
           path: "/career-roadmap",
           icon: <FaRoute />,
         },
-
         {
-          name: "Coaching Recommendations",
-          path: "/coaching-recommendation",
+          name: "Career Recommendations",
+          path: "/career-recommendation",
           icon: <FaBookOpen />,
         },
+
 
       ],
     },
@@ -458,6 +458,11 @@ function Home() {
         //   path: "/scholarship-finder",
         //   icon: <FaTrophy />,
         // },
+                {
+          name: "Coaching Recommendations",
+          path: "/coaching-recommendation",
+          icon: <FaBookOpen />,
+        },
 
         {
           name: "Cover Letter",

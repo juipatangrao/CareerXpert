@@ -15,12 +15,258 @@ import {
 
 import "../style/CareerRecommendation.css";
 
+/* =====================================================
+   RULE-BASED CAREER DATA
+   No AI / No Backend
+   ===================================================== */
+
+const careerProfiles = [
+  {
+    name: "Software Engineer",
+    route: "/it/software-engineer",
+    streams: ["Science", "Engineering", "Diploma"],
+    subjects: ["Mathematics", "Physics", "Computer Science"],
+    skills: ["Coding", "Problem Solving", "Mathematics"],
+    interests: ["Technology", "Research"],
+    personalities: ["Introvert", "Ambivert"],
+    workStyles: ["Office", "Remote", "Hybrid"],
+    keywords: ["software", "developer", "coding", "technology"],
+  },
+
+  {
+    name: "Data Scientist",
+    route: "/it/data-scientist",
+    streams: ["Science", "Engineering"],
+    subjects: ["Mathematics", "Computer Science"],
+    skills: ["Mathematics", "Coding", "Problem Solving"],
+    interests: ["Technology", "Research", "Finance"],
+    personalities: ["Introvert", "Ambivert"],
+    workStyles: ["Office", "Remote", "Hybrid"],
+    keywords: ["data", "analytics", "statistics"],
+  },
+
+  {
+    name: "Doctor",
+    route: "/doctor",
+    streams: ["Science"],
+    subjects: ["Biology", "Chemistry"],
+    skills: ["Communication", "Problem Solving", "Teamwork"],
+    interests: ["Medical", "Research"],
+    personalities: ["Extrovert", "Ambivert"],
+    workStyles: ["Office", "Field Work"],
+    keywords: ["doctor", "medical", "medicine", "health"],
+  },
+
+  {
+    name: "Chartered Accountant",
+    route: "/banking-and-finance",
+    streams: ["Commerce"],
+    subjects: ["Mathematics"],
+    skills: ["Mathematics", "Problem Solving", "Communication"],
+    interests: ["Finance", "Business"],
+    personalities: ["Introvert", "Ambivert"],
+    workStyles: ["Office", "Hybrid"],
+    keywords: ["finance", "account", "ca", "tax"],
+  },
+
+  {
+    name: "Lawyer",
+    route: "/law",
+    streams: ["Arts", "Commerce", "Science"],
+    subjects: ["English"],
+    skills: ["Communication", "Public Speaking", "Problem Solving"],
+    interests: ["Law", "Government"],
+    personalities: ["Extrovert", "Ambivert"],
+    workStyles: ["Office", "Field Work"],
+    keywords: ["law", "lawyer", "legal", "advocate"],
+  },
+
+  {
+    name: "Civil Services Officer",
+    route: "/government",
+    streams: ["Arts", "Commerce", "Science"],
+    subjects: ["English"],
+    skills: ["Communication", "Leadership", "Public Speaking"],
+    interests: ["Government", "Law"],
+    personalities: ["Extrovert", "Ambivert"],
+    workStyles: ["Office", "Field Work"],
+    keywords: ["ias", "ips", "government", "civil service"],
+  },
+
+  {
+    name: "UI/UX Designer",
+    route: "/design",
+    streams: ["Arts", "Science", "Commerce"],
+    subjects: ["Computer Science", "English"],
+    skills: ["Creativity", "Communication", "Problem Solving"],
+    interests: ["Design", "Technology", "Media"],
+    personalities: ["Introvert", "Extrovert", "Ambivert"],
+    workStyles: ["Remote", "Hybrid", "Office"],
+    keywords: ["design", "ui", "ux", "creative"],
+  },
+
+  {
+    name: "Business Manager",
+    route: "/banking-and-finance",
+    streams: ["Commerce", "Arts", "Science"],
+    subjects: ["Mathematics", "English"],
+    skills: ["Leadership", "Communication", "Teamwork"],
+    interests: ["Business", "Finance"],
+    personalities: ["Extrovert", "Ambivert"],
+    workStyles: ["Office", "Hybrid"],
+    keywords: ["business", "manager", "management"],
+  },
+
+  {
+    name: "Research Scientist",
+    route: "/science-research",
+    streams: ["Science", "Engineering"],
+    subjects: [
+      "Mathematics",
+      "Physics",
+      "Chemistry",
+      "Biology",
+      "Computer Science",
+    ],
+    skills: ["Mathematics", "Problem Solving", "Creativity"],
+    interests: ["Research", "Space", "Technology"],
+    personalities: ["Introvert", "Ambivert"],
+    workStyles: ["Office", "Field Work"],
+    keywords: ["research", "scientist", "science", "laboratory"],
+  },
+
+  {
+    name: "Environmental Scientist",
+    route: "/environmental",
+    streams: ["Science"],
+    subjects: ["Biology", "Chemistry"],
+    skills: ["Problem Solving", "Communication", "Creativity"],
+    interests: ["Environment", "Research"],
+    personalities: ["Introvert", "Extrovert", "Ambivert"],
+    workStyles: ["Field Work", "Office"],
+    keywords: ["environment", "climate", "ecology"],
+  },
+
+  {
+    name: "Hotel Management Professional",
+    route: "/hotel-management",
+    streams: ["Arts", "Commerce", "Science"],
+    subjects: ["English"],
+    skills: ["Communication", "Teamwork", "Leadership"],
+    interests: ["Hotel Management", "Business"],
+    personalities: ["Extrovert", "Ambivert"],
+    workStyles: ["Field Work", "Office"],
+    keywords: ["hotel", "hospitality", "tourism"],
+  },
+
+  {
+    name: "Merchant Navy Officer",
+    route: "/merchant-navy",
+    streams: ["Science", "Engineering", "Diploma"],
+    subjects: ["Mathematics", "Physics"],
+    skills: ["Problem Solving", "Leadership", "Teamwork"],
+    interests: ["Merchant Navy"],
+    personalities: ["Extrovert", "Ambivert"],
+    workStyles: ["Field Work"],
+    keywords: ["merchant navy", "marine", "ship"],
+  },
+];
+
+/* =====================================================
+   CAREER SCORING LOGIC
+   ===================================================== */
+
+const calculateCareerRecommendations = (data) => {
+  const subjects = data.favoriteSubjects || [];
+  const skills = data.skills || [];
+  const interests = data.interests || [];
+  const goal = (data.careerGoal || "").toLowerCase();
+
+  const results = careerProfiles.map((career) => {
+    let score = 0;
+    const reasons = [];
+
+    // 1. Stream Match
+    if (career.streams.includes(data.stream)) {
+      score += 20;
+      reasons.push("Stream matched");
+    }
+
+    // 2. Favourite Subject Match
+    const subjectMatches = career.subjects.filter((subject) =>
+      subjects.includes(subject)
+    );
+
+    score += Math.min(subjectMatches.length * 8, 24);
+
+    if (subjectMatches.length > 0) {
+      reasons.push(`${subjectMatches.length} subject matched`);
+    }
+
+    // 3. Skill Match
+    const skillMatches = career.skills.filter((skill) =>
+      skills.includes(skill)
+    );
+
+    score += Math.min(skillMatches.length * 8, 24);
+
+    if (skillMatches.length > 0) {
+      reasons.push(`${skillMatches.length} skill matched`);
+    }
+
+    // 4. Interest Match
+    const interestMatches = career.interests.filter((interest) =>
+      interests.includes(interest)
+    );
+
+    score += Math.min(interestMatches.length * 10, 30);
+
+    if (interestMatches.length > 0) {
+      reasons.push(`${interestMatches.length} interest matched`);
+    }
+
+    // 5. Personality Match
+    if (career.personalities.includes(data.personality)) {
+      score += 8;
+      reasons.push("Personality matched");
+    }
+
+    // 6. Work Style Match
+    if (career.workStyles.includes(data.workStyle)) {
+      score += 6;
+      reasons.push("Work style matched");
+    }
+
+    // 7. Career Goal Match
+    const keywordMatches = career.keywords.filter((keyword) =>
+      goal.includes(keyword)
+    );
+
+    score += Math.min(keywordMatches.length * 5, 10);
+
+    if (keywordMatches.length > 0) {
+      reasons.push("Career goal matched");
+    }
+
+    return {
+      ...career,
+      score: Math.min(Math.round(score), 100),
+      reasons,
+    };
+  });
+
+  // Highest score first
+  return results
+    .sort((a, b) => b.score - a.score)
+    .slice(0, 5);
+};
+
+/* =====================================================
+   COMPONENT
+   ===================================================== */
+
 const CareerRecommendation = () => {
   const navigate = useNavigate();
-
-  /* =====================================================
-     FORM DATA
-     ===================================================== */
 
   const [formData, setFormData] = useState({
     fullName: "",
@@ -39,7 +285,7 @@ const CareerRecommendation = () => {
   });
 
   /* =====================================================
-     HANDLE INPUT CHANGE
+     INPUT CHANGE
      ===================================================== */
 
   const handleChange = (e) => {
@@ -52,7 +298,7 @@ const CareerRecommendation = () => {
   };
 
   /* =====================================================
-     HANDLE CHECKBOX
+     CHECKBOX CHANGE
      ===================================================== */
 
   const handleCheckbox = (e) => {
@@ -62,30 +308,36 @@ const CareerRecommendation = () => {
       ...prev,
       [name]: checked
         ? [...prev[name], value]
-        : prev[name].filter(
-            (item) => item !== value
-          ),
+        : prev[name].filter((item) => item !== value),
     }));
   };
 
   /* =====================================================
-     SUBMIT FORM
+     SUBMIT
      ===================================================== */
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
+    // Calculate recommendations without AI
+    const recommendations =
+      calculateCareerRecommendations(formData);
+
+    // Store student information
     localStorage.setItem(
       "studentData",
       JSON.stringify(formData)
     );
 
+    // Store calculated career recommendations
+    localStorage.setItem(
+      "careerRecommendations",
+      JSON.stringify(recommendations)
+    );
+
+    // Continue to aptitude test
     navigate("/aptitude-test");
   };
-
-  /* =====================================================
-     RETURN
-     ===================================================== */
 
   return (
     <div className="crf-page">
@@ -94,39 +346,28 @@ const CareerRecommendation = () => {
 
         <div className="crf-card">
 
-          {/* =================================================
-              HEADER
-              ================================================= */}
-
           <div className="crf-header">
 
             <div className="crf-ai-icon">
-              <FaBrain />
+              <FaBullseye />
             </div>
 
             <h1>
-              AI Career Recommendation
+              Career Recommendation
             </h1>
 
             <p>
-              Fill the information below and let our AI
-              analyze your interests, skills, aptitude
-              and personality to recommend the best
-              career for you.
+              Fill the information below. Your academic
+              background, skills, interests, personality
+              and preferences will be matched with
+              career profiles.
             </p>
 
           </div>
 
-
-          {/* =================================================
-              FORM
-              ================================================= */}
-
           <form onSubmit={handleSubmit}>
 
-            {/* =================================================
-                PERSONAL INFORMATION
-                ================================================= */}
+            {/* PERSONAL INFORMATION */}
 
             <div className="crf-section">
 
@@ -135,13 +376,9 @@ const CareerRecommendation = () => {
                 Personal Information
               </h2>
 
-              {/* Full Name */}
-
               <div className="crf-form-group">
 
-                <label>
-                  Full Name
-                </label>
+                <label>Full Name</label>
 
                 <input
                   type="text"
@@ -154,16 +391,11 @@ const CareerRecommendation = () => {
 
               </div>
 
-
-              {/* Age + Class */}
-
               <div className="crf-two-column">
 
                 <div className="crf-form-group">
 
-                  <label>
-                    Age
-                  </label>
+                  <label>Age</label>
 
                   <input
                     type="number"
@@ -178,12 +410,9 @@ const CareerRecommendation = () => {
 
                 </div>
 
-
                 <div className="crf-form-group">
 
-                  <label>
-                    Class
-                  </label>
+                  <label>Class</label>
 
                   <select
                     name="studentClass"
@@ -191,43 +420,25 @@ const CareerRecommendation = () => {
                     onChange={handleChange}
                     required
                   >
-
                     <option value="">
                       Select Class
                     </option>
 
-                    <option value="10th">
-                      10th
-                    </option>
-
-                    <option value="12th">
-                      12th
-                    </option>
-
-                    <option value="Diploma">
-                      Diploma
-                    </option>
-
-                    <option value="Graduate">
-                      Graduate
-                    </option>
-
+                    <option value="10th">10th</option>
+                    <option value="12th">12th</option>
+                    <option value="Diploma">Diploma</option>
+                    <option value="Graduate">Graduate</option>
                   </select>
 
                 </div>
 
               </div>
 
-
-              {/* Stream + Marks */}
-
               <div className="crf-two-column">
 
                 <div className="crf-form-group">
 
-                  <label>
-                    Stream
-                  </label>
+                  <label>Stream</label>
 
                   <select
                     name="stream"
@@ -235,7 +446,6 @@ const CareerRecommendation = () => {
                     onChange={handleChange}
                     required
                   >
-
                     <option value="">
                       Select Stream
                     </option>
@@ -259,17 +469,13 @@ const CareerRecommendation = () => {
                     <option value="Diploma">
                       Diploma
                     </option>
-
                   </select>
 
                 </div>
 
-
                 <div className="crf-form-group">
 
-                  <label>
-                    Marks (%)
-                  </label>
+                  <label>Marks (%)</label>
 
                   <input
                     type="number"
@@ -288,10 +494,7 @@ const CareerRecommendation = () => {
 
             </div>
 
-
-            {/* =================================================
-                FAVOURITE SUBJECTS
-                ================================================= */}
+            {/* FAVOURITE SUBJECTS */}
 
             <div className="crf-section">
 
@@ -326,9 +529,7 @@ const CareerRecommendation = () => {
                       onChange={handleCheckbox}
                     />
 
-                    <span>
-                      {subject}
-                    </span>
+                    <span>{subject}</span>
 
                   </label>
 
@@ -338,10 +539,7 @@ const CareerRecommendation = () => {
 
             </div>
 
-
-            {/* =================================================
-                SKILLS
-                ================================================= */}
+            {/* SKILLS */}
 
             <div className="crf-section">
 
@@ -378,9 +576,7 @@ const CareerRecommendation = () => {
                       onChange={handleCheckbox}
                     />
 
-                    <span>
-                      {skill}
-                    </span>
+                    <span>{skill}</span>
 
                   </label>
 
@@ -390,10 +586,7 @@ const CareerRecommendation = () => {
 
             </div>
 
-
-            {/* =================================================
-                INTERESTS
-                ================================================= */}
+            {/* INTERESTS */}
 
             <div className="crf-section">
 
@@ -437,9 +630,7 @@ const CareerRecommendation = () => {
                       onChange={handleCheckbox}
                     />
 
-                    <span>
-                      {interest}
-                    </span>
+                    <span>{interest}</span>
 
                   </label>
 
@@ -449,10 +640,7 @@ const CareerRecommendation = () => {
 
             </div>
 
-
-            {/* =================================================
-                PERSONALITY
-                ================================================= */}
+            {/* PERSONALITY */}
 
             <div className="crf-section">
 
@@ -492,10 +680,7 @@ const CareerRecommendation = () => {
 
             </div>
 
-
-            {/* =================================================
-                CAREER GOAL
-                ================================================= */}
+            {/* CAREER GOAL */}
 
             <div className="crf-section">
 
@@ -509,7 +694,7 @@ const CareerRecommendation = () => {
                 <textarea
                   rows="5"
                   name="careerGoal"
-                  placeholder="Example: I want to become an AI Engineer..."
+                  placeholder="Enter your career goal..."
                   value={formData.careerGoal}
                   onChange={handleChange}
                 />
@@ -518,10 +703,7 @@ const CareerRecommendation = () => {
 
             </div>
 
-
-            {/* =================================================
-                WORK STYLE
-                ================================================= */}
+            {/* WORK STYLE */}
 
             <div className="crf-section">
 
@@ -563,10 +745,7 @@ const CareerRecommendation = () => {
 
             </div>
 
-
-            {/* =================================================
-                EXPECTED SALARY
-                ================================================= */}
+            {/* SALARY */}
 
             <div className="crf-section">
 
@@ -609,10 +788,7 @@ const CareerRecommendation = () => {
 
             </div>
 
-
-            {/* =================================================
-                LOCATION
-                ================================================= */}
+            {/* LOCATION */}
 
             <div className="crf-section">
 
@@ -650,11 +826,6 @@ const CareerRecommendation = () => {
               </div>
 
             </div>
-
-
-            {/* =================================================
-                SUBMIT BUTTON
-                ================================================= */}
 
             <button
               type="submit"

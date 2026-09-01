@@ -24,6 +24,10 @@ const CareerResult = () => {
     localStorage.getItem("aptitudeResult")
   );
 
+  /* =========================================
+     CHECK DATA
+  ========================================= */
+
   if (!studentData || !aptitude) {
     return (
       <div className="result-page">
@@ -34,7 +38,9 @@ const CareerResult = () => {
 
           <button
             className="result-btn"
-            onClick={() => navigate("/career-recommendation")}
+            onClick={() =>
+              navigate("/career-recommendation")
+            }
           >
             Start Again
           </button>
@@ -45,10 +51,23 @@ const CareerResult = () => {
     );
   }
 
-  const recommendations = calculateRecommendations(
-    studentData,
-    aptitude
-  );
+  /* =========================================
+     RULE-BASED RECOMMENDATION
+     
+     Student Data + Aptitude
+             ↓
+        Matching Logic
+             ↓
+          Score
+             ↓
+       Top 3 Careers
+  ========================================= */
+
+  const recommendations =
+    calculateRecommendations(
+      studentData,
+      aptitude
+    );
 
   return (
     <div className="result-page">
@@ -60,25 +79,23 @@ const CareerResult = () => {
         <div className="result-header">
 
           <div className="brain-box">
-
             <FaBrain />
-
           </div>
 
-          <h1>AI Career Recommendation</h1>
+          <h1>
+            Career Recommendation
+          </h1>
 
           <p>
-
             Congratulations
-
-            <span> {studentData.fullName}</span>
-
+            <span>
+              {" "}
+              {studentData.fullName}
+            </span>
           </p>
 
           <h3>
-
             Your Career Analysis is Complete
-
           </h3>
 
         </div>
@@ -91,9 +108,13 @@ const CareerResult = () => {
 
             <FaUserGraduate />
 
-            <h4>{studentData.studentClass}</h4>
+            <h4>
+              {studentData.studentClass}
+            </h4>
 
-            <span>Class</span>
+            <span>
+              Class
+            </span>
 
           </div>
 
@@ -101,9 +122,13 @@ const CareerResult = () => {
 
             <FaChartLine />
 
-            <h4>{studentData.marks}%</h4>
+            <h4>
+              {studentData.marks}%
+            </h4>
 
-            <span>Marks</span>
+            <span>
+              Marks
+            </span>
 
           </div>
 
@@ -112,12 +137,12 @@ const CareerResult = () => {
             <FaBrain />
 
             <h4>
-
               {aptitude.totalScore}
-
             </h4>
 
-            <span>Aptitude Score</span>
+            <span>
+              Aptitude Score
+            </span>
 
           </div>
 
@@ -126,109 +151,117 @@ const CareerResult = () => {
         {/* ================= TOP 3 CAREERS ================= */}
 
         <h2 className="recommend-title">
-
           Top Career Recommendations
-
         </h2>
 
         <div className="career-grid">
 
-          {recommendations.map((career, index) => (
+          {recommendations.map(
+            (career, index) => (
 
-            <div
-              className="career-result-card"
-              key={career.id}
-            >
-
-              <div className="rank">
-
-                {index === 0 && "🥇"}
-
-                {index === 1 && "🥈"}
-
-                {index === 2 && "🥉"}
-
-              </div>
-
-              <h2>
-
-                {career.name}
-
-              </h2>
-
-              <p>
-
-                {career.category}
-
-              </p>
-
-              <div className="match-circle">
-
-                <h1>
-
-                  {career.percentage}%
-
-                </h1>
-
-                <span>Match</span>
-
-              </div>
-
-              <div className="reason-title">
-
-                Why Recommended?
-
-              </div>
-
-              <div className="reason-list">
-
-                {career.reasons.map((reason, i) => (
-
-                  <div
-                    className="reason-chip"
-                    key={i}
-                  >
-
-                    <FaCheckCircle />
-
-                    {reason}
-
-                  </div>
-
-                ))}
-
-              </div>
-
-              <div className="rating">
-
-                <FaStar />
-
-                <FaStar />
-
-                <FaStar />
-
-                <FaStar />
-
-                <FaStar />
-
-              </div>
-
-              <button
-                className="explore-btn"
-                onClick={() =>
-                  navigate(career.route)
-                }
+              <div
+                className="career-result-card"
+                key={career.id}
               >
 
-                Explore Career
+                {/* RANK */}
 
-                <FaArrowRight />
+                <div className="rank">
 
-              </button>
+                  {index === 0 && "🥇"}
 
-            </div>
+                  {index === 1 && "🥈"}
 
-          ))}
+                  {index === 2 && "🥉"}
+
+                </div>
+
+                {/* CAREER NAME */}
+
+                <h2>
+                  {career.name}
+                </h2>
+
+                {/* CATEGORY */}
+
+                <p>
+                  {career.category}
+                </p>
+
+                {/* MATCH PERCENTAGE */}
+
+                <div className="match-circle">
+
+                  <h1>
+                    {career.percentage}%
+                  </h1>
+
+                  <span>
+                    Match
+                  </span>
+
+                </div>
+
+                {/* REASONS */}
+
+                <div className="reason-title">
+                  Why Recommended?
+                </div>
+
+                <div className="reason-list">
+
+                  {career.reasons.map(
+                    (reason, i) => (
+
+                      <div
+                        className="reason-chip"
+                        key={i}
+                      >
+
+                        <FaCheckCircle />
+
+                        {reason}
+
+                      </div>
+
+                    )
+                  )}
+
+                </div>
+
+                {/* RATING */}
+
+                <div className="rating">
+
+                  <FaStar />
+                  <FaStar />
+                  <FaStar />
+                  <FaStar />
+                  <FaStar />
+
+                </div>
+
+                {/* EXPLORE */}
+
+                <button
+                  className="explore-btn"
+                  onClick={() =>
+                    navigate(
+                      career.route
+                    )
+                  }
+                >
+
+                  Explore Career
+
+                  <FaArrowRight />
+
+                </button>
+
+              </div>
+
+            )
+          )}
 
         </div>
 
@@ -237,25 +270,14 @@ const CareerResult = () => {
         <div className="ai-footer">
 
           <h3>
-
-            AI Recommendation Completed Successfully
-
+            Career Recommendation Completed Successfully
           </h3>
 
           <p>
-
             These recommendations are generated based on your
-
-            academic performance,
-
-            interests,
-
-            personality,
-
-            skills
-
-            and aptitude test.
-
+            academic performance, interests, personality,
+            skills and aptitude test using a
+            rule-based matching system.
           </p>
 
         </div>
