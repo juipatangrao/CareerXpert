@@ -99,7 +99,7 @@ const CareerTemplate = ({
     "Scope",
     "Salary",
     "Day to Day Work",
-    "AI Courses",
+    "Courses",
   ];
 
 
@@ -272,12 +272,12 @@ const CareerTemplate = ({
       } catch (error) {
 
         console.error(
-          "AI Course Recommendation Error:",
+          "Course Recommendation Error:",
           error
         );
 
         alert(
-          "Unable to generate AI course recommendations."
+          "Unable to generate course recommendations."
         );
 
 
@@ -903,14 +903,14 @@ const CareerTemplate = ({
                 <>
 
                   <h2>
-                    🤖 AI Course Recommendations
+                    Course Recommendations
                   </h2>
 
 
                   <p className="career-template-about-text">
 
                     Discover the best
-                    AI-recommended courses
+                    course recommendations
                     to become a{" "}
 
                     <strong>
@@ -939,7 +939,7 @@ const CareerTemplate = ({
 
                       {loading
                         ? "🤖 Generating..."
-                        : "✨ Get AI Course Recommendations"}
+                        : "✨ Get Course Recommendations"}
 
                     </button>
 
@@ -955,7 +955,7 @@ const CareerTemplate = ({
                         }}
                       >
 
-                        🤖 Generating AI
+                        🤖 Generating Course
                         Recommendations...
 
                       </p>
@@ -1076,8 +1076,8 @@ const CareerTemplate = ({
                         >
 
                           Click the button above
-                          to get AI-powered
-                          course recommendations.
+                          to get course
+                          recommendations.
 
                         </p>
 
